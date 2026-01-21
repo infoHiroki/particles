@@ -31,8 +31,27 @@ particles/
 
 ## パーティクル一覧
 
-<!-- 作成したパーティクルをここにリスト化 -->
+### React Native (SVG)
 
-| 名前 | 技術 | 説明 |
-|------|------|------|
-| - | - | - |
+| 名前 | 説明 | 元 |
+|------|------|-----|
+| DamageEffectSvg | ダメージエフェクト | BrainBusters |
+| DefeatEffectSvg | 敗北エフェクト | BrainBusters |
+| BlockEffectSvg | ブロックエフェクト | BrainBusters |
+| HealEffectSvg | 回復エフェクト | BrainBusters |
+| BuffEffectSvg | バフエフェクト | BrainBusters |
+| DebuffEffectSvg | デバフエフェクト | BrainBusters |
+| CardPlayEffectSvg | カードプレイエフェクト | BrainBusters |
+| PsychedelicEffect | サイケデリックエフェクト | BrainBusters |
+
+### Canvas
+
+| 名前 | 説明 |
+|------|------|
+| - | - |
+
+### Three.js
+
+| 名前 | 説明 |
+|------|------|
+| - | - |
