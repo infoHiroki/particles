@@ -1,0 +1,13 @@
+{
+  "name": "particles-cljs",
+  "version": "0.1.0",
+  "description": "ClojureScript + Canvas パーティクルシステム",
+  "scripts": {
+    "dev": "shadow-cljs watch app",
+    "build": "shadow-cljs release app",
+    "clean": "rm -rf public/js"
+  },
+  "devDependencies": {
+    "shadow-cljs": "^2.28.0"
+  }
+}

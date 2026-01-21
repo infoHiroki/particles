@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particles - ClojureScript</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #1a1a2e;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    h1 {
+      color: #eee;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+    #canvas {
+      background: #16213e;
+      border-radius: 8px;
+      cursor: crosshair;
+    }
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      max-width: 800px;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.1s, border-color 0.1s, box-shadow 0.1s;
+      color: white;
+      font-weight: 500;
+    }
+    button:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+    button:active {
+      transform: scale(0.98);
+    }
+    button.selected {
+      border-color: white;
+      box-shadow: 0 0 12px rgba(255,255,255,0.4);
+    }
+    .btn-damage { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+    .btn-heal { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+    .btn-block { background: linear-gradient(135deg, #3498db, #2980b9); }
+    .btn-buff { background: linear-gradient(135deg, #f39c12, #e67e22); }
+    .btn-debuff { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+    .btn-defeat { background: linear-gradient(135deg, #95a5a6, #7f8c8d); }
+    .btn-cardplay { background: linear-gradient(135deg, #1abc9c, #16a085); }
+    .btn-psychedelic { background: linear-gradient(135deg, #e8b4d8, #9b59b6); }
+    .btn-clear {
+      background: #333;
+      color: #aaa;
+    }
+    .btn-auto {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    }
+    .btn-auto.active {
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .info {
+      color: #888;
+      font-size: 0.85rem;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Particles ClojureScript</h1>
+  <canvas id="canvas" width="1200" height="800"></canvas>
+  <div class="controls">
+    <button class="btn-damage selected" data-effect="damage" onclick="selectEffect(this, 'damage')">Damage</button>
+    <button class="btn-heal" data-effect="heal" onclick="selectEffect(this, 'heal')">Heal</button>
+    <button class="btn-block" data-effect="block" onclick="selectEffect(this, 'block')">Block</button>
+    <button class="btn-buff" data-effect="buff" onclick="selectEffect(this, 'buff')">Buff</button>
+    <button class="btn-debuff" data-effect="debuff" onclick="selectEffect(this, 'debuff')">Debuff</button>
+    <button class="btn-defeat" data-effect="defeat" onclick="selectEffect(this, 'defeat')">Defeat</button>
+    <button class="btn-cardplay" data-effect="cardplay" onclick="selectEffect(this, 'cardplay')">Card Play</button>
+    <button class="btn-psychedelic" data-effect="psychedelic" onclick="selectEffect(this, 'psychedelic')">Psychedelic</button>
+    <button class="btn-auto" id="autoBtn" onclick="toggleAuto()">🎲 Auto</button>
+    <button class="btn-clear" onclick="particles.core.clear_canvas()">Clear</button>
+  </div>
+  <p class="info">Select effect, then click canvas to trigger (hold for continuous)</p>
+  <script src="/js/main.js"></script>
+  <script>
+    function selectEffect(btn, effectName) {
+      // Remove selected from all
+      document.querySelectorAll('.controls button').forEach(b => b.classList.remove('selected'));
+      // Add selected to clicked
+      btn.classList.add('selected');
+      // Update ClojureScript state
+      particles.core.select_effect(effectName);
+    }
+
+    let autoActive = false;
+    function toggleAuto() {
+      autoActive = !autoActive;
+      const btn = document.getElementById('autoBtn');
+      if (autoActive) {
+        btn.classList.add('active');
+        btn.textContent = '⏹ Stop';
+        particles.core.start_auto();
+      } else {
+        btn.classList.remove('active');
+        btn.textContent = '🎲 Auto';
+        particles.core.stop_auto();
+      }
+    }
+  </script>
+</body>
+</html>

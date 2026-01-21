@@ -15,6 +15,7 @@
 - Three.js（3D）
 - CSS animations
 - React Native対応
+- ClojureScript + shadow-cljs
 
 ## ディレクトリ構成
 
@@ -26,6 +27,7 @@ particles/
 ├── threejs/         # Three.js系パーティクル
 ├── css/             # CSSアニメーション系
 ├── react-native/    # React Native用
+├── cljs/            # ClojureScript + Canvas
 └── examples/        # デモ・サンプル
 ```
 
@@ -49,6 +51,28 @@ particles/
 | 名前 | 説明 |
 |------|------|
 | - | - |
+
+### ClojureScript (Canvas)
+
+| 名前 | 説明 | ファイル |
+|------|------|---------|
+| DamageEffect | ダメージエフェクト | cljs/src/particles/effects/damage.cljs |
+| HealEffect | 回復エフェクト | cljs/src/particles/effects/heal.cljs |
+| BlockEffect | ブロックエフェクト | cljs/src/particles/effects/block.cljs |
+| BuffEffect | バフエフェクト | cljs/src/particles/effects/buff.cljs |
+| DebuffEffect | デバフエフェクト | cljs/src/particles/effects/debuff.cljs |
+| DefeatEffect | 敵撃破エフェクト | cljs/src/particles/effects/defeat.cljs |
+| CardPlayEffect | カードプレイエフェクト | cljs/src/particles/effects/cardplay.cljs |
+| PsychedelicEffect | サイケデリックエフェクト | cljs/src/particles/effects/psychedelic.cljs |
+
+#### 開発方法
+
+```bash
+cd cljs
+npm install
+npm run dev
+# http://localhost:8080 を開く
+```
 
 ### Three.js
 
