@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>シャインエフェクト デモ</title>
+  <link rel="stylesheet" href="shine-effect.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #1a1a2e;
+      color: #fff;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    h1 { text-align: center; margin-bottom: 2rem; }
+    h2 { margin: 2rem 0 1rem; border-bottom: 1px solid #444; padding-bottom: 0.5rem; }
+    .demo-section { margin-bottom: 3rem; }
+    .demo-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+
+    /* デモ用ボタンスタイル */
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: #00B900; }
+    .btn-blue { background: #3b82f6; }
+    .btn-purple { background: #8b5cf6; }
+    .btn-orange { background: #f97316; }
+
+    /* デモ用カード */
+    .card {
+      background: #2a2a4a;
+      border-radius: 12px;
+      padding: 1.5rem;
+      width: 200px;
+    }
+    .card h3 { margin: 0 0 0.5rem; }
+    .card p { margin: 0; font-size: 0.9rem; opacity: 0.8; }
+
+    code {
+      background: #333;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>シャインエフェクト デモ</h1>
+
+  <div class="demo-section">
+    <h2>速度バリエーション</h2>
+    <div class="demo-row">
+      <a href="#" class="btn btn-primary shine-effect">通常（4秒）</a>
+      <a href="#" class="btn btn-primary shine-effect-fast">速い（3秒）</a>
+      <a href="#" class="btn btn-primary shine-effect-slow">遅い（6秒）</a>
+    </div>
+    <p><code>.shine-effect</code> / <code>.shine-effect-fast</code> / <code>.shine-effect-slow</code></p>
+  </div>
+
+  <div class="demo-section">
+    <h2>カラーバリエーション</h2>
+    <div class="demo-row">
+      <a href="#" class="btn btn-blue shine-effect">白（デフォルト）</a>
+      <a href="#" class="btn btn-blue shine-effect shine-gold">金色</a>
+      <a href="#" class="btn btn-purple shine-effect shine-pink">ピンク</a>
+      <a href="#" class="btn btn-orange shine-effect shine-blue">青</a>
+    </div>
+    <p><code>.shine-gold</code> / <code>.shine-pink</code> / <code>.shine-blue</code> / <code>.shine-purple</code></p>
+  </div>
+
+  <div class="demo-section">
+    <h2>カードへの適用</h2>
+    <div class="demo-row">
+      <div class="card shine-effect">
+        <h3>お知らせ</h3>
+        <p>新機能をリリースしました</p>
+      </div>
+      <div class="card shine-effect-fast shine-gold">
+        <h3>セール中</h3>
+        <p>本日限定50%OFF</p>
+      </div>
+      <div class="card shine-effect-slow shine-purple">
+        <h3>特集</h3>
+        <p>おすすめ記事まとめ</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h2>組み合わせ例</h2>
+    <div class="demo-row">
+      <a href="#" class="btn btn-primary shine-effect-fast shine-green">LINE追加</a>
+    </div>
+    <p><code>class="btn shine-effect-fast shine-green"</code></p>
+  </div>
+
+</body>
+</html>

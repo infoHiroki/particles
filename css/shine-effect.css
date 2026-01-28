@@ -1,0 +1,192 @@
+/* ========================================================================
+   シャインエフェクト（光る演出）
+
+   元: infoHiroki WebsiteのLINEボタン演出
+   用途: ボタン、カード、バナーなどに光が走る演出を追加
+   ======================================================================== */
+
+/* ========================================================================
+   基本の使い方
+   ========================================================================
+
+   1. 親要素にクラスを追加:
+      <a href="#" class="shine-effect">ボタン</a>
+      <div class="card shine-effect">カード</div>
+
+   2. 必須条件:
+      - 親要素に overflow: hidden が必要
+      - 親要素に position: relative が必要
+      （このCSSで自動設定される）
+
+   ======================================================================== */
+
+/* ------------------------------------------------------------------------
+   基本エフェクト（4秒サイクル）
+   ------------------------------------------------------------------------ */
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect::before {
+  position: absolute;
+  content: '';
+  display: inline-block;
+  top: -180px;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  transform: rotate(45deg);
+  animation: shine-sweep 4s ease-in-out infinite;
+  pointer-events: none; /* クリックを妨げない */
+}
+
+@keyframes shine-sweep {
+  0% {
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  75% {
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(4) rotate(45deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(50) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   速いバージョン（3秒サイクル）
+   ------------------------------------------------------------------------ */
+.shine-effect-fast {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect-fast::before {
+  position: absolute;
+  content: '';
+  display: inline-block;
+  top: -180px;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: rotate(45deg);
+  animation: shine-sweep-fast 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shine-sweep-fast {
+  0% {
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  75% {
+    transform: scale(4) rotate(45deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(50) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   遅いバージョン（6秒サイクル）
+   ------------------------------------------------------------------------ */
+.shine-effect-slow {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-effect-slow::before {
+  position: absolute;
+  content: '';
+  display: inline-block;
+  top: -180px;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  transform: rotate(45deg);
+  animation: shine-sweep-slow 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes shine-sweep-slow {
+  0% {
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  85% {
+    transform: scale(4) rotate(45deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(50) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------------------
+   カラーバリエーション（修飾クラスとして追加）
+
+   使い方: <div class="shine-effect shine-gold">
+   ------------------------------------------------------------------------ */
+
+/* 金色 */
+.shine-gold::before {
+  background-color: rgba(255, 215, 0, 0.6);
+}
+
+/* ピンク */
+.shine-pink::before {
+  background-color: rgba(255, 182, 193, 0.7);
+}
+
+/* 青 */
+.shine-blue::before {
+  background-color: rgba(100, 180, 255, 0.7);
+}
+
+/* 緑（LINE風） */
+.shine-green::before {
+  background-color: rgba(0, 185, 0, 0.5);
+}
+
+/* 紫 */
+.shine-purple::before {
+  background-color: rgba(180, 100, 255, 0.6);
+}
+
+/* ------------------------------------------------------------------------
+   使用例
+   ------------------------------------------------------------------------
+
+   <!-- 基本 -->
+   <button class="shine-effect">送信</button>
+
+   <!-- 速い + 金色 -->
+   <a href="#" class="shine-effect-fast shine-gold">今すぐ購入</a>
+
+   <!-- 遅い + 青 -->
+   <div class="card shine-effect-slow shine-blue">
+     <h3>お知らせ</h3>
+   </div>
+
+   ------------------------------------------------------------------------ */
