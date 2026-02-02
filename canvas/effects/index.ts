@@ -419,6 +419,16 @@ export { firewallEffect } from './firewall';
 export { encryptEffect } from './encrypt';
 export { decryptEffect } from './decrypt';
 export { syncEffect } from './sync';
+export { wave3Effect } from './wave3';
+export { orbit3Effect } from './orbit3';
+export { chainEffect } from './chain';
+export { linkEffect } from './link';
+export { threadEffect } from './thread';
+export { webEffect } from './web';
+export { swarmEffect } from './swarm';
+export { flockEffect } from './flock';
+export { schoolEffect } from './school';
+export { herdEffect } from './herd';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -827,6 +837,16 @@ import { firewallEffect } from './firewall';
 import { encryptEffect } from './encrypt';
 import { decryptEffect } from './decrypt';
 import { syncEffect } from './sync';
+import { wave3Effect } from './wave3';
+import { orbit3Effect } from './orbit3';
+import { chainEffect } from './chain';
+import { linkEffect } from './link';
+import { threadEffect } from './thread';
+import { webEffect } from './web';
+import { swarmEffect } from './swarm';
+import { flockEffect } from './flock';
+import { schoolEffect } from './school';
+import { herdEffect } from './herd';
 
 import type { Effect } from '../types';
 
@@ -1110,6 +1130,16 @@ export const visualEffects: Effect[] = [
   encryptEffect,
   decryptEffect,
   syncEffect,
+  wave3Effect,
+  orbit3Effect,
+  chainEffect,
+  linkEffect,
+  threadEffect,
+  webEffect,
+  swarmEffect,
+  flockEffect,
+  schoolEffect,
+  herdEffect,
 ];
 
 /** 背景エフェクト一覧 */
