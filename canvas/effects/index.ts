@@ -309,6 +309,16 @@ export { alarmEffect } from './alarm';
 export { scheduleEffect } from './schedule';
 export { progress2Effect } from './progress2';
 export { circularEffect } from './circular';
+export { cardEffect } from './card';
+export { diceEffect } from './dice';
+export { chipEffect } from './chip';
+export { slotEffect } from './slot';
+export { rouletteEffect } from './roulette';
+export { jackpotEffect } from './jackpot';
+export { trophy2Effect } from './trophy2';
+export { medalEffect } from './medal';
+export { rankEffect } from './rank';
+export { badgeEffect } from './badge';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -607,6 +617,16 @@ import { alarmEffect } from './alarm';
 import { scheduleEffect } from './schedule';
 import { progress2Effect } from './progress2';
 import { circularEffect } from './circular';
+import { cardEffect } from './card';
+import { diceEffect } from './dice';
+import { chipEffect } from './chip';
+import { slotEffect } from './slot';
+import { rouletteEffect } from './roulette';
+import { jackpotEffect } from './jackpot';
+import { trophy2Effect } from './trophy2';
+import { medalEffect } from './medal';
+import { rankEffect } from './rank';
+import { badgeEffect } from './badge';
 
 import type { Effect } from '../types';
 
@@ -920,6 +940,16 @@ export const gameEffects: Effect[] = [
   diamondEffect,
   dragonEffect,
   phoenixEffect,
+  cardEffect,
+  diceEffect,
+  chipEffect,
+  slotEffect,
+  rouletteEffect,
+  jackpotEffect,
+  trophy2Effect,
+  medalEffect,
+  rankEffect,
+  badgeEffect,
 ];
 
 /** 全エフェクト一覧 */
