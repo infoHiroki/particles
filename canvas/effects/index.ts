@@ -269,6 +269,16 @@ export { dizzyEffect } from './dizzy';
 export { rageEffect } from './rage';
 export { dreamEffect } from './dream';
 export { sleepyEffect } from './sleepy';
+export { drumEffect } from './drum';
+export { pianoEffect } from './piano';
+export { guitarEffect } from './guitar';
+export { trumpetEffect } from './trumpet';
+export { violinEffect } from './violin';
+export { speakerEffect } from './speaker';
+export { equalizerEffect } from './equalizer';
+export { microphoneEffect } from './microphone';
+export { headphoneEffect } from './headphone';
+export { recordEffect } from './record';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -527,6 +537,16 @@ import { dizzyEffect } from './dizzy';
 import { rageEffect } from './rage';
 import { dreamEffect } from './dream';
 import { sleepyEffect } from './sleepy';
+import { drumEffect } from './drum';
+import { pianoEffect } from './piano';
+import { guitarEffect } from './guitar';
+import { trumpetEffect } from './trumpet';
+import { violinEffect } from './violin';
+import { speakerEffect } from './speaker';
+import { equalizerEffect } from './equalizer';
+import { microphoneEffect } from './microphone';
+import { headphoneEffect } from './headphone';
+import { recordEffect } from './record';
 
 import type { Effect } from '../types';
 
@@ -700,6 +720,16 @@ export const visualEffects: Effect[] = [
   rageEffect,
   dreamEffect,
   sleepyEffect,
+  drumEffect,
+  pianoEffect,
+  guitarEffect,
+  trumpetEffect,
+  violinEffect,
+  speakerEffect,
+  equalizerEffect,
+  microphoneEffect,
+  headphoneEffect,
+  recordEffect,
 ];
 
 /** 背景エフェクト一覧 */
