@@ -123,6 +123,15 @@ export { blockEffect } from './block';
 export { grabEffect } from './grab';
 export { throwEffect } from './throw';
 export { spinEffect } from './spin';
+export { focusEffect } from './focus';
+export { unlockEffect } from './unlock';
+export { lockEffect } from './lock';
+export { alertEffect } from './alert';
+export { confirmEffect } from './confirm';
+export { cancelEffect } from './cancel';
+export { searchEffect } from './search';
+export { shareEffect } from './share';
+export { saveEffect } from './save';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -235,6 +244,15 @@ import { blockEffect } from './block';
 import { grabEffect } from './grab';
 import { throwEffect } from './throw';
 import { spinEffect } from './spin';
+import { focusEffect } from './focus';
+import { unlockEffect } from './unlock';
+import { lockEffect } from './lock';
+import { alertEffect } from './alert';
+import { confirmEffect } from './confirm';
+import { cancelEffect } from './cancel';
+import { searchEffect } from './search';
+import { shareEffect } from './share';
+import { saveEffect } from './save';
 
 import type { Effect } from '../types';
 
@@ -248,6 +266,15 @@ export const uiEffects: Effect[] = [
   clickEffect,
   heartbeatEffect,
   rippleEffect,
+  focusEffect,
+  unlockEffect,
+  lockEffect,
+  alertEffect,
+  confirmEffect,
+  cancelEffect,
+  searchEffect,
+  shareEffect,
+  saveEffect,
 ];
 
 /** 視覚効果エフェクト一覧 */
