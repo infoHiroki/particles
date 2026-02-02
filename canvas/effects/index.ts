@@ -230,6 +230,16 @@ export { mergeEffect } from './merge';
 export { cascadeEffect } from './cascade';
 export { expandEffect } from './expand';
 export { contractEffect } from './contract';
+export { blackholeEffect } from './blackhole';
+export { nebulaEffect } from './nebula';
+export { supernovaEffect } from './supernova';
+export { quasarEffect } from './quasar';
+export { asteroidEffect } from './asteroid';
+export { satelliteEffect } from './satellite';
+export { starfieldEffect } from './starfield';
+export { cosmosEffect } from './cosmos';
+export { wormholeEffect } from './wormhole';
+export { pulsarEffect } from './pulsar';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -449,6 +459,16 @@ import { mergeEffect } from './merge';
 import { cascadeEffect } from './cascade';
 import { expandEffect } from './expand';
 import { contractEffect } from './contract';
+import { blackholeEffect } from './blackhole';
+import { nebulaEffect } from './nebula';
+import { supernovaEffect } from './supernova';
+import { quasarEffect } from './quasar';
+import { asteroidEffect } from './asteroid';
+import { satelliteEffect } from './satellite';
+import { starfieldEffect } from './starfield';
+import { cosmosEffect } from './cosmos';
+import { wormholeEffect } from './wormhole';
+import { pulsarEffect } from './pulsar';
 
 import type { Effect } from '../types';
 
@@ -637,6 +657,16 @@ export const backgroundEffects: Effect[] = [
   bambooEffect,
   fernEffect,
   cloverEffect,
+  blackholeEffect,
+  nebulaEffect,
+  supernovaEffect,
+  quasarEffect,
+  asteroidEffect,
+  satelliteEffect,
+  starfieldEffect,
+  cosmosEffect,
+  wormholeEffect,
+  pulsarEffect,
 ];
 
 /** ゲームエフェクト一覧 */
