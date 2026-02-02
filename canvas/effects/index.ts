@@ -141,6 +141,15 @@ export { fearEffect } from './fear';
 export { curiousEffect } from './curious';
 export { calmEffect } from './calm';
 export { excitedEffect } from './excited';
+export { ribbonEffect } from './ribbon';
+export { crownEffect } from './crown';
+export { wingsEffect } from './wings';
+export { musicEffect } from './music';
+export { clockEffect } from './clock';
+export { eyeEffect } from './eye';
+export { skullEffect } from './skull';
+export { diamondEffect } from './diamond';
+export { crystalEffect } from './crystal';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -271,6 +280,15 @@ import { fearEffect } from './fear';
 import { curiousEffect } from './curious';
 import { calmEffect } from './calm';
 import { excitedEffect } from './excited';
+import { ribbonEffect } from './ribbon';
+import { crownEffect } from './crown';
+import { wingsEffect } from './wings';
+import { musicEffect } from './music';
+import { clockEffect } from './clock';
+import { eyeEffect } from './eye';
+import { skullEffect } from './skull';
+import { diamondEffect } from './diamond';
+import { crystalEffect } from './crystal';
 
 import type { Effect } from '../types';
 
@@ -351,6 +369,12 @@ export const visualEffects: Effect[] = [
   curiousEffect,
   calmEffect,
   excitedEffect,
+  ribbonEffect,
+  wingsEffect,
+  musicEffect,
+  clockEffect,
+  eyeEffect,
+  crystalEffect,
 ];
 
 /** 背景エフェクト一覧 */
@@ -416,6 +440,9 @@ export const gameEffects: Effect[] = [
   grabEffect,
   throwEffect,
   spinEffect,
+  crownEffect,
+  skullEffect,
+  diamondEffect,
 ];
 
 /** 全エフェクト一覧 */
