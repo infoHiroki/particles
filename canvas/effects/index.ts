@@ -160,6 +160,16 @@ export { snakeEffect } from './snake';
 export { spiderEffect } from './spider';
 export { dragonEffect } from './dragon';
 export { phoenixEffect } from './phoenix';
+export { appleEffect } from './apple';
+export { orangeEffect } from './orange';
+export { pizzaEffect } from './pizza';
+export { cakeEffect } from './cake';
+export { coffeeEffect } from './coffee';
+export { beerEffect } from './beer';
+export { sushiEffect } from './sushi';
+export { candyEffect } from './candy';
+export { cookieEffect } from './cookie';
+export { icecreamEffect } from './icecream';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -309,6 +319,16 @@ import { snakeEffect } from './snake';
 import { spiderEffect } from './spider';
 import { dragonEffect } from './dragon';
 import { phoenixEffect } from './phoenix';
+import { appleEffect } from './apple';
+import { orangeEffect } from './orange';
+import { pizzaEffect } from './pizza';
+import { cakeEffect } from './cake';
+import { coffeeEffect } from './coffee';
+import { beerEffect } from './beer';
+import { sushiEffect } from './sushi';
+import { candyEffect } from './candy';
+import { cookieEffect } from './cookie';
+import { icecreamEffect } from './icecream';
 
 import type { Effect } from '../types';
 
@@ -399,6 +419,16 @@ export const visualEffects: Effect[] = [
   dogEffect,
   snakeEffect,
   spiderEffect,
+  appleEffect,
+  orangeEffect,
+  pizzaEffect,
+  cakeEffect,
+  coffeeEffect,
+  beerEffect,
+  sushiEffect,
+  candyEffect,
+  cookieEffect,
+  icecreamEffect,
 ];
 
 /** 背景エフェクト一覧 */
