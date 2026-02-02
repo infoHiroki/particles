@@ -259,6 +259,16 @@ export { circuitEffect } from './circuit';
 export { factoryEffect } from './factory';
 export { machineEffect } from './machine';
 export { springEffect } from './spring';
+export { blushEffect } from './blush';
+export { sweatEffect } from './sweat';
+export { tears2Effect } from './tears2';
+export { laughEffect } from './laugh';
+export { yawnEffect } from './yawn';
+export { shock2Effect } from './shock2';
+export { dizzyEffect } from './dizzy';
+export { rageEffect } from './rage';
+export { dreamEffect } from './dream';
+export { sleepyEffect } from './sleepy';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -507,6 +517,16 @@ import { circuitEffect } from './circuit';
 import { factoryEffect } from './factory';
 import { machineEffect } from './machine';
 import { springEffect } from './spring';
+import { blushEffect } from './blush';
+import { sweatEffect } from './sweat';
+import { tears2Effect } from './tears2';
+import { laughEffect } from './laugh';
+import { yawnEffect } from './yawn';
+import { shock2Effect } from './shock2';
+import { dizzyEffect } from './dizzy';
+import { rageEffect } from './rage';
+import { dreamEffect } from './dream';
+import { sleepyEffect } from './sleepy';
 
 import type { Effect } from '../types';
 
@@ -670,6 +690,16 @@ export const visualEffects: Effect[] = [
   factoryEffect,
   machineEffect,
   springEffect,
+  blushEffect,
+  sweatEffect,
+  tears2Effect,
+  laughEffect,
+  yawnEffect,
+  shock2Effect,
+  dizzyEffect,
+  rageEffect,
+  dreamEffect,
+  sleepyEffect,
 ];
 
 /** 背景エフェクト一覧 */
