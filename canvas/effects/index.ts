@@ -409,6 +409,16 @@ export { blessEffect } from './bless';
 export { regenEffect } from './regen';
 export { drainEffect } from './drain';
 export { silenceEffect } from './silence';
+export { binaryEffect } from './binary';
+export { pixel2Effect } from './pixel2';
+export { dataEffect } from './data';
+export { codeEffect } from './code';
+export { cyberEffect } from './cyber';
+export { virusEffect } from './virus';
+export { firewallEffect } from './firewall';
+export { encryptEffect } from './encrypt';
+export { decryptEffect } from './decrypt';
+export { syncEffect } from './sync';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -807,6 +817,16 @@ import { blessEffect } from './bless';
 import { regenEffect } from './regen';
 import { drainEffect } from './drain';
 import { silenceEffect } from './silence';
+import { binaryEffect } from './binary';
+import { pixel2Effect } from './pixel2';
+import { dataEffect } from './data';
+import { codeEffect } from './code';
+import { cyberEffect } from './cyber';
+import { virusEffect } from './virus';
+import { firewallEffect } from './firewall';
+import { encryptEffect } from './encrypt';
+import { decryptEffect } from './decrypt';
+import { syncEffect } from './sync';
 
 import type { Effect } from '../types';
 
@@ -1080,6 +1100,16 @@ export const visualEffects: Effect[] = [
   soulEffect,
   radianceEffect,
   essenceEffect,
+  binaryEffect,
+  pixel2Effect,
+  dataEffect,
+  codeEffect,
+  cyberEffect,
+  virusEffect,
+  firewallEffect,
+  encryptEffect,
+  decryptEffect,
+  syncEffect,
 ];
 
 /** 背景エフェクト一覧 */
