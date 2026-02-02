@@ -19,6 +19,7 @@ export { electricEffect } from './electric';
 export { snowEffect } from './snow';
 export { starsEffect } from './stars';
 export { smokeEffect } from './smoke';
+export { rainEffect } from './rain';
 
 // 背景・環境系エフェクト
 export { networkEffect } from './network';
@@ -45,6 +46,7 @@ import { electricEffect } from './electric';
 import { snowEffect } from './snow';
 import { starsEffect } from './stars';
 import { smokeEffect } from './smoke';
+import { rainEffect } from './rain';
 import { networkEffect } from './network';
 import { bubbleEffect } from './bubble';
 import { dustEffect } from './dust';
@@ -74,6 +76,7 @@ export const visualEffects: Effect[] = [
   snowEffect,
   starsEffect,
   smokeEffect,
+  rainEffect,
 ];
 
 /** 背景エフェクト一覧 */
