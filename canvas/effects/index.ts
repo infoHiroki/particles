@@ -399,6 +399,16 @@ export { counterEffect } from './counter';
 export { rushEffect } from './rush';
 export { combo2Effect } from './combo2';
 export { finisherEffect } from './finisher';
+export { poison2Effect } from './poison2';
+export { burn2Effect } from './burn2';
+export { freeze2Effect } from './freeze2';
+export { stun2Effect } from './stun2';
+export { paralyzeEffect } from './paralyze';
+export { curseEffect } from './curse';
+export { blessEffect } from './bless';
+export { regenEffect } from './regen';
+export { drainEffect } from './drain';
+export { silenceEffect } from './silence';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -787,6 +797,16 @@ import { counterEffect } from './counter';
 import { rushEffect } from './rush';
 import { combo2Effect } from './combo2';
 import { finisherEffect } from './finisher';
+import { poison2Effect } from './poison2';
+import { burn2Effect } from './burn2';
+import { freeze2Effect } from './freeze2';
+import { stun2Effect } from './stun2';
+import { paralyzeEffect } from './paralyze';
+import { curseEffect } from './curse';
+import { blessEffect } from './bless';
+import { regenEffect } from './regen';
+import { drainEffect } from './drain';
+import { silenceEffect } from './silence';
 
 import type { Effect } from '../types';
 
@@ -1190,6 +1210,16 @@ export const gameEffects: Effect[] = [
   rushEffect,
   combo2Effect,
   finisherEffect,
+  poison2Effect,
+  burn2Effect,
+  freeze2Effect,
+  stun2Effect,
+  paralyzeEffect,
+  curseEffect,
+  blessEffect,
+  regenEffect,
+  drainEffect,
+  silenceEffect,
 ];
 
 /** 全エフェクト一覧 */
