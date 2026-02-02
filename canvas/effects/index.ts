@@ -299,6 +299,16 @@ export { chatEffect } from './chat';
 export { mailEffect } from './mail';
 export { bell2Effect } from './bell2';
 export { hashtagEffect } from './hashtag';
+export { timerEffect } from './timer';
+export { hourglassEffect } from './hourglass';
+export { countdownEffect } from './countdown';
+export { stopwatchEffect } from './stopwatch';
+export { calendarEffect } from './calendar';
+export { deadlineEffect } from './deadline';
+export { alarmEffect } from './alarm';
+export { scheduleEffect } from './schedule';
+export { progress2Effect } from './progress2';
+export { circularEffect } from './circular';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -587,6 +597,16 @@ import { chatEffect } from './chat';
 import { mailEffect } from './mail';
 import { bell2Effect } from './bell2';
 import { hashtagEffect } from './hashtag';
+import { timerEffect } from './timer';
+import { hourglassEffect } from './hourglass';
+import { countdownEffect } from './countdown';
+import { stopwatchEffect } from './stopwatch';
+import { calendarEffect } from './calendar';
+import { deadlineEffect } from './deadline';
+import { alarmEffect } from './alarm';
+import { scheduleEffect } from './schedule';
+import { progress2Effect } from './progress2';
+import { circularEffect } from './circular';
 
 import type { Effect } from '../types';
 
@@ -619,6 +639,16 @@ export const uiEffects: Effect[] = [
   mailEffect,
   bell2Effect,
   hashtagEffect,
+  timerEffect,
+  hourglassEffect,
+  countdownEffect,
+  stopwatchEffect,
+  calendarEffect,
+  deadlineEffect,
+  alarmEffect,
+  scheduleEffect,
+  progress2Effect,
+  circularEffect,
 ];
 
 /** 視覚効果エフェクト一覧 */
