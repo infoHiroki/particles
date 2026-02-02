@@ -220,6 +220,16 @@ export { sunflowerEffect } from './sunflower';
 export { bambooEffect } from './bamboo';
 export { fernEffect } from './fern';
 export { cloverEffect } from './clover';
+export { swirlEffect } from './swirl';
+export { bounceEffect } from './bounce';
+export { orbit2Effect } from './orbit2';
+export { twistEffect } from './twist';
+export { morphEffect } from './morph';
+export { splitEffect } from './split';
+export { mergeEffect } from './merge';
+export { cascadeEffect } from './cascade';
+export { expandEffect } from './expand';
+export { contractEffect } from './contract';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -429,6 +439,16 @@ import { sunflowerEffect } from './sunflower';
 import { bambooEffect } from './bamboo';
 import { fernEffect } from './fern';
 import { cloverEffect } from './clover';
+import { swirlEffect } from './swirl';
+import { bounceEffect } from './bounce';
+import { orbit2Effect } from './orbit2';
+import { twistEffect } from './twist';
+import { morphEffect } from './morph';
+import { splitEffect } from './split';
+import { mergeEffect } from './merge';
+import { cascadeEffect } from './cascade';
+import { expandEffect } from './expand';
+import { contractEffect } from './contract';
 
 import type { Effect } from '../types';
 
@@ -563,6 +583,16 @@ export const visualEffects: Effect[] = [
   ringEffect,
   crossEffect,
   arrowEffect,
+  swirlEffect,
+  bounceEffect,
+  orbit2Effect,
+  twistEffect,
+  morphEffect,
+  splitEffect,
+  mergeEffect,
+  cascadeEffect,
+  expandEffect,
+  contractEffect,
 ];
 
 /** 背景エフェクト一覧 */
