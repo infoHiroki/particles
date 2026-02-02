@@ -289,6 +289,16 @@ export { roofEffect } from './roof';
 export { stairsEffect } from './stairs';
 export { domeEffect } from './dome';
 export { archEffect } from './arch';
+export { speechEffect } from './speech';
+export { thoughtEffect } from './thought';
+export { exclaimEffect } from './exclaim';
+export { questionEffect } from './question';
+export { likeEffect } from './like';
+export { dislikeEffect } from './dislike';
+export { chatEffect } from './chat';
+export { mailEffect } from './mail';
+export { bell2Effect } from './bell2';
+export { hashtagEffect } from './hashtag';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -567,6 +577,16 @@ import { roofEffect } from './roof';
 import { stairsEffect } from './stairs';
 import { domeEffect } from './dome';
 import { archEffect } from './arch';
+import { speechEffect } from './speech';
+import { thoughtEffect } from './thought';
+import { exclaimEffect } from './exclaim';
+import { questionEffect } from './question';
+import { likeEffect } from './like';
+import { dislikeEffect } from './dislike';
+import { chatEffect } from './chat';
+import { mailEffect } from './mail';
+import { bell2Effect } from './bell2';
+import { hashtagEffect } from './hashtag';
 
 import type { Effect } from '../types';
 
@@ -589,6 +609,16 @@ export const uiEffects: Effect[] = [
   searchEffect,
   shareEffect,
   saveEffect,
+  speechEffect,
+  thoughtEffect,
+  exclaimEffect,
+  questionEffect,
+  likeEffect,
+  dislikeEffect,
+  chatEffect,
+  mailEffect,
+  bell2Effect,
+  hashtagEffect,
 ];
 
 /** 視覚効果エフェクト一覧 */
