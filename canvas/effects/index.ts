@@ -47,6 +47,7 @@ export { criticalEffect } from './critical';
 export { shieldEffect } from './shield';
 export { healEffect } from './heal';
 export { poisonEffect } from './poison';
+export { freezeEffect } from './freeze';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -85,6 +86,7 @@ import { criticalEffect } from './critical';
 import { shieldEffect } from './shield';
 import { healEffect } from './heal';
 import { poisonEffect } from './poison';
+import { freezeEffect } from './freeze';
 
 import type { Effect } from '../types';
 
@@ -138,6 +140,7 @@ export const gameEffects: Effect[] = [
   shieldEffect,
   healEffect,
   poisonEffect,
+  freezeEffect,
 ];
 
 /** 全エフェクト一覧 */
