@@ -359,6 +359,16 @@ export { leafEffect } from './leaf';
 export { flameEffect } from './flame';
 export { snowflakeEffect } from './snowflake';
 export { featherEffect } from './feather';
+export { gridEffect } from './grid';
+export { stripeEffect } from './stripe';
+export { dotsEffect } from './dots';
+export { checkerEffect } from './checker';
+export { zigzagEffect } from './zigzag';
+export { wave2Effect } from './wave2';
+export { spiral2Effect } from './spiral2';
+export { hexgridEffect } from './hexgrid';
+export { radialEffect } from './radial';
+export { concentricEffect } from './concentric';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -707,6 +717,16 @@ import { leafEffect } from './leaf';
 import { flameEffect } from './flame';
 import { snowflakeEffect } from './snowflake';
 import { featherEffect } from './feather';
+import { gridEffect } from './grid';
+import { stripeEffect } from './stripe';
+import { dotsEffect } from './dots';
+import { checkerEffect } from './checker';
+import { zigzagEffect } from './zigzag';
+import { wave2Effect } from './wave2';
+import { spiral2Effect } from './spiral2';
+import { hexgridEffect } from './hexgrid';
+import { radialEffect } from './radial';
+import { concentricEffect } from './concentric';
 
 import type { Effect } from '../types';
 
@@ -950,6 +970,16 @@ export const visualEffects: Effect[] = [
   flameEffect,
   snowflakeEffect,
   featherEffect,
+  gridEffect,
+  stripeEffect,
+  dotsEffect,
+  checkerEffect,
+  zigzagEffect,
+  wave2Effect,
+  spiral2Effect,
+  hexgridEffect,
+  radialEffect,
+  concentricEffect,
 ];
 
 /** 背景エフェクト一覧 */
