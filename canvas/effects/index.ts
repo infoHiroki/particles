@@ -210,6 +210,16 @@ export { pyramidEffect } from './pyramid';
 export { ringEffect } from './ring';
 export { crossEffect } from './cross';
 export { arrowEffect } from './arrow';
+export { treeEffect } from './tree';
+export { flowerEffect } from './flower';
+export { mushroomEffect } from './mushroom';
+export { cactusEffect } from './cactus';
+export { roseEffect } from './rose';
+export { tulipEffect } from './tulip';
+export { sunflowerEffect } from './sunflower';
+export { bambooEffect } from './bamboo';
+export { fernEffect } from './fern';
+export { cloverEffect } from './clover';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -409,6 +419,16 @@ import { pyramidEffect } from './pyramid';
 import { ringEffect } from './ring';
 import { crossEffect } from './cross';
 import { arrowEffect } from './arrow';
+import { treeEffect } from './tree';
+import { flowerEffect } from './flower';
+import { mushroomEffect } from './mushroom';
+import { cactusEffect } from './cactus';
+import { roseEffect } from './rose';
+import { tulipEffect } from './tulip';
+import { sunflowerEffect } from './sunflower';
+import { bambooEffect } from './bamboo';
+import { fernEffect } from './fern';
+import { cloverEffect } from './clover';
 
 import type { Effect } from '../types';
 
@@ -577,6 +597,16 @@ export const backgroundEffects: Effect[] = [
   eclipseEffect,
   sunriseEffect,
   sunsetEffect,
+  treeEffect,
+  flowerEffect,
+  mushroomEffect,
+  cactusEffect,
+  roseEffect,
+  tulipEffect,
+  sunflowerEffect,
+  bambooEffect,
+  fernEffect,
+  cloverEffect,
 ];
 
 /** ゲームエフェクト一覧 */
