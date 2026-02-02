@@ -2576,11 +2576,13 @@
     // キャンバスクリック
     canvas.addEventListener('click', (e) => {
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const x = (e.clientX - rect.left) * scaleX;
+      const y = (e.clientY - rect.top) * scaleY;
       const intensity = parseFloat(intensitySlider.value);
       const color = colorPicker.value;
-      system.trigger(system.currentEffect, x, y, { intensity, color });
+      system.trigger(x, y, { intensity, color });
     });
 
     // 強度スライダー
@@ -2594,7 +2596,7 @@
       const y = canvas.height / 2;
       const intensity = parseFloat(intensitySlider.value);
       const color = colorPicker.value;
-      system.trigger(system.currentEffect, x, y, { intensity, color });
+      system.trigger(x, y, { intensity, color });
     });
 
     // オートプレイ
@@ -2611,7 +2613,7 @@
           const y = random(100, canvas.height - 100);
           const intensity = parseFloat(intensitySlider.value);
           const color = colorPicker.value;
-          system.trigger(system.currentEffect, x, y, { intensity, color });
+          system.trigger(x, y, { intensity, color });
         }, 500);
         autoBtn.textContent = 'Stop';
         autoBtn.classList.add('auto-active');
