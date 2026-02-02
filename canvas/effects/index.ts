@@ -389,6 +389,16 @@ export { spiritEffect } from './spirit';
 export { soulEffect } from './soul';
 export { radianceEffect } from './radiance';
 export { essenceEffect } from './essence';
+export { strikeEffect } from './strike';
+export { cutEffect } from './cut';
+export { smashEffect } from './smash';
+export { pierceEffect } from './pierce';
+export { clashEffect } from './clash';
+export { parryEffect } from './parry';
+export { counterEffect } from './counter';
+export { rushEffect } from './rush';
+export { combo2Effect } from './combo2';
+export { finisherEffect } from './finisher';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -767,6 +777,16 @@ import { spiritEffect } from './spirit';
 import { soulEffect } from './soul';
 import { radianceEffect } from './radiance';
 import { essenceEffect } from './essence';
+import { strikeEffect } from './strike';
+import { cutEffect } from './cut';
+import { smashEffect } from './smash';
+import { pierceEffect } from './pierce';
+import { clashEffect } from './clash';
+import { parryEffect } from './parry';
+import { counterEffect } from './counter';
+import { rushEffect } from './rush';
+import { combo2Effect } from './combo2';
+import { finisherEffect } from './finisher';
 
 import type { Effect } from '../types';
 
@@ -1160,6 +1180,16 @@ export const gameEffects: Effect[] = [
   medalEffect,
   rankEffect,
   badgeEffect,
+  strikeEffect,
+  cutEffect,
+  smashEffect,
+  pierceEffect,
+  clashEffect,
+  parryEffect,
+  counterEffect,
+  rushEffect,
+  combo2Effect,
+  finisherEffect,
 ];
 
 /** 全エフェクト一覧 */
