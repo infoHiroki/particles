@@ -250,6 +250,15 @@ export { fountainEffect } from './fountain';
 export { geyserEffect } from './geyser';
 export { whirlpoolEffect } from './whirlpool';
 export { tideEffect } from './tide';
+export { gearEffect } from './gear';
+export { engineEffect } from './engine';
+export { pistonEffect } from './piston';
+export { cogEffect } from './cog';
+export { wrenchEffect } from './wrench';
+export { circuitEffect } from './circuit';
+export { factoryEffect } from './factory';
+export { machineEffect } from './machine';
+export { springEffect } from './spring';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -489,6 +498,15 @@ import { fountainEffect } from './fountain';
 import { geyserEffect } from './geyser';
 import { whirlpoolEffect } from './whirlpool';
 import { tideEffect } from './tide';
+import { gearEffect } from './gear';
+import { engineEffect } from './engine';
+import { pistonEffect } from './piston';
+import { cogEffect } from './cog';
+import { wrenchEffect } from './wrench';
+import { circuitEffect } from './circuit';
+import { factoryEffect } from './factory';
+import { machineEffect } from './machine';
+import { springEffect } from './spring';
 
 import type { Effect } from '../types';
 
@@ -643,6 +661,15 @@ export const visualEffects: Effect[] = [
   geyserEffect,
   whirlpoolEffect,
   tideEffect,
+  gearEffect,
+  engineEffect,
+  pistonEffect,
+  cogEffect,
+  wrenchEffect,
+  circuitEffect,
+  factoryEffect,
+  machineEffect,
+  springEffect,
 ];
 
 /** 背景エフェクト一覧 */
