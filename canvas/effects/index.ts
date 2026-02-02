@@ -23,6 +23,7 @@ export { rainEffect } from './rain';
 export { fireworksEffect } from './fireworks';
 export { meteorEffect } from './meteor';
 export { spiralEffect } from './spiral';
+export { portalEffect } from './portal';
 
 // 背景・環境系エフェクト
 export { networkEffect } from './network';
@@ -54,6 +55,7 @@ import { rainEffect } from './rain';
 import { fireworksEffect } from './fireworks';
 import { meteorEffect } from './meteor';
 import { spiralEffect } from './spiral';
+import { portalEffect } from './portal';
 import { networkEffect } from './network';
 import { bubbleEffect } from './bubble';
 import { dustEffect } from './dust';
@@ -88,6 +90,7 @@ export const visualEffects: Effect[] = [
   fireworksEffect,
   meteorEffect,
   spiralEffect,
+  portalEffect,
 ];
 
 /** 背景エフェクト一覧 */
