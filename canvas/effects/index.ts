@@ -170,6 +170,16 @@ export { sushiEffect } from './sushi';
 export { candyEffect } from './candy';
 export { cookieEffect } from './cookie';
 export { icecreamEffect } from './icecream';
+export { sunEffect } from './sun';
+export { moonEffect } from './moon';
+export { cloudEffect } from './cloud';
+export { boltEffect } from './bolt';
+export { tsunamiEffect } from './tsunami';
+export { volcanoEffect } from './volcano';
+export { shootingEffect } from './shooting';
+export { eclipseEffect } from './eclipse';
+export { sunriseEffect } from './sunrise';
+export { sunsetEffect } from './sunset';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -329,6 +339,16 @@ import { sushiEffect } from './sushi';
 import { candyEffect } from './candy';
 import { cookieEffect } from './cookie';
 import { icecreamEffect } from './icecream';
+import { sunEffect } from './sun';
+import { moonEffect } from './moon';
+import { cloudEffect } from './cloud';
+import { boltEffect } from './bolt';
+import { tsunamiEffect } from './tsunami';
+import { volcanoEffect } from './volcano';
+import { shootingEffect } from './shooting';
+import { eclipseEffect } from './eclipse';
+import { sunriseEffect } from './sunrise';
+import { sunsetEffect } from './sunset';
 
 import type { Effect } from '../types';
 
@@ -429,6 +449,10 @@ export const visualEffects: Effect[] = [
   candyEffect,
   cookieEffect,
   icecreamEffect,
+  boltEffect,
+  tsunamiEffect,
+  volcanoEffect,
+  shootingEffect,
 ];
 
 /** 背景エフェクト一覧 */
@@ -457,6 +481,12 @@ export const backgroundEffects: Effect[] = [
   beeEffect,
   fishEffect,
   birdEffect,
+  sunEffect,
+  moonEffect,
+  cloudEffect,
+  eclipseEffect,
+  sunriseEffect,
+  sunsetEffect,
 ];
 
 /** ゲームエフェクト一覧 */
