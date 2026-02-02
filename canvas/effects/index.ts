@@ -190,6 +190,16 @@ export { runnerEffect } from './runner';
 export { bikeEffect } from './bike';
 export { skateEffect } from './skate';
 export { skiEffect } from './ski';
+export { wifiEffect } from './wifi';
+export { bluetoothEffect } from './bluetooth';
+export { gpsEffect } from './gps';
+export { batteryEffect } from './battery';
+export { cameraEffect } from './camera';
+export { phoneEffect } from './phone';
+export { laptopEffect } from './laptop';
+export { robotEffect } from './robot';
+export { droneEffect } from './drone';
+export { rocketEffect } from './rocket';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -369,6 +379,16 @@ import { runnerEffect } from './runner';
 import { bikeEffect } from './bike';
 import { skateEffect } from './skate';
 import { skiEffect } from './ski';
+import { wifiEffect } from './wifi';
+import { bluetoothEffect } from './bluetooth';
+import { gpsEffect } from './gps';
+import { batteryEffect } from './battery';
+import { cameraEffect } from './camera';
+import { phoneEffect } from './phone';
+import { laptopEffect } from './laptop';
+import { robotEffect } from './robot';
+import { droneEffect } from './drone';
+import { rocketEffect } from './rocket';
 
 import type { Effect } from '../types';
 
@@ -483,6 +503,16 @@ export const visualEffects: Effect[] = [
   bikeEffect,
   skateEffect,
   skiEffect,
+  wifiEffect,
+  bluetoothEffect,
+  gpsEffect,
+  batteryEffect,
+  cameraEffect,
+  phoneEffect,
+  laptopEffect,
+  robotEffect,
+  droneEffect,
+  rocketEffect,
 ];
 
 /** 背景エフェクト一覧 */
