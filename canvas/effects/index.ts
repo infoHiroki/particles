@@ -240,6 +240,16 @@ export { starfieldEffect } from './starfield';
 export { cosmosEffect } from './cosmos';
 export { wormholeEffect } from './wormhole';
 export { pulsarEffect } from './pulsar';
+export { dripEffect } from './drip';
+export { splashEffect } from './splash';
+export { pourEffect } from './pour';
+export { poolEffect } from './pool';
+export { streamEffect } from './stream';
+export { waterfallEffect } from './waterfall';
+export { fountainEffect } from './fountain';
+export { geyserEffect } from './geyser';
+export { whirlpoolEffect } from './whirlpool';
+export { tideEffect } from './tide';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -469,6 +479,16 @@ import { starfieldEffect } from './starfield';
 import { cosmosEffect } from './cosmos';
 import { wormholeEffect } from './wormhole';
 import { pulsarEffect } from './pulsar';
+import { dripEffect } from './drip';
+import { splashEffect } from './splash';
+import { pourEffect } from './pour';
+import { poolEffect } from './pool';
+import { streamEffect } from './stream';
+import { waterfallEffect } from './waterfall';
+import { fountainEffect } from './fountain';
+import { geyserEffect } from './geyser';
+import { whirlpoolEffect } from './whirlpool';
+import { tideEffect } from './tide';
 
 import type { Effect } from '../types';
 
@@ -613,6 +633,16 @@ export const visualEffects: Effect[] = [
   cascadeEffect,
   expandEffect,
   contractEffect,
+  dripEffect,
+  splashEffect,
+  pourEffect,
+  poolEffect,
+  streamEffect,
+  waterfallEffect,
+  fountainEffect,
+  geyserEffect,
+  whirlpoolEffect,
+  tideEffect,
 ];
 
 /** 背景エフェクト一覧 */
