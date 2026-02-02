@@ -95,6 +95,15 @@ export { burnEffect } from './burn';
 export { bleedEffect } from './bleed';
 export { thunderEffect } from './thunder';
 export { earthquakeEffect } from './earthquake';
+export { scanEffect } from './scan';
+export { hackEffect } from './hack';
+export { downloadEffect } from './download';
+export { uploadEffect } from './upload';
+export { signalEffect } from './signal';
+export { broadcastEffect } from './broadcast';
+export { hologramEffect } from './hologram';
+export { plasmaEffect } from './plasma';
+export { voidEffect } from './void';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -179,6 +188,15 @@ import { burnEffect } from './burn';
 import { bleedEffect } from './bleed';
 import { thunderEffect } from './thunder';
 import { earthquakeEffect } from './earthquake';
+import { scanEffect } from './scan';
+import { hackEffect } from './hack';
+import { downloadEffect } from './download';
+import { uploadEffect } from './upload';
+import { signalEffect } from './signal';
+import { broadcastEffect } from './broadcast';
+import { hologramEffect } from './hologram';
+import { plasmaEffect } from './plasma';
+import { voidEffect } from './void';
 
 import type { Effect } from '../types';
 
@@ -232,6 +250,15 @@ export const visualEffects: Effect[] = [
   impactEffect,
   thunderEffect,
   earthquakeEffect,
+  scanEffect,
+  hackEffect,
+  downloadEffect,
+  uploadEffect,
+  signalEffect,
+  broadcastEffect,
+  hologramEffect,
+  plasmaEffect,
+  voidEffect,
 ];
 
 /** 背景エフェクト一覧 */
