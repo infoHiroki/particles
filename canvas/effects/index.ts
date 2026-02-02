@@ -43,6 +43,7 @@ export { levelupEffect } from './levelup';
 export { comboEffect } from './combo';
 export { criticalEffect } from './critical';
 export { shieldEffect } from './shield';
+export { healEffect } from './heal';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -77,6 +78,7 @@ import { levelupEffect } from './levelup';
 import { comboEffect } from './combo';
 import { criticalEffect } from './critical';
 import { shieldEffect } from './shield';
+import { healEffect } from './heal';
 
 import type { Effect } from '../types';
 
@@ -126,6 +128,7 @@ export const gameEffects: Effect[] = [
   comboEffect,
   criticalEffect,
   shieldEffect,
+  healEffect,
 ];
 
 /** 全エフェクト一覧 */
