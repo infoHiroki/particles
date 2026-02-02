@@ -279,6 +279,16 @@ export { equalizerEffect } from './equalizer';
 export { microphoneEffect } from './microphone';
 export { headphoneEffect } from './headphone';
 export { recordEffect } from './record';
+export { towerEffect } from './tower';
+export { bridgeEffect } from './bridge';
+export { pillarEffect } from './pillar';
+export { wallEffect } from './wall';
+export { gateEffect } from './gate';
+export { window2Effect } from './window2';
+export { roofEffect } from './roof';
+export { stairsEffect } from './stairs';
+export { domeEffect } from './dome';
+export { archEffect } from './arch';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -547,6 +557,16 @@ import { equalizerEffect } from './equalizer';
 import { microphoneEffect } from './microphone';
 import { headphoneEffect } from './headphone';
 import { recordEffect } from './record';
+import { towerEffect } from './tower';
+import { bridgeEffect } from './bridge';
+import { pillarEffect } from './pillar';
+import { wallEffect } from './wall';
+import { gateEffect } from './gate';
+import { window2Effect } from './window2';
+import { roofEffect } from './roof';
+import { stairsEffect } from './stairs';
+import { domeEffect } from './dome';
+import { archEffect } from './arch';
 
 import type { Effect } from '../types';
 
@@ -730,6 +750,16 @@ export const visualEffects: Effect[] = [
   microphoneEffect,
   headphoneEffect,
   recordEffect,
+  towerEffect,
+  bridgeEffect,
+  pillarEffect,
+  wallEffect,
+  gateEffect,
+  window2Effect,
+  roofEffect,
+  stairsEffect,
+  domeEffect,
+  archEffect,
 ];
 
 /** 背景エフェクト一覧 */
