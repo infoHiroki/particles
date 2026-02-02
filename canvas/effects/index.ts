@@ -200,6 +200,16 @@ export { laptopEffect } from './laptop';
 export { robotEffect } from './robot';
 export { droneEffect } from './drone';
 export { rocketEffect } from './rocket';
+export { circleEffect } from './circle';
+export { squareEffect } from './square';
+export { triangleEffect } from './triangle';
+export { hexagonEffect } from './hexagon';
+export { pentagonEffect } from './pentagon';
+export { cubeEffect } from './cube';
+export { pyramidEffect } from './pyramid';
+export { ringEffect } from './ring';
+export { crossEffect } from './cross';
+export { arrowEffect } from './arrow';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -389,6 +399,16 @@ import { laptopEffect } from './laptop';
 import { robotEffect } from './robot';
 import { droneEffect } from './drone';
 import { rocketEffect } from './rocket';
+import { circleEffect } from './circle';
+import { squareEffect } from './square';
+import { triangleEffect } from './triangle';
+import { hexagonEffect } from './hexagon';
+import { pentagonEffect } from './pentagon';
+import { cubeEffect } from './cube';
+import { pyramidEffect } from './pyramid';
+import { ringEffect } from './ring';
+import { crossEffect } from './cross';
+import { arrowEffect } from './arrow';
 
 import type { Effect } from '../types';
 
@@ -513,6 +533,16 @@ export const visualEffects: Effect[] = [
   robotEffect,
   droneEffect,
   rocketEffect,
+  circleEffect,
+  squareEffect,
+  triangleEffect,
+  hexagonEffect,
+  pentagonEffect,
+  cubeEffect,
+  pyramidEffect,
+  ringEffect,
+  crossEffect,
+  arrowEffect,
 ];
 
 /** 背景エフェクト一覧 */
