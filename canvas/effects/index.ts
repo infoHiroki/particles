@@ -379,6 +379,16 @@ export { scatterEffect } from './scatter';
 export { gatherEffect } from './gather';
 export { stretchEffect } from './stretch';
 export { squashEffect } from './squash';
+export { energyEffect } from './energy';
+export { aura2Effect } from './aura2';
+export { forceEffect } from './force';
+export { powerEffect } from './power';
+export { chiEffect } from './chi';
+export { manaEffect } from './mana';
+export { spiritEffect } from './spirit';
+export { soulEffect } from './soul';
+export { radianceEffect } from './radiance';
+export { essenceEffect } from './essence';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -747,6 +757,16 @@ import { scatterEffect } from './scatter';
 import { gatherEffect } from './gather';
 import { stretchEffect } from './stretch';
 import { squashEffect } from './squash';
+import { energyEffect } from './energy';
+import { aura2Effect } from './aura2';
+import { forceEffect } from './force';
+import { powerEffect } from './power';
+import { chiEffect } from './chi';
+import { manaEffect } from './mana';
+import { spiritEffect } from './spirit';
+import { soulEffect } from './soul';
+import { radianceEffect } from './radiance';
+import { essenceEffect } from './essence';
 
 import type { Effect } from '../types';
 
@@ -1010,6 +1030,16 @@ export const visualEffects: Effect[] = [
   gatherEffect,
   stretchEffect,
   squashEffect,
+  energyEffect,
+  aura2Effect,
+  forceEffect,
+  powerEffect,
+  chiEffect,
+  manaEffect,
+  spiritEffect,
+  soulEffect,
+  radianceEffect,
+  essenceEffect,
 ];
 
 /** 背景エフェクト一覧 */
