@@ -319,6 +319,16 @@ export { trophy2Effect } from './trophy2';
 export { medalEffect } from './medal';
 export { rankEffect } from './rank';
 export { badgeEffect } from './badge';
+export { fade2Effect } from './fade2';
+export { wipeEffect } from './wipe';
+export { zoom2Effect } from './zoom2';
+export { slideEffect } from './slide';
+export { flip2Effect } from './flip2';
+export { rotate3Effect } from './rotate3';
+export { scale2Effect } from './scale2';
+export { dissolve3Effect } from './dissolve3';
+export { curtainEffect } from './curtain';
+export { shutterEffect } from './shutter';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -627,6 +637,16 @@ import { trophy2Effect } from './trophy2';
 import { medalEffect } from './medal';
 import { rankEffect } from './rank';
 import { badgeEffect } from './badge';
+import { fade2Effect } from './fade2';
+import { wipeEffect } from './wipe';
+import { zoom2Effect } from './zoom2';
+import { slideEffect } from './slide';
+import { flip2Effect } from './flip2';
+import { rotate3Effect } from './rotate3';
+import { scale2Effect } from './scale2';
+import { dissolve3Effect } from './dissolve3';
+import { curtainEffect } from './curtain';
+import { shutterEffect } from './shutter';
 
 import type { Effect } from '../types';
 
@@ -840,6 +860,16 @@ export const visualEffects: Effect[] = [
   stairsEffect,
   domeEffect,
   archEffect,
+  fade2Effect,
+  wipeEffect,
+  zoom2Effect,
+  slideEffect,
+  flip2Effect,
+  rotate3Effect,
+  scale2Effect,
+  dissolve3Effect,
+  curtainEffect,
+  shutterEffect,
 ];
 
 /** 背景エフェクト一覧 */
