@@ -132,6 +132,15 @@ export { cancelEffect } from './cancel';
 export { searchEffect } from './search';
 export { shareEffect } from './share';
 export { saveEffect } from './save';
+export { loveEffect } from './love';
+export { angerEffect } from './anger';
+export { sadEffect } from './sad';
+export { joyEffect } from './joy';
+export { surpriseEffect } from './surprise';
+export { fearEffect } from './fear';
+export { curiousEffect } from './curious';
+export { calmEffect } from './calm';
+export { excitedEffect } from './excited';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -253,6 +262,15 @@ import { cancelEffect } from './cancel';
 import { searchEffect } from './search';
 import { shareEffect } from './share';
 import { saveEffect } from './save';
+import { loveEffect } from './love';
+import { angerEffect } from './anger';
+import { sadEffect } from './sad';
+import { joyEffect } from './joy';
+import { surpriseEffect } from './surprise';
+import { fearEffect } from './fear';
+import { curiousEffect } from './curious';
+import { calmEffect } from './calm';
+import { excitedEffect } from './excited';
 
 import type { Effect } from '../types';
 
@@ -324,6 +342,15 @@ export const visualEffects: Effect[] = [
   hologramEffect,
   plasmaEffect,
   voidEffect,
+  loveEffect,
+  angerEffect,
+  sadEffect,
+  joyEffect,
+  surpriseEffect,
+  fearEffect,
+  curiousEffect,
+  calmEffect,
+  excitedEffect,
 ];
 
 /** 背景エフェクト一覧 */
