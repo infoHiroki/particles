@@ -339,6 +339,16 @@ export { cycloneEffect } from './cyclone';
 export { monsoonEffect } from './monsoon';
 export { overcastEffect } from './overcast';
 export { sleetEffect } from './sleet';
+export { prismEffect } from './prism';
+export { lensEffect } from './lens';
+export { reflect2Effect } from './reflect2';
+export { refractEffect } from './refract';
+export { glow2Effect } from './glow2';
+export { neonEffect } from './neon';
+export { spotlightEffect } from './spotlight';
+export { strobeEffect } from './strobe';
+export { shimmerEffect } from './shimmer';
+export { flickerEffect } from './flicker';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -667,6 +677,16 @@ import { cycloneEffect } from './cyclone';
 import { monsoonEffect } from './monsoon';
 import { overcastEffect } from './overcast';
 import { sleetEffect } from './sleet';
+import { prismEffect } from './prism';
+import { lensEffect } from './lens';
+import { reflect2Effect } from './reflect2';
+import { refractEffect } from './refract';
+import { glow2Effect } from './glow2';
+import { neonEffect } from './neon';
+import { spotlightEffect } from './spotlight';
+import { strobeEffect } from './strobe';
+import { shimmerEffect } from './shimmer';
+import { flickerEffect } from './flicker';
 
 import type { Effect } from '../types';
 
@@ -890,6 +910,16 @@ export const visualEffects: Effect[] = [
   dissolve3Effect,
   curtainEffect,
   shutterEffect,
+  prismEffect,
+  lensEffect,
+  reflect2Effect,
+  refractEffect,
+  glow2Effect,
+  neonEffect,
+  spotlightEffect,
+  strobeEffect,
+  shimmerEffect,
+  flickerEffect,
 ];
 
 /** 背景エフェクト一覧 */
