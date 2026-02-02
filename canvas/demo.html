@@ -5,30 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Particle Effects Demo</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
       min-height: 100vh;
       color: #fff;
     }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
+    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+    header { text-align: center; margin-bottom: 20px; }
     h1 {
       font-size: 2.5rem;
       margin-bottom: 10px;
@@ -37,2603 +22,281 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-
-    .subtitle {
-      color: #888;
-      font-size: 1rem;
-    }
-
-    /* カテゴリタブ */
+    .subtitle { color: #888; font-size: 1rem; }
+    .count { color: #667eea; font-weight: bold; }
     .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 20px;
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; margin-bottom: 15px;
     }
-
     .tab {
-      padding: 10px 20px;
+      padding: 8px 16px;
       background: rgba(255, 255, 255, 0.1);
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 0.9rem;
+      border: none; border-radius: 8px;
+      color: #fff; cursor: pointer;
+      transition: all 0.3s; font-size: 0.85rem;
     }
-
-    .tab:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .tab.active {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-
-    /* エフェクトボタン */
+    .tab:hover { background: rgba(255, 255, 255, 0.2); }
+    .tab.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
     .effects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 12px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 8px; margin-bottom: 15px;
+      max-height: 300px; overflow-y: auto;
+      padding: 10px; background: rgba(0,0,0,0.2); border-radius: 10px;
     }
-
     .effect-btn {
-      padding: 15px 10px;
+      padding: 10px 8px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 0.85rem;
-      text-align: center;
+      border-radius: 8px; color: #fff;
+      cursor: pointer; transition: all 0.2s;
+      font-size: 0.75rem; text-align: center;
     }
-
     .effect-btn:hover {
       background: rgba(255, 255, 255, 0.15);
       border-color: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
     }
-
     .effect-btn.selected {
       background: rgba(102, 126, 234, 0.3);
       border-color: #667eea;
     }
-
-    .effect-btn .icon {
-      font-size: 1.5rem;
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    /* キャンバスコンテナ */
     .canvas-container {
       position: relative;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 15px;
-      overflow: hidden;
-      margin-bottom: 20px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 15px; overflow: hidden;
+      margin-bottom: 15px;
     }
-
-    #canvas {
-      display: block;
-      width: 100%;
-      cursor: crosshair;
-    }
-
+    #canvas { display: block; width: 100%; cursor: crosshair; }
     .canvas-hint {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
+      position: absolute; bottom: 10px; left: 50%;
       transform: translateX(-50%);
       background: rgba(0, 0, 0, 0.6);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      color: #aaa;
+      padding: 6px 12px; border-radius: 20px;
+      font-size: 0.75rem; color: #aaa;
       pointer-events: none;
     }
-
-    /* コントロールパネル */
     .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      margin-bottom: 20px;
+      display: flex; flex-wrap: wrap; gap: 10px;
+      align-items: center; justify-content: center;
+      padding: 15px; background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px; margin-bottom: 10px;
     }
-
-    .control-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .control-group label {
-      font-size: 0.85rem;
-      color: #aaa;
-    }
-
-    .control-group input[type="range"] {
-      width: 120px;
-      accent-color: #667eea;
-    }
-
-    .control-group input[type="color"] {
-      width: 40px;
-      height: 30px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
+    .control-group { display: flex; align-items: center; gap: 8px; }
+    .control-group label { font-size: 0.8rem; color: #aaa; }
+    .control-group input[type="range"] { width: 100px; accent-color: #667eea; }
     .action-btn {
-      padding: 10px 20px;
+      padding: 8px 16px;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.3s;
+      border: none; border-radius: 8px;
+      color: #fff; cursor: pointer; font-size: 0.85rem;
     }
-
-    .action-btn:hover {
-      transform: scale(1.05);
-    }
-
-    .action-btn.secondary {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
+    .action-btn:hover { transform: scale(1.05); }
     .action-btn.auto-active {
       background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     }
-
-    /* 統計表示 */
     .stats {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      font-size: 0.85rem;
-      color: #888;
+      display: flex; gap: 20px; justify-content: center;
+      font-size: 0.8rem; color: #888;
     }
-
-    .stat {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .stat-value {
-      font-weight: bold;
-      color: #fff;
-    }
-
-    /* レスポンシブ */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .effects-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      }
-
-      .controls {
-        flex-direction: column;
-      }
-    }
+    .stat { display: flex; align-items: center; gap: 5px; }
+    .stat-value { font-weight: bold; color: #fff; }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>Particle Effects</h1>
-      <p class="subtitle">Canvas TypeScript Particle System</p>
+      <p class="subtitle">Canvas TypeScript Particle System - <span class="count" id="effectCount">0</span> Effects</p>
     </header>
-
-    <!-- カテゴリタブ -->
-    <div class="tabs">
-      <button class="tab active" data-category="all">All</button>
-      <button class="tab" data-category="ui">UI/UX</button>
-      <button class="tab" data-category="visual">Visual</button>
-      <button class="tab" data-category="game">Game</button>
-      <button class="tab" data-category="background">Background</button>
-    </div>
-
-    <!-- エフェクトボタン -->
-    <div class="effects-grid" id="effectsGrid">
-      <!-- UI/UX -->
-      <button class="effect-btn" data-effect="success" data-category="ui">
-        <span class="icon">&#10004;</span>
-        Success
-      </button>
-      <button class="effect-btn" data-effect="error" data-category="ui">
-        <span class="icon">&#10008;</span>
-        Error
-      </button>
-      <button class="effect-btn" data-effect="loading" data-category="ui">
-        <span class="icon">&#8634;</span>
-        Loading
-      </button>
-      <button class="effect-btn" data-effect="notification" data-category="ui">
-        <span class="icon">&#128276;</span>
-        Notification
-      </button>
-      <button class="effect-btn" data-effect="confetti" data-category="ui">
-        <span class="icon">&#127881;</span>
-        Confetti
-      </button>
-      <button class="effect-btn" data-effect="click" data-category="ui">
-        <span class="icon">&#128073;</span>
-        Click
-      </button>
-
-      <!-- Visual -->
-      <button class="effect-btn" data-effect="fire" data-category="visual">
-        <span class="icon">&#128293;</span>
-        Fire
-      </button>
-      <button class="effect-btn" data-effect="water" data-category="visual">
-        <span class="icon">&#128167;</span>
-        Water
-      </button>
-      <button class="effect-btn" data-effect="electric" data-category="visual">
-        <span class="icon">&#9889;</span>
-        Electric
-      </button>
-      <button class="effect-btn" data-effect="snow" data-category="visual">
-        <span class="icon">&#10052;</span>
-        Snow
-      </button>
-      <button class="effect-btn" data-effect="stars" data-category="visual">
-        <span class="icon">&#11088;</span>
-        Stars
-      </button>
-      <button class="effect-btn" data-effect="smoke" data-category="visual">
-        <span class="icon">&#127787;</span>
-        Smoke
-      </button>
-
-      <!-- Game -->
-      <button class="effect-btn" data-effect="levelup" data-category="game">
-        <span class="icon">&#11014;</span>
-        Level Up
-      </button>
-      <button class="effect-btn" data-effect="combo" data-category="game">
-        <span class="icon">&#128293;</span>
-        Combo
-      </button>
-      <button class="effect-btn" data-effect="critical" data-category="game">
-        <span class="icon">&#128165;</span>
-        Critical
-      </button>
-      <button class="effect-btn" data-effect="shield" data-category="game">
-        <span class="icon">&#128737;</span>
-        Shield
-      </button>
-
-      <!-- Background -->
-      <button class="effect-btn" data-effect="network" data-category="background">
-        <span class="icon">&#127760;</span>
-        Network
-      </button>
-      <button class="effect-btn" data-effect="bubble" data-category="background">
-        <span class="icon">&#128172;</span>
-        Bubble
-      </button>
-      <button class="effect-btn" data-effect="dust" data-category="background">
-        <span class="icon">&#10023;</span>
-        Dust
-      </button>
-      <button class="effect-btn" data-effect="sakura" data-category="background">
-        <span class="icon">&#127800;</span>
-        Sakura
-      </button>
-    </div>
-
-    <!-- キャンバス -->
+    <div class="tabs" id="tabs"></div>
+    <div class="effects-grid" id="effectsGrid"></div>
     <div class="canvas-container">
-      <canvas id="canvas" width="800" height="500"></canvas>
+      <canvas id="canvas" width="1200" height="500"></canvas>
       <div class="canvas-hint">Click anywhere to trigger effect</div>
     </div>
-
-    <!-- コントロール -->
     <div class="controls">
       <div class="control-group">
-        <label>Intensity</label>
-        <input type="range" id="intensity" min="0.1" max="2" step="0.1" value="1">
+        <label>Intensity:</label>
+        <input type="range" id="intensity" min="0.5" max="3" step="0.1" value="1">
         <span id="intensityValue">1.0</span>
       </div>
-      <div class="control-group">
-        <label>Color</label>
-        <input type="color" id="colorPicker" value="#667eea">
-      </div>
-      <button class="action-btn" id="triggerBtn">Trigger</button>
-      <button class="action-btn secondary" id="autoBtn">Auto Play</button>
-      <button class="action-btn secondary" id="clearBtn">Clear</button>
+      <button class="action-btn" id="autoBtn">Auto Play</button>
+      <button class="action-btn" id="clearBtn">Clear</button>
     </div>
-
-    <!-- 統計 -->
     <div class="stats">
-      <div class="stat">
-        <span>FPS:</span>
-        <span class="stat-value" id="fpsDisplay">0</span>
-      </div>
-      <div class="stat">
-        <span>Particles:</span>
-        <span class="stat-value" id="particleCount">0</span>
-      </div>
-      <div class="stat">
-        <span>Current Effect:</span>
-        <span class="stat-value" id="currentEffect">-</span>
-      </div>
+      <div class="stat">FPS: <span class="stat-value" id="fps">0</span></div>
+      <div class="stat">Particles: <span class="stat-value" id="particleCount">0</span></div>
     </div>
   </div>
 
   <script type="module">
-    // エフェクトモジュールをインポート（ビルド後に使用）
-    // import { ParticleSystem } from './core.js';
-    // import { successEffect } from './effects/success.js';
-    // 等...
+    // Effect definitions with categories and icons
+    const EFFECT_META = {
+      // UI/UX
+      success: { icon: '✔', category: 'ui' },
+      error: { icon: '✖', category: 'ui' },
+      loading: { icon: '↻', category: 'ui' },
+      notification: { icon: '🔔', category: 'ui' },
+      confetti: { icon: '🎉', category: 'ui' },
+      click: { icon: '👆', category: 'ui' },
+      heartbeat: { icon: '💗', category: 'ui' },
+      ripple: { icon: '💧', category: 'ui' },
+      // Visual
+      fire: { icon: '🔥', category: 'visual' },
+      water: { icon: '💧', category: 'visual' },
+      electric: { icon: '⚡', category: 'visual' },
+      snow: { icon: '❄', category: 'visual' },
+      stars: { icon: '⭐', category: 'visual' },
+      smoke: { icon: '🌫', category: 'visual' },
+      rain: { icon: '🌧', category: 'visual' },
+      fireworks: { icon: '🎆', category: 'visual' },
+      meteor: { icon: '☄', category: 'visual' },
+      spiral: { icon: '🌀', category: 'visual' },
+      portal: { icon: '🌀', category: 'visual' },
+      glitch: { icon: '📺', category: 'visual' },
+      aurora: { icon: '🌌', category: 'visual' },
+      matrix: { icon: '💻', category: 'visual' },
+      explosion: { icon: '💥', category: 'visual' },
+      teleport: { icon: '✨', category: 'visual' },
+      lightning: { icon: '🌩', category: 'visual' },
+      magic: { icon: '🪄', category: 'visual' },
+      tornado: { icon: '🌪', category: 'visual' },
+      vortex: { icon: '🕳', category: 'visual' },
+      galaxy: { icon: '🌌', category: 'visual' },
+      // Background
+      network: { icon: '🌐', category: 'background' },
+      bubble: { icon: '💬', category: 'background' },
+      dust: { icon: '✨', category: 'background' },
+      sakura: { icon: '🌸', category: 'background' },
+      leaves: { icon: '🍂', category: 'background' },
+      firefly: { icon: '✨', category: 'background' },
+      comet: { icon: '☄', category: 'background' },
+      // Game
+      levelup: { icon: '⬆', category: 'game' },
+      combo: { icon: '🔥', category: 'game' },
+      critical: { icon: '💥', category: 'game' },
+      shield: { icon: '🛡', category: 'game' },
+      heal: { icon: '💚', category: 'game' },
+      poison: { icon: '☠', category: 'game' },
+      freeze: { icon: '🧊', category: 'game' },
+    };
 
-    // 開発用: インラインで簡易的なパーティクルシステムを定義
-    class SimpleParticleSystem {
-      constructor(canvas) {
-        this.canvas = canvas;
-        this.ctx = canvas.getContext('2d');
-        this.particles = [];
-        this.effects = new Map();
-        this.currentEffect = null;
-        this.animationId = null;
-        this.fps = 0;
-        this.frameCount = 0;
-        this.lastFpsTime = 0;
-      }
+    // Import effects from built JS
+    import { allEffects, getEffectByName } from './dist/effects/index.js';
+    import { ParticleSystem } from './dist/core.js';
 
-      registerEffect(name, effect) {
-        this.effects.set(name, effect);
-      }
+    // Initialize
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const system = new ParticleSystem(canvas);
 
-      setCurrentEffect(name) {
-        this.currentEffect = name;
-      }
+    // Register all effects
+    allEffects.forEach(effect => system.registerEffect(effect));
 
-      trigger(x, y, options = {}) {
-        const effect = this.effects.get(this.currentEffect);
-        if (effect) {
-          const newParticles = effect.create(x, y, options);
-          this.particles.push(...newParticles);
-        }
-      }
+    // Update effect count
+    document.getElementById('effectCount').textContent = allEffects.length;
 
-      start() {
-        const loop = (time) => {
-          this.frameCount++;
-          if (time - this.lastFpsTime >= 1000) {
-            this.fps = this.frameCount;
-            this.frameCount = 0;
-            this.lastFpsTime = time;
-          }
+    // Generate tabs
+    const categories = ['all', 'ui', 'visual', 'game', 'background'];
+    const tabsContainer = document.getElementById('tabs');
+    categories.forEach((cat, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'tab' + (i === 0 ? ' active' : '');
+      btn.dataset.category = cat;
+      btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+      btn.onclick = () => filterEffects(cat);
+      tabsContainer.appendChild(btn);
+    });
 
-          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    // Generate effect buttons
+    const grid = document.getElementById('effectsGrid');
+    let currentEffect = allEffects[0]?.config.name || 'success';
 
-          this.particles = this.particles.filter(p => {
-            const effect = this.effects.get(p._effectName);
-            if (effect) {
-              const updated = effect.update(p);
-              if (updated) {
-                effect.draw(this.ctx, updated);
-                Object.assign(p, updated);
-                return true;
-              }
-            }
-            return false;
-          });
+    allEffects.forEach(effect => {
+      const name = effect.config.name;
+      const meta = EFFECT_META[name] || { icon: '✨', category: 'visual' };
+      const btn = document.createElement('button');
+      btn.className = 'effect-btn' + (name === currentEffect ? ' selected' : '');
+      btn.dataset.effect = name;
+      btn.dataset.category = meta.category;
+      btn.innerHTML = `<span style="font-size:1.2rem">${meta.icon}</span><br>${name}`;
+      btn.onclick = () => selectEffect(name);
+      grid.appendChild(btn);
+    });
 
-          this.animationId = requestAnimationFrame(loop);
-        };
-        this.animationId = requestAnimationFrame(loop);
-      }
-
-      clear() {
-        this.particles = [];
-      }
-
-      getParticleCount() {
-        return this.particles.length;
-      }
-
-      getFps() {
-        return this.fps;
-      }
+    function selectEffect(name) {
+      currentEffect = name;
+      document.querySelectorAll('.effect-btn').forEach(btn => {
+        btn.classList.toggle('selected', btn.dataset.effect === name);
+      });
     }
 
-    // イージング関数
-    const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
-    const easeOutQuad = t => 1 - (1 - t) * (1 - t);
-    const easeOutElastic = t => {
-      const c4 = (2 * Math.PI) / 3;
-      return t === 0 ? 0 : t === 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1;
-    };
-
-    // ユーティリティ
-    const random = (min, max) => min + Math.random() * (max - min);
-    const randomInt = (min, max) => Math.floor(random(min, max + 1));
-    const randomPick = arr => arr[Math.floor(Math.random() * arr.length)];
-    const generateId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-
-    // ============================================================
-    // エフェクト定義
-    // ============================================================
-
-    // Success エフェクト
-    const successEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-        const colors = ['#4CAF50', '#8BC34A', '#CDDC39', '#00E676', '#69F0AE'];
-
-        // チェックマーク
-        particles.push({
-          id: generateId(),
-          _effectName: 'success',
-          type: 'check',
-          x, y,
-          progress: 0,
-          maxProgress: 40,
-          alpha: 1,
-          scale: 0,
-          color: '#4CAF50'
-        });
-
-        // 光波
-        for (let i = 0; i < 3; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'success',
-            type: 'wave',
-            x, y,
-            progress: 0,
-            maxProgress: 50,
-            delay: i * 8,
-            alpha: 1,
-            radius: 10,
-            color: colors[i]
-          });
-        }
-
-        // 紙吹雪
-        const confettiCount = Math.floor(20 * intensity);
-        for (let i = 0; i < confettiCount; i++) {
-          const angle = (i / confettiCount) * Math.PI * 2;
-          particles.push({
-            id: generateId(),
-            _effectName: 'success',
-            type: 'confetti',
-            x, y,
-            progress: 0,
-            maxProgress: 60 + random(0, 20),
-            delay: random(0, 10),
-            alpha: 1,
-            angle,
-            distance: 60 + random(0, 80),
-            size: 4 + random(0, 4),
-            color: randomPick(colors),
-            rotation: random(0, Math.PI * 2),
-            rotationSpeed: random(-0.2, 0.2)
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) {
-          return p;
-        }
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'check') {
-          p.scale = easeOutElastic(Math.min(1, t * 1.5));
-          p.alpha = t > 0.7 ? 1 - ((t - 0.7) / 0.3) : 1;
-        } else if (p.type === 'wave') {
-          p.radius = 10 + easeOutQuad(t) * 80;
-          p.alpha = 1 - easeOutCubic(t);
-        } else if (p.type === 'confetti') {
-          const eased = easeOutCubic(t);
-          p.currentX = p.x + Math.cos(p.angle) * p.distance * eased;
-          p.currentY = p.y + Math.sin(p.angle) * p.distance * eased + t * t * 100;
-          p.rotation += p.rotationSpeed;
-          p.alpha = t > 0.6 ? 1 - ((t - 0.6) / 0.4) : 1;
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'check') {
-          ctx.translate(p.x, p.y);
-          ctx.scale(p.scale, p.scale);
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 4;
-          ctx.lineCap = 'round';
-          ctx.beginPath();
-          ctx.moveTo(-15, 0);
-          ctx.lineTo(-5, 10);
-          ctx.lineTo(15, -10);
-          ctx.stroke();
-        } else if (p.type === 'wave') {
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.stroke();
-        } else if (p.type === 'confetti') {
-          ctx.translate(p.currentX, p.currentY);
-          ctx.rotate(p.rotation);
-          ctx.fillStyle = p.color;
-          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Error エフェクト
-    const errorEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-        const colors = ['#f44336', '#ff5252', '#ff1744', '#d50000'];
-
-        // X印
-        particles.push({
-          id: generateId(),
-          _effectName: 'error',
-          type: 'cross',
-          x, y,
-          progress: 0,
-          maxProgress: 40,
-          alpha: 1,
-          scale: 0,
-          shake: 0,
-          color: '#f44336'
-        });
-
-        // 振動波
-        for (let i = 0; i < 4; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'error',
-            type: 'shakeWave',
-            x, y,
-            progress: 0,
-            maxProgress: 30,
-            delay: i * 5,
-            alpha: 1,
-            radius: 5,
-            color: colors[i % colors.length]
-          });
-        }
-
-        // 破片
-        const fragmentCount = Math.floor(12 * intensity);
-        for (let i = 0; i < fragmentCount; i++) {
-          const angle = (i / fragmentCount) * Math.PI * 2 + random(-0.2, 0.2);
-          particles.push({
-            id: generateId(),
-            _effectName: 'error',
-            type: 'fragment',
-            x, y,
-            progress: 0,
-            maxProgress: 40 + random(0, 20),
-            alpha: 1,
-            angle,
-            distance: 30 + random(0, 50),
-            size: 3 + random(0, 3),
-            color: randomPick(colors)
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'cross') {
-          p.scale = easeOutElastic(Math.min(1, t * 1.5));
-          p.shake = t < 0.3 ? Math.sin(t * 50) * (1 - t / 0.3) * 5 : 0;
-          p.alpha = t > 0.7 ? 1 - ((t - 0.7) / 0.3) : 1;
-        } else if (p.type === 'shakeWave') {
-          p.radius = 5 + easeOutQuad(t) * 50;
-          p.alpha = 1 - t;
-        } else if (p.type === 'fragment') {
-          const eased = easeOutCubic(t);
-          p.currentX = p.x + Math.cos(p.angle) * p.distance * eased;
-          p.currentY = p.y + Math.sin(p.angle) * p.distance * eased;
-          p.alpha = 1 - easeOutCubic(t);
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'cross') {
-          ctx.translate(p.x + p.shake, p.y);
-          ctx.scale(p.scale, p.scale);
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 4;
-          ctx.lineCap = 'round';
-          ctx.beginPath();
-          ctx.moveTo(-12, -12);
-          ctx.lineTo(12, 12);
-          ctx.moveTo(12, -12);
-          ctx.lineTo(-12, 12);
-          ctx.stroke();
-        } else if (p.type === 'shakeWave') {
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.stroke();
-        } else if (p.type === 'fragment') {
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Click/Tap エフェクト
-    const clickEffect = {
-      create(x, y, options = {}) {
-        const particles = [];
-        const color = options.color || '#667eea';
-
-        // 波紋
-        for (let i = 0; i < 3; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'click',
-            type: 'ripple',
-            x, y,
-            progress: 0,
-            maxProgress: 30,
-            delay: i * 5,
-            alpha: 1,
-            radius: 5,
-            color
-          });
-        }
-
-        // スプラッシュ
-        for (let i = 0; i < 8; i++) {
-          const angle = (i / 8) * Math.PI * 2;
-          particles.push({
-            id: generateId(),
-            _effectName: 'click',
-            type: 'splash',
-            x, y,
-            progress: 0,
-            maxProgress: 20,
-            alpha: 1,
-            angle,
-            distance: 30,
-            size: 3,
-            color
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'ripple') {
-          p.radius = 5 + easeOutCubic(t) * 40;
-          p.alpha = 1 - easeOutCubic(t);
-        } else if (p.type === 'splash') {
-          const eased = easeOutQuad(t);
-          p.currentX = p.x + Math.cos(p.angle) * p.distance * eased;
-          p.currentY = p.y + Math.sin(p.angle) * p.distance * eased;
-          p.size = 3 * (1 - t);
-          p.alpha = 1 - t;
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'ripple') {
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.stroke();
-        } else if (p.type === 'splash') {
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Confetti エフェクト
-    const confettiEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-        const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#00bcd4', '#009688', '#4caf50', '#ffeb3b', '#ff9800', '#ff5722'];
-
-        const count = Math.floor(50 * intensity);
-        for (let i = 0; i < count; i++) {
-          const angle = random(-Math.PI, 0);
-          particles.push({
-            id: generateId(),
-            _effectName: 'confetti',
-            type: 'piece',
-            x, y,
-            progress: 0,
-            maxProgress: 100 + random(0, 50),
-            alpha: 1,
-            vx: Math.cos(angle) * random(3, 8),
-            vy: Math.sin(angle) * random(5, 12),
-            gravity: 0.15,
-            width: random(6, 12),
-            height: random(4, 8),
-            color: randomPick(colors),
-            rotation: random(0, Math.PI * 2),
-            rotationSpeed: random(-0.15, 0.15),
-            currentX: x,
-            currentY: y
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        p.progress++;
-        const t = p.progress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'piece') {
-          p.vy += p.gravity;
-          p.currentX += p.vx;
-          p.currentY += p.vy;
-          p.rotation += p.rotationSpeed;
-          p.alpha = t > 0.7 ? 1 - ((t - 0.7) / 0.3) : 1;
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.translate(p.currentX, p.currentY);
-        ctx.rotate(p.rotation);
-        ctx.fillStyle = p.color;
-        ctx.fillRect(-p.width / 2, -p.height / 2, p.width, p.height);
-        ctx.restore();
-      }
-    };
-
-    // Fire エフェクト
-    const fireEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-        const colors = ['#ff4500', '#ff6a00', '#ff8c00', '#ffb700', '#ffe100'];
-
-        const count = Math.floor(30 * intensity);
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'fire',
-            type: 'flame',
-            x: x + random(-20, 20),
-            y,
-            progress: 0,
-            maxProgress: 40 + random(0, 30),
-            delay: random(0, 15),
-            alpha: 1,
-            size: 8 + random(0, 12),
-            vx: random(-1, 1),
-            vy: -random(2, 5),
-            color: randomPick(colors),
-            currentX: x + random(-20, 20),
-            currentY: y
-          });
-        }
-
-        // 火の粉
-        for (let i = 0; i < 15 * intensity; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'fire',
-            type: 'spark',
-            x, y,
-            progress: 0,
-            maxProgress: 60 + random(0, 40),
-            delay: random(0, 20),
-            alpha: 1,
-            size: 2 + random(0, 2),
-            vx: random(-2, 2),
-            vy: -random(3, 7),
-            color: '#ffff00',
-            currentX: x,
-            currentY: y
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        p.currentX += p.vx + random(-0.5, 0.5);
-        p.currentY += p.vy;
-
-        if (p.type === 'flame') {
-          p.size *= 0.98;
-          p.alpha = 1 - easeOutCubic(t);
-        } else if (p.type === 'spark') {
-          p.alpha = 1 - t;
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'flame') {
-          const gradient = ctx.createRadialGradient(p.currentX, p.currentY, 0, p.currentX, p.currentY, p.size);
-          gradient.addColorStop(0, p.color);
-          gradient.addColorStop(1, 'transparent');
-          ctx.fillStyle = gradient;
-          ctx.beginPath();
-          ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (p.type === 'spark') {
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Snow エフェクト
-    const snowEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-
-        const count = Math.floor(30 * intensity);
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'snow',
-            type: 'flake',
-            x: x + random(-100, 100),
-            y: y - 50,
-            progress: 0,
-            maxProgress: 120 + random(0, 60),
-            alpha: random(0.5, 1),
-            size: random(3, 8),
-            vx: random(-0.5, 0.5),
-            vy: random(1, 3),
-            wobbleSpeed: random(0.02, 0.05),
-            wobbleAmount: random(20, 40),
-            currentX: x + random(-100, 100),
-            currentY: y - 50
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        p.progress++;
-        const t = p.progress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        p.currentX += p.vx + Math.sin(p.progress * p.wobbleSpeed) * 0.5;
-        p.currentY += p.vy;
-        p.alpha = t > 0.8 ? (1 - t) / 0.2 * p.alpha : p.alpha;
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath();
-        ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-    };
-
-    // Stars エフェクト
-    const starsEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-        const colors = ['#ffffff', '#ffffd4', '#ffd700', '#87ceeb'];
-
-        // 星
-        const count = Math.floor(20 * intensity);
-        for (let i = 0; i < count; i++) {
-          const angle = random(0, Math.PI * 2);
-          const distance = random(20, 100);
-          particles.push({
-            id: generateId(),
-            _effectName: 'stars',
-            type: 'star',
-            x, y,
-            progress: 0,
-            maxProgress: 60 + random(0, 30),
-            delay: random(0, 20),
-            alpha: 0,
-            size: random(3, 8),
-            targetX: x + Math.cos(angle) * distance,
-            targetY: y + Math.sin(angle) * distance,
-            color: randomPick(colors),
-            twinkleSpeed: random(0.1, 0.2)
-          });
-        }
-
-        // 流れ星
-        for (let i = 0; i < 3; i++) {
-          const angle = random(Math.PI * 0.6, Math.PI * 0.9);
-          particles.push({
-            id: generateId(),
-            _effectName: 'stars',
-            type: 'shooting',
-            x, y,
-            progress: 0,
-            maxProgress: 30,
-            delay: random(0, 30),
-            alpha: 1,
-            angle,
-            length: random(30, 60),
-            speed: random(8, 15),
-            currentX: x,
-            currentY: y,
-            color: '#ffffff'
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'star') {
-          p.alpha = Math.sin(effectiveProgress * p.twinkleSpeed) * 0.5 + 0.5;
-          if (t > 0.7) p.alpha *= 1 - ((t - 0.7) / 0.3);
-        } else if (p.type === 'shooting') {
-          p.currentX += Math.cos(p.angle) * p.speed;
-          p.currentY += Math.sin(p.angle) * p.speed;
-          p.alpha = 1 - t;
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'star') {
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          for (let i = 0; i < 5; i++) {
-            const angle = (i / 5) * Math.PI * 2 - Math.PI / 2;
-            const r = i % 2 === 0 ? p.size : p.size * 0.4;
-            const px = p.targetX + r * Math.cos(angle);
-            const py = p.targetY + r * Math.sin(angle);
-            if (i === 0) ctx.moveTo(px, py);
-            else ctx.lineTo(px, py);
-          }
-          ctx.closePath();
-          ctx.fill();
-        } else if (p.type === 'shooting') {
-          const tailX = p.currentX - Math.cos(p.angle) * p.length;
-          const tailY = p.currentY - Math.sin(p.angle) * p.length;
-
-          const gradient = ctx.createLinearGradient(tailX, tailY, p.currentX, p.currentY);
-          gradient.addColorStop(0, 'transparent');
-          gradient.addColorStop(1, p.color);
-
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.moveTo(tailX, tailY);
-          ctx.lineTo(p.currentX, p.currentY);
-          ctx.stroke();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Electric エフェクト
-    const electricEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-
-        // 稲妻
-        for (let i = 0; i < 5 * intensity; i++) {
-          const angle = random(0, Math.PI * 2);
-          particles.push({
-            id: generateId(),
-            _effectName: 'electric',
-            type: 'lightning',
-            x, y,
-            progress: 0,
-            maxProgress: 15 + random(0, 10),
-            delay: random(0, 10),
-            alpha: 1,
-            angle,
-            length: random(40, 80),
-            segments: [],
-            color: '#00bfff'
-          });
-        }
-
-        // スパーク
-        for (let i = 0; i < 20 * intensity; i++) {
-          const angle = random(0, Math.PI * 2);
-          particles.push({
-            id: generateId(),
-            _effectName: 'electric',
-            type: 'spark',
-            x, y,
-            progress: 0,
-            maxProgress: 20 + random(0, 15),
-            delay: random(0, 8),
-            alpha: 1,
-            angle,
-            distance: random(20, 60),
-            size: random(1, 3),
-            color: '#ffffff',
-            currentX: x,
-            currentY: y
-          });
-        }
-
-        // グロー
-        particles.push({
-          id: generateId(),
-          _effectName: 'electric',
-          type: 'glow',
-          x, y,
-          progress: 0,
-          maxProgress: 30,
-          alpha: 1,
-          radius: 10,
-          color: '#00bfff'
-        });
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'lightning') {
-          // 稲妻のセグメントを生成（毎フレームランダムに）
-          p.segments = [];
-          let cx = p.x, cy = p.y;
-          const steps = 8;
-          for (let i = 0; i < steps; i++) {
-            const nextX = cx + Math.cos(p.angle) * (p.length / steps) + random(-10, 10);
-            const nextY = cy + Math.sin(p.angle) * (p.length / steps) + random(-10, 10);
-            p.segments.push({ x1: cx, y1: cy, x2: nextX, y2: nextY });
-            cx = nextX;
-            cy = nextY;
-          }
-          p.alpha = 1 - t;
-        } else if (p.type === 'spark') {
-          const eased = easeOutQuad(t);
-          p.currentX = p.x + Math.cos(p.angle) * p.distance * eased;
-          p.currentY = p.y + Math.sin(p.angle) * p.distance * eased;
-          p.alpha = 1 - t;
-        } else if (p.type === 'glow') {
-          p.radius = 10 + easeOutCubic(t) * 50;
-          p.alpha = 0.5 * (1 - t);
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'lightning') {
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 2;
-          ctx.shadowColor = p.color;
-          ctx.shadowBlur = 10;
-          for (const seg of p.segments) {
-            ctx.beginPath();
-            ctx.moveTo(seg.x1, seg.y1);
-            ctx.lineTo(seg.x2, seg.y2);
-            ctx.stroke();
-          }
-        } else if (p.type === 'spark') {
-          ctx.fillStyle = p.color;
-          ctx.shadowColor = '#00bfff';
-          ctx.shadowBlur = 5;
-          ctx.beginPath();
-          ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (p.type === 'glow') {
-          const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-          gradient.addColorStop(0, p.color);
-          gradient.addColorStop(1, 'transparent');
-          ctx.fillStyle = gradient;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Loading エフェクト
-    const loadingEffect = {
-      create(x, y, options = {}) {
-        const particles = [];
-        const color = options.color || '#667eea';
-
-        // 回転ドット
-        for (let i = 0; i < 8; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'loading',
-            type: 'dot',
-            x, y,
-            progress: 0,
-            maxProgress: 120,
-            alpha: 1,
-            index: i,
-            radius: 30,
-            dotSize: 6,
-            color
-          });
-        }
-
-        // パルス
-        for (let i = 0; i < 3; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'loading',
-            type: 'pulse',
-            x, y,
-            progress: 0,
-            maxProgress: 60,
-            delay: i * 20,
-            alpha: 1,
-            ringRadius: 20,
-            color
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        // Loading は継続的なので、ループさせる
-        if (t >= 1) {
-          p.progress = delayFrames;
-          return p;
-        }
-
-        if (p.type === 'dot') {
-          const baseAngle = (p.index / 8) * Math.PI * 2;
-          p.currentAngle = baseAngle + effectiveProgress * 0.1;
-          p.alpha = 0.3 + Math.sin((effectiveProgress * 0.2) - (p.index * 0.5)) * 0.35 + 0.35;
-        } else if (p.type === 'pulse') {
-          p.ringRadius = 20 + easeOutCubic(t) * 30;
-          p.alpha = 0.5 * (1 - t);
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'dot') {
-          const dx = p.x + Math.cos(p.currentAngle) * p.radius;
-          const dy = p.y + Math.sin(p.currentAngle) * p.radius;
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(dx, dy, p.dotSize, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (p.type === 'pulse') {
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.ringRadius, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Notification エフェクト
-    const notificationEffect = {
-      create(x, y, options = {}) {
-        const particles = [];
-        const color = options.color || '#ffb300';
-
-        // ベル
-        particles.push({
-          id: generateId(),
-          _effectName: 'notification',
-          type: 'bell',
-          x, y,
-          progress: 0,
-          maxProgress: 60,
-          alpha: 1,
-          rotation: 0,
-          scale: 0,
-          color
-        });
-
-        // 波紋
-        for (let i = 0; i < 4; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'notification',
-            type: 'ripple',
-            x, y,
-            progress: 0,
-            maxProgress: 40,
-            delay: i * 8,
-            alpha: 1,
-            radius: 15,
-            color
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'bell') {
-          p.scale = easeOutElastic(Math.min(1, t * 2));
-          p.rotation = t < 0.5 ? Math.sin(t * 20) * 0.3 * (1 - t * 2) : 0;
-          p.alpha = t > 0.8 ? 1 - ((t - 0.8) / 0.2) : 1;
-        } else if (p.type === 'ripple') {
-          p.radius = 15 + easeOutCubic(t) * 50;
-          p.alpha = 1 - easeOutCubic(t);
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'bell') {
-          ctx.translate(p.x, p.y);
-          ctx.rotate(p.rotation);
-          ctx.scale(p.scale, p.scale);
-          ctx.fillStyle = p.color;
-
-          // 簡易ベル形状
-          ctx.beginPath();
-          ctx.arc(0, -5, 12, Math.PI, 0, false);
-          ctx.lineTo(12, 8);
-          ctx.lineTo(-12, 8);
-          ctx.closePath();
-          ctx.fill();
-
-          // 鳴り口
-          ctx.beginPath();
-          ctx.arc(0, 12, 4, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (p.type === 'ripple') {
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Smoke エフェクト
-    const smokeEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-
-        const count = Math.floor(25 * intensity);
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'smoke',
-            type: 'puff',
-            x: x + random(-10, 10),
-            y,
-            progress: 0,
-            maxProgress: 80 + random(0, 40),
-            delay: random(0, 20),
-            alpha: random(0.2, 0.5),
-            size: random(20, 40),
-            vx: random(-0.5, 0.5),
-            vy: -random(0.5, 2),
-            color: `rgba(150, 150, 150, 1)`,
-            currentX: x + random(-10, 10),
-            currentY: y
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        p.currentX += p.vx;
-        p.currentY += p.vy;
-        p.size += 0.3;
-        p.alpha = p.alpha * (1 - t * 0.5);
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        const gradient = ctx.createRadialGradient(p.currentX, p.currentY, 0, p.currentX, p.currentY, p.size);
-        gradient.addColorStop(0, 'rgba(150, 150, 150, 0.3)');
-        gradient.addColorStop(1, 'transparent');
-
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.restore();
-      }
-    };
-
-    // Network エフェクト
-    const networkEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-        const color = options.color || '#667eea';
-
-        // ノード
-        const nodeCount = Math.floor(12 * intensity);
-        const nodes = [];
-        for (let i = 0; i < nodeCount; i++) {
-          const angle = random(0, Math.PI * 2);
-          const distance = random(30, 100);
-          const node = {
-            id: generateId(),
-            _effectName: 'network',
-            type: 'node',
-            x, y,
-            progress: 0,
-            maxProgress: 100,
-            delay: random(0, 20),
-            alpha: 0,
-            targetX: x + Math.cos(angle) * distance,
-            targetY: y + Math.sin(angle) * distance,
-            size: random(3, 6),
-            color,
-            floatSpeed: random(0.02, 0.05),
-            floatAmount: random(5, 15)
-          };
-          nodes.push(node);
-          particles.push(node);
-        }
-
-        // 接続線
-        for (let i = 0; i < nodes.length; i++) {
-          for (let j = i + 1; j < nodes.length; j++) {
-            const dx = nodes[j].targetX - nodes[i].targetX;
-            const dy = nodes[j].targetY - nodes[i].targetY;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 80) {
-              particles.push({
-                id: generateId(),
-                _effectName: 'network',
-                type: 'line',
-                x, y,
-                progress: 0,
-                maxProgress: 100,
-                delay: Math.max(nodes[i].delay, nodes[j].delay) + 10,
-                alpha: 0,
-                node1: nodes[i],
-                node2: nodes[j],
-                color
-              });
-            }
-          }
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'node') {
-          p.alpha = t < 0.2 ? t / 0.2 : (t > 0.8 ? 1 - (t - 0.8) / 0.2 : 1);
-          p.floatY = Math.sin(effectiveProgress * p.floatSpeed) * p.floatAmount;
-        } else if (p.type === 'line') {
-          p.alpha = t < 0.2 ? t / 0.2 * 0.3 : (t > 0.8 ? (1 - (t - 0.8) / 0.2) * 0.3 : 0.3);
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'node') {
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.targetX, p.targetY + (p.floatY || 0), p.size, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (p.type === 'line') {
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(p.node1.targetX, p.node1.targetY + (p.node1.floatY || 0));
-          ctx.lineTo(p.node2.targetX, p.node2.targetY + (p.node2.floatY || 0));
-          ctx.stroke();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Bubble エフェクト
-    const bubbleEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-
-        const count = Math.floor(20 * intensity);
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'bubble',
-            type: 'bubble',
-            x: x + random(-50, 50),
-            y: y + random(0, 50),
-            progress: 0,
-            maxProgress: 80 + random(0, 40),
-            delay: random(0, 30),
-            alpha: random(0.3, 0.7),
-            size: random(5, 20),
-            vx: random(-0.3, 0.3),
-            vy: -random(1, 3),
-            wobbleSpeed: random(0.05, 0.1),
-            currentX: x + random(-50, 50),
-            currentY: y + random(0, 50)
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        p.currentX += p.vx + Math.sin(effectiveProgress * p.wobbleSpeed) * 0.5;
-        p.currentY += p.vy;
-
-        // ポップする確率
-        if (random(0, 1) < 0.005) {
-          return null;
-        }
-
-        p.alpha = p.alpha * (t > 0.8 ? 1 - (t - 0.8) / 0.2 : 1);
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        // 泡の外枠
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-        ctx.stroke();
-
-        // ハイライト
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-        ctx.beginPath();
-        ctx.arc(p.currentX - p.size * 0.3, p.currentY - p.size * 0.3, p.size * 0.2, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.restore();
-      }
-    };
-
-    // Dust エフェクト
-    const dustEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-
-        const count = Math.floor(40 * intensity);
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'dust',
-            type: 'mote',
-            x: x + random(-100, 100),
-            y: y + random(-100, 100),
-            progress: 0,
-            maxProgress: 150 + random(0, 100),
-            alpha: random(0.2, 0.6),
-            size: random(1, 3),
-            vx: random(-0.2, 0.2),
-            vy: random(-0.2, 0.2),
-            currentX: x + random(-100, 100),
-            currentY: y + random(-100, 100)
-          });
-        }
-
-        // 光の筋
-        for (let i = 0; i < 3; i++) {
-          const angle = random(-0.3, 0.3) - Math.PI / 4;
-          particles.push({
-            id: generateId(),
-            _effectName: 'dust',
-            type: 'ray',
-            x, y,
-            progress: 0,
-            maxProgress: 100,
-            delay: random(0, 30),
-            alpha: 0,
-            angle,
-            width: random(30, 60),
-            length: random(150, 250)
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'mote') {
-          p.currentX += p.vx;
-          p.currentY += p.vy;
-          p.alpha = p.alpha * (t > 0.8 ? 1 - (t - 0.8) / 0.2 : 1);
-        } else if (p.type === 'ray') {
-          p.alpha = t < 0.2 ? t / 0.2 * 0.15 : (t > 0.7 ? (1 - (t - 0.7) / 0.3) * 0.15 : 0.15);
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'mote') {
-          ctx.fillStyle = '#ffffd4';
-          ctx.beginPath();
-          ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (p.type === 'ray') {
-          ctx.translate(p.x, p.y);
-          ctx.rotate(p.angle);
-
-          const gradient = ctx.createLinearGradient(0, -p.width / 2, p.length, p.width / 2);
-          gradient.addColorStop(0, 'rgba(255, 255, 200, 0.3)');
-          gradient.addColorStop(1, 'transparent');
-
-          ctx.fillStyle = gradient;
-          ctx.beginPath();
-          ctx.moveTo(0, 0);
-          ctx.lineTo(p.length, -p.width / 2);
-          ctx.lineTo(p.length, p.width / 2);
-          ctx.closePath();
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Sakura エフェクト
-    const sakuraEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-        const colors = ['#ffb7c5', '#ffc0cb', '#ff69b4', '#ffb6c1'];
-
-        const count = Math.floor(25 * intensity);
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'sakura',
-            type: 'petal',
-            x: x + random(-100, 100),
-            y: y - 50 + random(-30, 30),
-            progress: 0,
-            maxProgress: 120 + random(0, 60),
-            alpha: random(0.6, 1),
-            size: random(6, 12),
-            vx: random(0.5, 2),
-            vy: random(0.5, 2),
-            rotation: random(0, Math.PI * 2),
-            rotationSpeed: random(-0.05, 0.05),
-            wobbleSpeed: random(0.03, 0.08),
-            wobbleAmount: random(20, 40),
-            color: randomPick(colors),
-            currentX: x + random(-100, 100),
-            currentY: y - 50 + random(-30, 30)
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        p.progress++;
-        const t = p.progress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        p.currentX += p.vx + Math.sin(p.progress * p.wobbleSpeed) * 1;
-        p.currentY += p.vy;
-        p.rotation += p.rotationSpeed;
-        p.alpha = t > 0.8 ? (1 - (t - 0.8) / 0.2) * p.alpha : p.alpha;
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.translate(p.currentX, p.currentY);
-        ctx.rotate(p.rotation);
-        ctx.fillStyle = p.color;
-
-        // 花びら形状
-        ctx.beginPath();
-        ctx.moveTo(0, -p.size);
-        ctx.bezierCurveTo(p.size, -p.size, p.size, p.size * 0.5, 0, p.size);
-        ctx.bezierCurveTo(-p.size, p.size * 0.5, -p.size, -p.size, 0, -p.size);
-        ctx.fill();
-
-        ctx.restore();
-      }
-    };
-
-    // Water エフェクト
-    const waterEffect = {
-      create(x, y, options = {}) {
-        const intensity = options.intensity || 1;
-        const particles = [];
-
-        // 水滴
-        for (let i = 0; i < 15 * intensity; i++) {
-          const angle = random(-Math.PI * 0.8, -Math.PI * 0.2);
-          particles.push({
-            id: generateId(),
-            _effectName: 'water',
-            type: 'drop',
-            x, y,
-            progress: 0,
-            maxProgress: 40 + random(0, 20),
-            alpha: random(0.5, 1),
-            vx: Math.cos(angle) * random(2, 6),
-            vy: Math.sin(angle) * random(3, 8),
-            gravity: 0.3,
-            size: random(3, 8),
-            currentX: x,
-            currentY: y
-          });
-        }
-
-        // 波紋
-        for (let i = 0; i < 4; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'water',
-            type: 'ripple',
-            x, y: y + 30,
-            progress: 0,
-            maxProgress: 50,
-            delay: i * 10,
-            alpha: 1,
-            radius: 5
-          });
-        }
-
-        // 泡
-        for (let i = 0; i < 8 * intensity; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'water',
-            type: 'bubble',
-            x: x + random(-30, 30),
-            y: y + 30,
-            progress: 0,
-            maxProgress: 60 + random(0, 30),
-            delay: random(0, 20),
-            alpha: random(0.3, 0.6),
-            size: random(2, 6),
-            vy: -random(0.5, 2),
-            currentX: x + random(-30, 30),
-            currentY: y + 30
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'drop') {
-          p.vy += p.gravity;
-          p.currentX += p.vx;
-          p.currentY += p.vy;
-          p.alpha = 1 - t;
-        } else if (p.type === 'ripple') {
-          p.radius = 5 + easeOutCubic(t) * 60;
-          p.alpha = 1 - easeOutCubic(t);
-        } else if (p.type === 'bubble') {
-          p.currentY += p.vy;
-          p.alpha = p.alpha * (1 - t * 0.3);
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'drop') {
-          ctx.fillStyle = '#4fc3f7';
-          ctx.beginPath();
-          ctx.ellipse(p.currentX, p.currentY, p.size * 0.6, p.size, 0, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (p.type === 'ripple') {
-          ctx.strokeStyle = '#4fc3f7';
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.ellipse(p.x, p.y, p.radius, p.radius * 0.3, 0, 0, Math.PI * 2);
-          ctx.stroke();
-        } else if (p.type === 'bubble') {
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // LevelUp エフェクト
-    const levelupEffect = {
-      create(x, y, options = {}) {
-        const particles = [];
-        const colors = ['#ffd700', '#ffeb3b', '#fff176'];
-
-        // 上昇光柱
-        particles.push({
-          id: generateId(),
-          _effectName: 'levelup',
-          type: 'pillar',
-          x, y,
-          progress: 0,
-          maxProgress: 60,
-          alpha: 0,
-          height: 0,
-          width: 40
-        });
-
-        // 輝き
-        for (let i = 0; i < 20; i++) {
-          const angle = random(0, Math.PI * 2);
-          const distance = random(20, 80);
-          particles.push({
-            id: generateId(),
-            _effectName: 'levelup',
-            type: 'sparkle',
-            x, y,
-            progress: 0,
-            maxProgress: 50 + random(0, 20),
-            delay: random(0, 20),
-            alpha: 0,
-            targetX: x + Math.cos(angle) * distance,
-            targetY: y + Math.sin(angle) * distance - 50,
-            size: random(2, 5),
-            color: randomPick(colors)
-          });
-        }
-
-        // 上昇パーティクル
-        for (let i = 0; i < 30; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'levelup',
-            type: 'rising',
-            x: x + random(-30, 30),
-            y: y + random(0, 20),
-            progress: 0,
-            maxProgress: 60 + random(0, 30),
-            delay: random(0, 15),
-            alpha: 1,
-            vy: -random(2, 5),
-            size: random(2, 4),
-            color: randomPick(colors),
-            currentX: x + random(-30, 30),
-            currentY: y + random(0, 20)
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'pillar') {
-          p.height = easeOutCubic(Math.min(1, t * 2)) * 200;
-          p.alpha = t < 0.3 ? t / 0.3 * 0.6 : (t > 0.7 ? (1 - (t - 0.7) / 0.3) * 0.6 : 0.6);
-        } else if (p.type === 'sparkle') {
-          p.alpha = t < 0.3 ? t / 0.3 : (t > 0.7 ? 1 - (t - 0.7) / 0.3 : 1);
-        } else if (p.type === 'rising') {
-          p.currentY += p.vy;
-          p.alpha = 1 - t;
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'pillar') {
-          const gradient = ctx.createLinearGradient(p.x, p.y, p.x, p.y - p.height);
-          gradient.addColorStop(0, 'rgba(255, 215, 0, 0.8)');
-          gradient.addColorStop(0.5, 'rgba(255, 235, 59, 0.4)');
-          gradient.addColorStop(1, 'transparent');
-
-          ctx.fillStyle = gradient;
-          ctx.beginPath();
-          ctx.moveTo(p.x - p.width / 2, p.y);
-          ctx.lineTo(p.x - p.width / 4, p.y - p.height);
-          ctx.lineTo(p.x + p.width / 4, p.y - p.height);
-          ctx.lineTo(p.x + p.width / 2, p.y);
-          ctx.closePath();
-          ctx.fill();
-        } else if (p.type === 'sparkle') {
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          for (let i = 0; i < 4; i++) {
-            const angle = (i / 4) * Math.PI * 2;
-            const r = i % 2 === 0 ? p.size : p.size * 0.3;
-            const px = p.targetX + r * Math.cos(angle);
-            const py = p.targetY + r * Math.sin(angle);
-            if (i === 0) ctx.moveTo(px, py);
-            else ctx.lineTo(px, py);
-          }
-          ctx.closePath();
-          ctx.fill();
-        } else if (p.type === 'rising') {
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Combo エフェクト
-    const comboEffect = {
-      create(x, y, options = {}) {
-        const particles = [];
-        const comboNum = options.comboNum || Math.floor(random(2, 10));
-        const colors = ['#ff5722', '#ff9800', '#ffc107', '#ffeb3b'];
-
-        // 数字
-        particles.push({
-          id: generateId(),
-          _effectName: 'combo',
-          type: 'number',
-          x, y,
-          progress: 0,
-          maxProgress: 60,
-          alpha: 1,
-          scale: 0,
-          number: comboNum,
-          color: '#ff5722'
-        });
-
-        // 連鎖エフェクト
-        for (let i = 0; i < comboNum; i++) {
-          const angle = (i / comboNum) * Math.PI * 2;
-          particles.push({
-            id: generateId(),
-            _effectName: 'combo',
-            type: 'chain',
-            x, y,
-            progress: 0,
-            maxProgress: 40,
-            delay: i * 3,
-            alpha: 1,
-            angle,
-            distance: 40 + i * 5,
-            size: 8 - i * 0.5,
-            color: colors[i % colors.length]
-          });
-        }
-
-        // 火花
-        for (let i = 0; i < 15; i++) {
-          const angle = random(0, Math.PI * 2);
-          particles.push({
-            id: generateId(),
-            _effectName: 'combo',
-            type: 'spark',
-            x, y,
-            progress: 0,
-            maxProgress: 30,
-            delay: random(0, 10),
-            alpha: 1,
-            angle,
-            distance: random(30, 60),
-            size: random(2, 4),
-            color: randomPick(colors)
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'number') {
-          p.scale = easeOutElastic(Math.min(1, t * 1.5));
-          p.alpha = t > 0.7 ? 1 - (t - 0.7) / 0.3 : 1;
-        } else if (p.type === 'chain') {
-          const eased = easeOutCubic(t);
-          p.currentX = p.x + Math.cos(p.angle) * p.distance * eased;
-          p.currentY = p.y + Math.sin(p.angle) * p.distance * eased;
-          p.alpha = 1 - t;
-        } else if (p.type === 'spark') {
-          const eased = easeOutQuad(t);
-          p.currentX = p.x + Math.cos(p.angle) * p.distance * eased;
-          p.currentY = p.y + Math.sin(p.angle) * p.distance * eased;
-          p.alpha = 1 - t;
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'number') {
-          ctx.translate(p.x, p.y);
-          ctx.scale(p.scale, p.scale);
-          ctx.fillStyle = p.color;
-          ctx.font = 'bold 48px sans-serif';
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(`${p.number}x`, 0, 0);
-        } else if (p.type === 'chain') {
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (p.type === 'spark') {
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Critical エフェクト
-    const criticalEffect = {
-      create(x, y, options = {}) {
-        const particles = [];
-
-        // 閃光
-        particles.push({
-          id: generateId(),
-          _effectName: 'critical',
-          type: 'flash',
-          x, y,
-          progress: 0,
-          maxProgress: 20,
-          alpha: 1,
-          radius: 0
-        });
-
-        // 衝撃波
-        for (let i = 0; i < 3; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'critical',
-            type: 'shockwave',
-            x, y,
-            progress: 0,
-            maxProgress: 30,
-            delay: i * 5,
-            alpha: 1,
-            radius: 10
-          });
-        }
-
-        // スラッシュライン
-        for (let i = 0; i < 3; i++) {
-          const angle = random(-Math.PI / 4, Math.PI / 4) - Math.PI / 2;
-          particles.push({
-            id: generateId(),
-            _effectName: 'critical',
-            type: 'slash',
-            x, y,
-            progress: 0,
-            maxProgress: 15,
-            delay: i * 2,
-            alpha: 1,
-            angle,
-            length: random(60, 100)
-          });
-        }
-
-        // 破片
-        for (let i = 0; i < 20; i++) {
-          const angle = random(0, Math.PI * 2);
-          particles.push({
-            id: generateId(),
-            _effectName: 'critical',
-            type: 'debris',
-            x, y,
-            progress: 0,
-            maxProgress: 40,
-            delay: 5,
-            alpha: 1,
-            angle,
-            distance: random(40, 100),
-            size: random(2, 5),
-            color: randomPick(['#ffffff', '#ffeb3b', '#ff5722'])
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'flash') {
-          p.radius = easeOutCubic(t) * 100;
-          p.alpha = 1 - t;
-        } else if (p.type === 'shockwave') {
-          p.radius = 10 + easeOutCubic(t) * 80;
-          p.alpha = 1 - easeOutCubic(t);
-        } else if (p.type === 'slash') {
-          p.drawProgress = easeOutQuad(t);
-          p.alpha = 1 - t;
-        } else if (p.type === 'debris') {
-          const eased = easeOutCubic(t);
-          p.currentX = p.x + Math.cos(p.angle) * p.distance * eased;
-          p.currentY = p.y + Math.sin(p.angle) * p.distance * eased;
-          p.alpha = 1 - easeOutCubic(t);
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'flash') {
-          const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-          gradient.addColorStop(0, '#ffffff');
-          gradient.addColorStop(0.5, '#ffeb3b');
-          gradient.addColorStop(1, 'transparent');
-          ctx.fillStyle = gradient;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (p.type === 'shockwave') {
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 3;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.stroke();
-        } else if (p.type === 'slash') {
-          const startX = p.x - Math.cos(p.angle) * p.length / 2;
-          const startY = p.y - Math.sin(p.angle) * p.length / 2;
-          const endX = startX + Math.cos(p.angle) * p.length * p.drawProgress;
-          const endY = startY + Math.sin(p.angle) * p.length * p.drawProgress;
-
-          ctx.strokeStyle = '#ffffff';
-          ctx.lineWidth = 4;
-          ctx.lineCap = 'round';
-          ctx.beginPath();
-          ctx.moveTo(startX, startY);
-          ctx.lineTo(endX, endY);
-          ctx.stroke();
-        } else if (p.type === 'debris') {
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.currentX, p.currentY, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // Shield エフェクト
-    const shieldEffect = {
-      create(x, y, options = {}) {
-        const particles = [];
-        const color = options.color || '#4fc3f7';
-
-        // 球状バリア
-        particles.push({
-          id: generateId(),
-          _effectName: 'shield',
-          type: 'barrier',
-          x, y,
-          progress: 0,
-          maxProgress: 80,
-          alpha: 0,
-          radius: 0,
-          color
-        });
-
-        // 六角形パターン
-        for (let i = 0; i < 6; i++) {
-          const angle = (i / 6) * Math.PI * 2;
-          const distance = 50;
-          particles.push({
-            id: generateId(),
-            _effectName: 'shield',
-            type: 'hex',
-            x: x + Math.cos(angle) * distance,
-            y: y + Math.sin(angle) * distance,
-            progress: 0,
-            maxProgress: 60,
-            delay: i * 3,
-            alpha: 0,
-            size: 20,
-            rotation: angle,
-            color
-          });
-        }
-
-        // エネルギー波
-        for (let i = 0; i < 3; i++) {
-          particles.push({
-            id: generateId(),
-            _effectName: 'shield',
-            type: 'wave',
-            x, y,
-            progress: 0,
-            maxProgress: 40,
-            delay: 20 + i * 10,
-            alpha: 1,
-            radius: 60,
-            color
-          });
-        }
-
-        return particles;
-      },
-
-      update(p) {
-        const delayFrames = p.delay || 0;
-        p.progress++;
-
-        if (p.progress < delayFrames) return p;
-
-        const effectiveProgress = p.progress - delayFrames;
-        const t = effectiveProgress / p.maxProgress;
-
-        if (t >= 1) return null;
-
-        if (p.type === 'barrier') {
-          p.radius = easeOutElastic(Math.min(1, t * 1.5)) * 60;
-          p.alpha = t < 0.3 ? t / 0.3 * 0.4 : (t > 0.7 ? (1 - (t - 0.7) / 0.3) * 0.4 : 0.4);
-        } else if (p.type === 'hex') {
-          p.alpha = t < 0.3 ? t / 0.3 * 0.8 : (t > 0.7 ? (1 - (t - 0.7) / 0.3) * 0.8 : 0.8);
-        } else if (p.type === 'wave') {
-          p.radius = 60 + easeOutCubic(t) * 40;
-          p.alpha = 0.5 * (1 - t);
-        }
-
-        return p;
-      },
-
-      draw(ctx, p) {
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-
-        if (p.type === 'barrier') {
-          const gradient = ctx.createRadialGradient(p.x, p.y, p.radius * 0.8, p.x, p.y, p.radius);
-          gradient.addColorStop(0, 'transparent');
-          gradient.addColorStop(0.8, p.color);
-          gradient.addColorStop(1, 'transparent');
-          ctx.fillStyle = gradient;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fill();
-        } else if (p.type === 'hex') {
-          ctx.translate(p.x, p.y);
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          for (let i = 0; i < 6; i++) {
-            const angle = (i / 6) * Math.PI * 2;
-            const hx = p.size * Math.cos(angle);
-            const hy = p.size * Math.sin(angle);
-            if (i === 0) ctx.moveTo(hx, hy);
-            else ctx.lineTo(hx, hy);
-          }
-          ctx.closePath();
-          ctx.stroke();
-        } else if (p.type === 'wave') {
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-
-        ctx.restore();
-      }
-    };
-
-    // ============================================================
-    // 初期化
-    // ============================================================
-
-    const canvas = document.getElementById('canvas');
-    const system = new SimpleParticleSystem(canvas);
-
-    // エフェクト登録
-    system.registerEffect('success', successEffect);
-    system.registerEffect('error', errorEffect);
-    system.registerEffect('click', clickEffect);
-    system.registerEffect('confetti', confettiEffect);
-    system.registerEffect('fire', fireEffect);
-    system.registerEffect('snow', snowEffect);
-    system.registerEffect('stars', starsEffect);
-    system.registerEffect('electric', electricEffect);
-    system.registerEffect('loading', loadingEffect);
-    system.registerEffect('notification', notificationEffect);
-    system.registerEffect('smoke', smokeEffect);
-    system.registerEffect('network', networkEffect);
-    system.registerEffect('bubble', bubbleEffect);
-    system.registerEffect('dust', dustEffect);
-    system.registerEffect('sakura', sakuraEffect);
-    system.registerEffect('water', waterEffect);
-    system.registerEffect('levelup', levelupEffect);
-    system.registerEffect('combo', comboEffect);
-    system.registerEffect('critical', criticalEffect);
-    system.registerEffect('shield', shieldEffect);
-
-    // デフォルトエフェクト
-    system.setCurrentEffect('success');
-
-    // アニメーション開始
-    system.start();
-
-    // UI要素
-    const effectsGrid = document.getElementById('effectsGrid');
-    const intensitySlider = document.getElementById('intensity');
-    const intensityValue = document.getElementById('intensityValue');
-    const colorPicker = document.getElementById('colorPicker');
-    const triggerBtn = document.getElementById('triggerBtn');
-    const autoBtn = document.getElementById('autoBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const fpsDisplay = document.getElementById('fpsDisplay');
-    const particleCount = document.getElementById('particleCount');
-    const currentEffectDisplay = document.getElementById('currentEffect');
-    const tabs = document.querySelectorAll('.tab');
-    const effectBtns = document.querySelectorAll('.effect-btn');
-
-    // エフェクトボタンクリック
-    effectBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const effectName = btn.dataset.effect;
-        system.setCurrentEffect(effectName);
-
-        effectBtns.forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-
-        currentEffectDisplay.textContent = effectName;
+    function filterEffects(category) {
+      document.querySelectorAll('.tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.category === category);
       });
-    });
-
-    // カテゴリタブ
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const category = tab.dataset.category;
-
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        effectBtns.forEach(btn => {
-          if (category === 'all' || btn.dataset.category === category) {
-            btn.style.display = '';
-          } else {
-            btn.style.display = 'none';
-          }
-        });
+      document.querySelectorAll('.effect-btn').forEach(btn => {
+        const show = category === 'all' || btn.dataset.category === category;
+        btn.style.display = show ? '' : 'none';
       });
-    });
+    }
 
-    // キャンバスクリック
+    // Canvas click handler
     canvas.addEventListener('click', (e) => {
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvas.width / rect.width;
       const scaleY = canvas.height / rect.height;
       const x = (e.clientX - rect.left) * scaleX;
       const y = (e.clientY - rect.top) * scaleY;
-      const intensity = parseFloat(intensitySlider.value);
-      const color = colorPicker.value;
-      system.trigger(x, y, { intensity, color });
+      const intensity = parseFloat(document.getElementById('intensity').value);
+      system.trigger(x, y, { intensity, effectName: currentEffect });
     });
 
-    // 強度スライダー
-    intensitySlider.addEventListener('input', () => {
-      intensityValue.textContent = parseFloat(intensitySlider.value).toFixed(1);
-    });
+    // Controls
+    document.getElementById('intensity').oninput = (e) => {
+      document.getElementById('intensityValue').textContent = parseFloat(e.target.value).toFixed(1);
+    };
 
-    // トリガーボタン
-    triggerBtn.addEventListener('click', () => {
-      const x = canvas.width / 2;
-      const y = canvas.height / 2;
-      const intensity = parseFloat(intensitySlider.value);
-      const color = colorPicker.value;
-      system.trigger(x, y, { intensity, color });
-    });
-
-    // オートプレイ
-    let autoInterval = null;
-    autoBtn.addEventListener('click', () => {
-      if (autoInterval) {
-        clearInterval(autoInterval);
-        autoInterval = null;
-        autoBtn.textContent = 'Auto Play';
-        autoBtn.classList.remove('auto-active');
-      } else {
+    let autoPlay = false;
+    let autoInterval;
+    document.getElementById('autoBtn').onclick = () => {
+      autoPlay = !autoPlay;
+      document.getElementById('autoBtn').classList.toggle('auto-active', autoPlay);
+      document.getElementById('autoBtn').textContent = autoPlay ? 'Stop' : 'Auto Play';
+      if (autoPlay) {
         autoInterval = setInterval(() => {
-          const x = random(100, canvas.width - 100);
-          const y = random(100, canvas.height - 100);
-          const intensity = parseFloat(intensitySlider.value);
-          const color = colorPicker.value;
-          system.trigger(x, y, { intensity, color });
+          const x = Math.random() * canvas.width;
+          const y = Math.random() * canvas.height;
+          const intensity = parseFloat(document.getElementById('intensity').value);
+          // Random effect
+          const randomEffect = allEffects[Math.floor(Math.random() * allEffects.length)];
+          system.trigger(x, y, { intensity, effectName: randomEffect.config.name });
         }, 500);
-        autoBtn.textContent = 'Stop';
-        autoBtn.classList.add('auto-active');
+      } else {
+        clearInterval(autoInterval);
       }
-    });
+    };
 
-    // クリアボタン
-    clearBtn.addEventListener('click', () => {
-      system.clear();
-    });
+    document.getElementById('clearBtn').onclick = () => system.clear();
 
-    // 統計更新
-    setInterval(() => {
-      fpsDisplay.textContent = system.getFps();
-      particleCount.textContent = system.getParticleCount();
-    }, 100);
+    // Stats
+    let lastTime = performance.now();
+    let frameCount = 0;
+    function updateStats() {
+      frameCount++;
+      const now = performance.now();
+      if (now - lastTime >= 1000) {
+        document.getElementById('fps').textContent = frameCount;
+        frameCount = 0;
+        lastTime = now;
+      }
+      document.getElementById('particleCount').textContent = system.getParticleCount();
+      requestAnimationFrame(updateStats);
+    }
+    updateStats();
 
-    // 初期選択
-    document.querySelector('[data-effect="success"]').classList.add('selected');
-    currentEffectDisplay.textContent = 'success';
+    // Start
+    system.start();
   </script>
 </body>
 </html>
