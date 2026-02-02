@@ -40,6 +40,7 @@ export { dustEffect } from './dust';
 export { sakuraEffect } from './sakura';
 export { leavesEffect } from './leaves';
 export { fireflyEffect } from './firefly';
+export { cometEffect } from './comet';
 
 // ゲーム系エフェクト
 export { levelupEffect } from './levelup';
@@ -82,6 +83,7 @@ import { dustEffect } from './dust';
 import { sakuraEffect } from './sakura';
 import { leavesEffect } from './leaves';
 import { fireflyEffect } from './firefly';
+import { cometEffect } from './comet';
 import { levelupEffect } from './levelup';
 import { comboEffect } from './combo';
 import { criticalEffect } from './critical';
@@ -133,6 +135,7 @@ export const backgroundEffects: Effect[] = [
   sakuraEffect,
   leavesEffect,
   fireflyEffect,
+  cometEffect,
 ];
 
 /** ゲームエフェクト一覧 */
