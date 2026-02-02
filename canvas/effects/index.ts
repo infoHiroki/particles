@@ -104,6 +104,16 @@ export { broadcastEffect } from './broadcast';
 export { hologramEffect } from './hologram';
 export { plasmaEffect } from './plasma';
 export { voidEffect } from './void';
+export { mistEffect } from './mist';
+export { dewEffect } from './dew';
+export { frostEffect } from './frost';
+export { hailEffect } from './hail';
+export { sandstormEffect } from './sandstorm';
+export { pollenEffect } from './pollen';
+export { firefliesEffect } from './fireflies';
+export { rainbowEffect } from './rainbow';
+export { moonlightEffect } from './moonlight';
+export { sunburstEffect } from './sunburst';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -197,6 +207,16 @@ import { broadcastEffect } from './broadcast';
 import { hologramEffect } from './hologram';
 import { plasmaEffect } from './plasma';
 import { voidEffect } from './void';
+import { mistEffect } from './mist';
+import { dewEffect } from './dew';
+import { frostEffect } from './frost';
+import { hailEffect } from './hail';
+import { sandstormEffect } from './sandstorm';
+import { pollenEffect } from './pollen';
+import { firefliesEffect } from './fireflies';
+import { rainbowEffect } from './rainbow';
+import { moonlightEffect } from './moonlight';
+import { sunburstEffect } from './sunburst';
 
 import type { Effect } from '../types';
 
@@ -273,6 +293,16 @@ export const backgroundEffects: Effect[] = [
   tornadoEffect,
   vortexEffect,
   galaxyEffect,
+  mistEffect,
+  dewEffect,
+  frostEffect,
+  hailEffect,
+  sandstormEffect,
+  pollenEffect,
+  firefliesEffect,
+  rainbowEffect,
+  moonlightEffect,
+  sunburstEffect,
 ];
 
 /** ゲームエフェクト一覧 */
