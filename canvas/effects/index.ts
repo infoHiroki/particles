@@ -349,6 +349,16 @@ export { spotlightEffect } from './spotlight';
 export { strobeEffect } from './strobe';
 export { shimmerEffect } from './shimmer';
 export { flickerEffect } from './flicker';
+export { star2Effect } from './star2';
+export { heart2Effect } from './heart2';
+export { moon2Effect } from './moon2';
+export { sun2Effect } from './sun2';
+export { bolt2Effect } from './bolt2';
+export { dropEffect } from './drop';
+export { leafEffect } from './leaf';
+export { flameEffect } from './flame';
+export { snowflakeEffect } from './snowflake';
+export { featherEffect } from './feather';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -687,6 +697,16 @@ import { spotlightEffect } from './spotlight';
 import { strobeEffect } from './strobe';
 import { shimmerEffect } from './shimmer';
 import { flickerEffect } from './flicker';
+import { star2Effect } from './star2';
+import { heart2Effect } from './heart2';
+import { moon2Effect } from './moon2';
+import { sun2Effect } from './sun2';
+import { bolt2Effect } from './bolt2';
+import { dropEffect } from './drop';
+import { leafEffect } from './leaf';
+import { flameEffect } from './flame';
+import { snowflakeEffect } from './snowflake';
+import { featherEffect } from './feather';
 
 import type { Effect } from '../types';
 
@@ -920,6 +940,16 @@ export const visualEffects: Effect[] = [
   strobeEffect,
   shimmerEffect,
   flickerEffect,
+  star2Effect,
+  heart2Effect,
+  moon2Effect,
+  sun2Effect,
+  bolt2Effect,
+  dropEffect,
+  leafEffect,
+  flameEffect,
+  snowflakeEffect,
+  featherEffect,
 ];
 
 /** 背景エフェクト一覧 */
