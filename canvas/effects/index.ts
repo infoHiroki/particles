@@ -369,6 +369,16 @@ export { spiral2Effect } from './spiral2';
 export { hexgridEffect } from './hexgrid';
 export { radialEffect } from './radial';
 export { concentricEffect } from './concentric';
+export { zoom3Effect } from './zoom3';
+export { shakeEffect } from './shake';
+export { swingEffect } from './swing';
+export { floatEffect } from './float';
+export { fallEffect } from './fall';
+export { riseEffect } from './rise';
+export { scatterEffect } from './scatter';
+export { gatherEffect } from './gather';
+export { stretchEffect } from './stretch';
+export { squashEffect } from './squash';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -727,6 +737,16 @@ import { spiral2Effect } from './spiral2';
 import { hexgridEffect } from './hexgrid';
 import { radialEffect } from './radial';
 import { concentricEffect } from './concentric';
+import { zoom3Effect } from './zoom3';
+import { shakeEffect } from './shake';
+import { swingEffect } from './swing';
+import { floatEffect } from './float';
+import { fallEffect } from './fall';
+import { riseEffect } from './rise';
+import { scatterEffect } from './scatter';
+import { gatherEffect } from './gather';
+import { stretchEffect } from './stretch';
+import { squashEffect } from './squash';
 
 import type { Effect } from '../types';
 
@@ -980,6 +1000,16 @@ export const visualEffects: Effect[] = [
   hexgridEffect,
   radialEffect,
   concentricEffect,
+  zoom3Effect,
+  shakeEffect,
+  swingEffect,
+  floatEffect,
+  fallEffect,
+  riseEffect,
+  scatterEffect,
+  gatherEffect,
+  stretchEffect,
+  squashEffect,
 ];
 
 /** 背景エフェクト一覧 */
