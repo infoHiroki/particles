@@ -329,6 +329,16 @@ export { scale2Effect } from './scale2';
 export { dissolve3Effect } from './dissolve3';
 export { curtainEffect } from './curtain';
 export { shutterEffect } from './shutter';
+export { stormEffect } from './storm';
+export { blizzardEffect } from './blizzard';
+export { typhoonEffect } from './typhoon';
+export { hurricaneEffect } from './hurricane';
+export { drizzleEffect } from './drizzle';
+export { hazeEffect } from './haze';
+export { cycloneEffect } from './cyclone';
+export { monsoonEffect } from './monsoon';
+export { overcastEffect } from './overcast';
+export { sleetEffect } from './sleet';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -647,6 +657,16 @@ import { scale2Effect } from './scale2';
 import { dissolve3Effect } from './dissolve3';
 import { curtainEffect } from './curtain';
 import { shutterEffect } from './shutter';
+import { stormEffect } from './storm';
+import { blizzardEffect } from './blizzard';
+import { typhoonEffect } from './typhoon';
+import { hurricaneEffect } from './hurricane';
+import { drizzleEffect } from './drizzle';
+import { hazeEffect } from './haze';
+import { cycloneEffect } from './cyclone';
+import { monsoonEffect } from './monsoon';
+import { overcastEffect } from './overcast';
+import { sleetEffect } from './sleet';
 
 import type { Effect } from '../types';
 
@@ -924,6 +944,16 @@ export const backgroundEffects: Effect[] = [
   cosmosEffect,
   wormholeEffect,
   pulsarEffect,
+  stormEffect,
+  blizzardEffect,
+  typhoonEffect,
+  hurricaneEffect,
+  drizzleEffect,
+  hazeEffect,
+  cycloneEffect,
+  monsoonEffect,
+  overcastEffect,
+  sleetEffect,
 ];
 
 /** ゲームエフェクト一覧 */
