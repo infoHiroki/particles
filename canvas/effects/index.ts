@@ -86,6 +86,15 @@ export { stunEffect } from './stun';
 export { slowEffect } from './slow';
 export { hasteEffect } from './haste';
 export { absorbEffect } from './absorb';
+export { reflectEffect } from './reflect';
+export { summonEffect } from './summon';
+export { transformEffect } from './transform';
+export { deathEffect } from './death';
+export { reviveEffect } from './revive';
+export { burnEffect } from './burn';
+export { bleedEffect } from './bleed';
+export { thunderEffect } from './thunder';
+export { earthquakeEffect } from './earthquake';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -161,6 +170,15 @@ import { stunEffect } from './stun';
 import { slowEffect } from './slow';
 import { hasteEffect } from './haste';
 import { absorbEffect } from './absorb';
+import { reflectEffect } from './reflect';
+import { summonEffect } from './summon';
+import { transformEffect } from './transform';
+import { deathEffect } from './death';
+import { reviveEffect } from './revive';
+import { burnEffect } from './burn';
+import { bleedEffect } from './bleed';
+import { thunderEffect } from './thunder';
+import { earthquakeEffect } from './earthquake';
 
 import type { Effect } from '../types';
 
@@ -212,6 +230,8 @@ export const visualEffects: Effect[] = [
   trailEffect,
   dashEffect,
   impactEffect,
+  thunderEffect,
+  earthquakeEffect,
 ];
 
 /** 背景エフェクト一覧 */
@@ -251,6 +271,13 @@ export const gameEffects: Effect[] = [
   slowEffect,
   hasteEffect,
   absorbEffect,
+  reflectEffect,
+  summonEffect,
+  transformEffect,
+  deathEffect,
+  reviveEffect,
+  burnEffect,
+  bleedEffect,
 ];
 
 /** 全エフェクト一覧 */
