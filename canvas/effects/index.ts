@@ -27,6 +27,7 @@ export { networkEffect } from './network';
 export { bubbleEffect } from './bubble';
 export { dustEffect } from './dust';
 export { sakuraEffect } from './sakura';
+export { leavesEffect } from './leaves';
 
 // ゲーム系エフェクト
 export { levelupEffect } from './levelup';
@@ -53,6 +54,7 @@ import { networkEffect } from './network';
 import { bubbleEffect } from './bubble';
 import { dustEffect } from './dust';
 import { sakuraEffect } from './sakura';
+import { leavesEffect } from './leaves';
 import { levelupEffect } from './levelup';
 import { comboEffect } from './combo';
 import { criticalEffect } from './critical';
@@ -88,6 +90,7 @@ export const backgroundEffects: Effect[] = [
   bubbleEffect,
   dustEffect,
   sakuraEffect,
+  leavesEffect,
 ];
 
 /** ゲームエフェクト一覧 */
