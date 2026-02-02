@@ -180,6 +180,16 @@ export { shootingEffect } from './shooting';
 export { eclipseEffect } from './eclipse';
 export { sunriseEffect } from './sunrise';
 export { sunsetEffect } from './sunset';
+export { baseballEffect } from './baseball';
+export { soccerEffect } from './soccer';
+export { basketballEffect } from './basketball';
+export { tennisEffect } from './tennis';
+export { golfEffect } from './golf';
+export { swimEffect } from './swim';
+export { runnerEffect } from './runner';
+export { bikeEffect } from './bike';
+export { skateEffect } from './skate';
+export { skiEffect } from './ski';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -349,6 +359,16 @@ import { shootingEffect } from './shooting';
 import { eclipseEffect } from './eclipse';
 import { sunriseEffect } from './sunrise';
 import { sunsetEffect } from './sunset';
+import { baseballEffect } from './baseball';
+import { soccerEffect } from './soccer';
+import { basketballEffect } from './basketball';
+import { tennisEffect } from './tennis';
+import { golfEffect } from './golf';
+import { swimEffect } from './swim';
+import { runnerEffect } from './runner';
+import { bikeEffect } from './bike';
+import { skateEffect } from './skate';
+import { skiEffect } from './ski';
 
 import type { Effect } from '../types';
 
@@ -453,6 +473,16 @@ export const visualEffects: Effect[] = [
   tsunamiEffect,
   volcanoEffect,
   shootingEffect,
+  baseballEffect,
+  soccerEffect,
+  basketballEffect,
+  tennisEffect,
+  golfEffect,
+  swimEffect,
+  runnerEffect,
+  bikeEffect,
+  skateEffect,
+  skiEffect,
 ];
 
 /** 背景エフェクト一覧 */
