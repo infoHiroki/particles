@@ -33,6 +33,15 @@ export { explosionEffect } from './explosion';
 export { teleportEffect } from './teleport';
 export { lightningEffect } from './lightning';
 export { magicEffect } from './magic';
+export { windEffect } from './wind';
+export { pulseEffect } from './pulse';
+export { slashEffect } from './slash';
+export { laserEffect } from './laser';
+export { shockwaveEffect } from './shockwave';
+export { bloomEffect } from './bloom';
+export { dissolveEffect } from './dissolve';
+export { steamEffect } from './steam';
+export { fogEffect } from './fog';
 
 // 背景・環境系エフェクト
 export { networkEffect } from './network';
@@ -54,6 +63,7 @@ export { shieldEffect } from './shield';
 export { healEffect } from './heal';
 export { poisonEffect } from './poison';
 export { freezeEffect } from './freeze';
+export { coinEffect } from './coin';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -82,6 +92,15 @@ import { explosionEffect } from './explosion';
 import { teleportEffect } from './teleport';
 import { lightningEffect } from './lightning';
 import { magicEffect } from './magic';
+import { windEffect } from './wind';
+import { pulseEffect } from './pulse';
+import { slashEffect } from './slash';
+import { laserEffect } from './laser';
+import { shockwaveEffect } from './shockwave';
+import { bloomEffect } from './bloom';
+import { dissolveEffect } from './dissolve';
+import { steamEffect } from './steam';
+import { fogEffect } from './fog';
 import { networkEffect } from './network';
 import { bubbleEffect } from './bubble';
 import { dustEffect } from './dust';
@@ -99,6 +118,7 @@ import { shieldEffect } from './shield';
 import { healEffect } from './heal';
 import { poisonEffect } from './poison';
 import { freezeEffect } from './freeze';
+import { coinEffect } from './coin';
 
 import type { Effect } from '../types';
 
@@ -134,6 +154,15 @@ export const visualEffects: Effect[] = [
   teleportEffect,
   lightningEffect,
   magicEffect,
+  windEffect,
+  pulseEffect,
+  slashEffect,
+  laserEffect,
+  shockwaveEffect,
+  bloomEffect,
+  dissolveEffect,
+  steamEffect,
+  fogEffect,
 ];
 
 /** 背景エフェクト一覧 */
@@ -159,6 +188,7 @@ export const gameEffects: Effect[] = [
   healEffect,
   poisonEffect,
   freezeEffect,
+  coinEffect,
 ];
 
 /** 全エフェクト一覧 */
