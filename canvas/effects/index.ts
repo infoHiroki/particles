@@ -76,6 +76,16 @@ export { healEffect } from './heal';
 export { poisonEffect } from './poison';
 export { freezeEffect } from './freeze';
 export { coinEffect } from './coin';
+export { damageEffect } from './damage';
+export { spawnEffect } from './spawn';
+export { powerupEffect } from './powerup';
+export { scoreEffect } from './score';
+export { buffEffect } from './buff';
+export { debuffEffect } from './debuff';
+export { stunEffect } from './stun';
+export { slowEffect } from './slow';
+export { hasteEffect } from './haste';
+export { absorbEffect } from './absorb';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -141,6 +151,16 @@ import { impactEffect } from './impact';
 import { gemEffect } from './gem';
 import { boostEffect } from './boost';
 import { chargeEffect } from './charge';
+import { damageEffect } from './damage';
+import { spawnEffect } from './spawn';
+import { powerupEffect } from './powerup';
+import { scoreEffect } from './score';
+import { buffEffect } from './buff';
+import { debuffEffect } from './debuff';
+import { stunEffect } from './stun';
+import { slowEffect } from './slow';
+import { hasteEffect } from './haste';
+import { absorbEffect } from './absorb';
 
 import type { Effect } from '../types';
 
@@ -221,6 +241,16 @@ export const gameEffects: Effect[] = [
   gemEffect,
   boostEffect,
   chargeEffect,
+  damageEffect,
+  spawnEffect,
+  powerupEffect,
+  scoreEffect,
+  buffEffect,
+  debuffEffect,
+  stunEffect,
+  slowEffect,
+  hasteEffect,
+  absorbEffect,
 ];
 
 /** 全エフェクト一覧 */
