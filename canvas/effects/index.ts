@@ -150,6 +150,16 @@ export { eyeEffect } from './eye';
 export { skullEffect } from './skull';
 export { diamondEffect } from './diamond';
 export { crystalEffect } from './crystal';
+export { butterflyEffect } from './butterfly';
+export { beeEffect } from './bee';
+export { fishEffect } from './fish';
+export { birdEffect } from './bird';
+export { catEffect } from './cat';
+export { dogEffect } from './dog';
+export { snakeEffect } from './snake';
+export { spiderEffect } from './spider';
+export { dragonEffect } from './dragon';
+export { phoenixEffect } from './phoenix';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -289,6 +299,16 @@ import { eyeEffect } from './eye';
 import { skullEffect } from './skull';
 import { diamondEffect } from './diamond';
 import { crystalEffect } from './crystal';
+import { butterflyEffect } from './butterfly';
+import { beeEffect } from './bee';
+import { fishEffect } from './fish';
+import { birdEffect } from './bird';
+import { catEffect } from './cat';
+import { dogEffect } from './dog';
+import { snakeEffect } from './snake';
+import { spiderEffect } from './spider';
+import { dragonEffect } from './dragon';
+import { phoenixEffect } from './phoenix';
 
 import type { Effect } from '../types';
 
@@ -375,6 +395,10 @@ export const visualEffects: Effect[] = [
   clockEffect,
   eyeEffect,
   crystalEffect,
+  catEffect,
+  dogEffect,
+  snakeEffect,
+  spiderEffect,
 ];
 
 /** 背景エフェクト一覧 */
@@ -399,6 +423,10 @@ export const backgroundEffects: Effect[] = [
   rainbowEffect,
   moonlightEffect,
   sunburstEffect,
+  butterflyEffect,
+  beeEffect,
+  fishEffect,
+  birdEffect,
 ];
 
 /** ゲームエフェクト一覧 */
@@ -443,6 +471,8 @@ export const gameEffects: Effect[] = [
   crownEffect,
   skullEffect,
   diamondEffect,
+  dragonEffect,
+  phoenixEffect,
 ];
 
 /** 全エフェクト一覧 */
