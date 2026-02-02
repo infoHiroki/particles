@@ -12,6 +12,7 @@ export { notificationEffect } from './notification';
 export { confettiEffect } from './confetti';
 export { clickEffect } from './click';
 export { heartbeatEffect } from './heartbeat';
+export { rippleEffect } from './ripple';
 
 // 視覚効果・演出系エフェクト
 export { fireEffect } from './fire';
@@ -54,6 +55,7 @@ import { notificationEffect } from './notification';
 import { confettiEffect } from './confetti';
 import { clickEffect } from './click';
 import { heartbeatEffect } from './heartbeat';
+import { rippleEffect } from './ripple';
 import { fireEffect } from './fire';
 import { waterEffect } from './water';
 import { electricEffect } from './electric';
@@ -93,6 +95,7 @@ export const uiEffects: Effect[] = [
   confettiEffect,
   clickEffect,
   heartbeatEffect,
+  rippleEffect,
 ];
 
 /** 視覚効果エフェクト一覧 */
