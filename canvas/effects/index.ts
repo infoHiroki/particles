@@ -42,6 +42,18 @@ export { bloomEffect } from './bloom';
 export { dissolveEffect } from './dissolve';
 export { steamEffect } from './steam';
 export { fogEffect } from './fog';
+export { beamEffect } from './beam';
+export { waveEffect } from './wave';
+export { sparkEffect } from './spark';
+export { auraEffect } from './aura';
+export { trailEffect } from './trail';
+export { dashEffect } from './dash';
+export { impactEffect } from './impact';
+
+// ゲーム追加系エフェクト
+export { gemEffect } from './gem';
+export { boostEffect } from './boost';
+export { chargeEffect } from './charge';
 
 // 背景・環境系エフェクト
 export { networkEffect } from './network';
@@ -119,6 +131,16 @@ import { healEffect } from './heal';
 import { poisonEffect } from './poison';
 import { freezeEffect } from './freeze';
 import { coinEffect } from './coin';
+import { beamEffect } from './beam';
+import { waveEffect } from './wave';
+import { sparkEffect } from './spark';
+import { auraEffect } from './aura';
+import { trailEffect } from './trail';
+import { dashEffect } from './dash';
+import { impactEffect } from './impact';
+import { gemEffect } from './gem';
+import { boostEffect } from './boost';
+import { chargeEffect } from './charge';
 
 import type { Effect } from '../types';
 
@@ -163,6 +185,13 @@ export const visualEffects: Effect[] = [
   dissolveEffect,
   steamEffect,
   fogEffect,
+  beamEffect,
+  waveEffect,
+  sparkEffect,
+  auraEffect,
+  trailEffect,
+  dashEffect,
+  impactEffect,
 ];
 
 /** 背景エフェクト一覧 */
@@ -189,6 +218,9 @@ export const gameEffects: Effect[] = [
   poisonEffect,
   freezeEffect,
   coinEffect,
+  gemEffect,
+  boostEffect,
+  chargeEffect,
 ];
 
 /** 全エフェクト一覧 */
