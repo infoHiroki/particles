@@ -114,6 +114,15 @@ export { firefliesEffect } from './fireflies';
 export { rainbowEffect } from './rainbow';
 export { moonlightEffect } from './moonlight';
 export { sunburstEffect } from './sunburst';
+export { punchEffect } from './punch';
+export { kickEffect } from './kick';
+export { jumpEffect } from './jump';
+export { landEffect } from './land';
+export { dodgeEffect } from './dodge';
+export { blockEffect } from './block';
+export { grabEffect } from './grab';
+export { throwEffect } from './throw';
+export { spinEffect } from './spin';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -217,6 +226,15 @@ import { firefliesEffect } from './fireflies';
 import { rainbowEffect } from './rainbow';
 import { moonlightEffect } from './moonlight';
 import { sunburstEffect } from './sunburst';
+import { punchEffect } from './punch';
+import { kickEffect } from './kick';
+import { jumpEffect } from './jump';
+import { landEffect } from './land';
+import { dodgeEffect } from './dodge';
+import { blockEffect } from './block';
+import { grabEffect } from './grab';
+import { throwEffect } from './throw';
+import { spinEffect } from './spin';
 
 import type { Effect } from '../types';
 
@@ -335,6 +353,15 @@ export const gameEffects: Effect[] = [
   reviveEffect,
   burnEffect,
   bleedEffect,
+  punchEffect,
+  kickEffect,
+  jumpEffect,
+  landEffect,
+  dodgeEffect,
+  blockEffect,
+  grabEffect,
+  throwEffect,
+  spinEffect,
 ];
 
 /** 全エフェクト一覧 */
