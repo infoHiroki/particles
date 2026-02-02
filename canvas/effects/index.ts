@@ -28,6 +28,7 @@ export { portalEffect } from './portal';
 export { glitchEffect } from './glitch';
 export { auroraEffect } from './aurora';
 export { matrixEffect } from './matrix';
+export { explosionEffect } from './explosion';
 
 // 背景・環境系エフェクト
 export { networkEffect } from './network';
@@ -65,6 +66,7 @@ import { portalEffect } from './portal';
 import { glitchEffect } from './glitch';
 import { auroraEffect } from './aurora';
 import { matrixEffect } from './matrix';
+import { explosionEffect } from './explosion';
 import { networkEffect } from './network';
 import { bubbleEffect } from './bubble';
 import { dustEffect } from './dust';
@@ -105,6 +107,7 @@ export const visualEffects: Effect[] = [
   glitchEffect,
   auroraEffect,
   matrixEffect,
+  explosionEffect,
 ];
 
 /** 背景エフェクト一覧 */
