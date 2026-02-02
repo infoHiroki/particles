@@ -31,6 +31,7 @@ export { auroraEffect } from './aurora';
 export { matrixEffect } from './matrix';
 export { explosionEffect } from './explosion';
 export { teleportEffect } from './teleport';
+export { lightningEffect } from './lightning';
 
 // 背景・環境系エフェクト
 export { networkEffect } from './network';
@@ -74,6 +75,7 @@ import { auroraEffect } from './aurora';
 import { matrixEffect } from './matrix';
 import { explosionEffect } from './explosion';
 import { teleportEffect } from './teleport';
+import { lightningEffect } from './lightning';
 import { networkEffect } from './network';
 import { bubbleEffect } from './bubble';
 import { dustEffect } from './dust';
@@ -120,6 +122,7 @@ export const visualEffects: Effect[] = [
   matrixEffect,
   explosionEffect,
   teleportEffect,
+  lightningEffect,
 ];
 
 /** 背景エフェクト一覧 */
