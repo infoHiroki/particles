@@ -490,6 +490,16 @@ export { chorusEffect } from './chorus';
 export { echo2Effect } from './echo2';
 export { reverbEffect } from './reverb';
 export { vibrationEffect } from './vibration';
+export { chaos2Effect } from './chaos2';
+export { orderEffect } from './order';
+export { entropyEffect } from './entropy';
+export { balance2Effect } from './balance2';
+export { discordEffect } from './discord';
+export { unityEffect } from './unity';
+export { divisionEffect } from './division';
+export { fusion2Effect } from './fusion2';
+export { split2Effect } from './split2';
+export { infinity2Effect } from './infinity2';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -969,6 +979,16 @@ import { chorusEffect } from './chorus';
 import { echo2Effect } from './echo2';
 import { reverbEffect } from './reverb';
 import { vibrationEffect } from './vibration';
+import { chaos2Effect } from './chaos2';
+import { orderEffect } from './order';
+import { entropyEffect } from './entropy';
+import { balance2Effect } from './balance2';
+import { discordEffect } from './discord';
+import { unityEffect } from './unity';
+import { divisionEffect } from './division';
+import { fusion2Effect } from './fusion2';
+import { split2Effect } from './split2';
+import { infinity2Effect } from './infinity2';
 
 import type { Effect } from '../types';
 
@@ -1323,6 +1343,16 @@ export const visualEffects: Effect[] = [
   echo2Effect,
   reverbEffect,
   vibrationEffect,
+  chaos2Effect,
+  orderEffect,
+  entropyEffect,
+  balance2Effect,
+  discordEffect,
+  unityEffect,
+  divisionEffect,
+  fusion2Effect,
+  split2Effect,
+  infinity2Effect,
 ];
 
 /** 背景エフェクト一覧 */
