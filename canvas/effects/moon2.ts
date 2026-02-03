@@ -33,13 +33,16 @@ export const moon2Effect: Effect = {
     ctx.globalAlpha = p.alpha;
     ctx.fillStyle = p.color;
     if (p.type === 'moon') {
+      // 三日月を直接pathで描画（destination-out不使用）
+      const outerR = p.size;
+      const innerR = p.size * 0.8;
+      const offsetX = p.size * 0.4;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.beginPath();
-      ctx.arc(p.x + p.size * 0.4, p.y, p.size * 0.8, 0, Math.PI * 2);
-      ctx.fill();
+      // 外側の円（時計回り）
+      ctx.arc(p.x, p.y, outerR, 0, Math.PI * 2);
+      // 内側の円（反時計回り）で切り抜き
+      ctx.arc(p.x + offsetX, p.y, innerR, 0, Math.PI * 2, true);
+      ctx.fill('evenodd');
     } else {
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);

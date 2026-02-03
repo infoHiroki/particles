@@ -34,16 +34,20 @@ export const moonEffect: Effect = {
     ctx.save();
     ctx.globalAlpha = p.alpha;
     if (p.type === 'moon') {
+      // 三日月を直接pathで描画（destination-out不使用）
+      const outerR = p.size;
+      const innerR = p.size * 0.7;
+      const offsetX = p.size * 0.4;
+      const offsetY = -p.size * 0.2;
       ctx.fillStyle = p.color;
       ctx.shadowColor = p.color;
       ctx.shadowBlur = 20;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.beginPath();
-      ctx.arc(p.x + p.size * 0.4, p.y - p.size * 0.2, p.size * 0.7, 0, Math.PI * 2);
-      ctx.fill();
+      // 外側の円（時計回り）
+      ctx.arc(p.x, p.y, outerR, 0, Math.PI * 2);
+      // 内側の円（反時計回り）で切り抜き
+      ctx.arc(p.x + offsetX, p.y + offsetY, innerR, 0, Math.PI * 2, true);
+      ctx.fill('evenodd');
     } else if (p.type === 'glow') {
       const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
       g.addColorStop(0, p.color + '44');
