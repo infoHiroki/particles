@@ -500,6 +500,15 @@ export { divisionEffect } from './division';
 export { fusion2Effect } from './fusion2';
 export { split2Effect } from './split2';
 export { infinity2Effect } from './infinity2';
+export { dimensionEffect } from './dimension';
+export { void2Effect } from './void2';
+export { quantumEffect } from './quantum';
+export { temporalEffect } from './temporal';
+export { etherealEffect } from './ethereal';
+export { primordialEffect } from './primordial';
+export { transcendEffect } from './transcend';
+export { genesisEffect } from './genesis';
+export { omegaEffect } from './omega';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -989,6 +998,15 @@ import { divisionEffect } from './division';
 import { fusion2Effect } from './fusion2';
 import { split2Effect } from './split2';
 import { infinity2Effect } from './infinity2';
+import { dimensionEffect } from './dimension';
+import { void2Effect } from './void2';
+import { quantumEffect } from './quantum';
+import { temporalEffect } from './temporal';
+import { etherealEffect } from './ethereal';
+import { primordialEffect } from './primordial';
+import { transcendEffect } from './transcend';
+import { genesisEffect } from './genesis';
+import { omegaEffect } from './omega';
 
 import type { Effect } from '../types';
 
@@ -1353,6 +1371,15 @@ export const visualEffects: Effect[] = [
   fusion2Effect,
   split2Effect,
   infinity2Effect,
+  dimensionEffect,
+  void2Effect,
+  quantumEffect,
+  temporalEffect,
+  etherealEffect,
+  primordialEffect,
+  transcendEffect,
+  genesisEffect,
+  omegaEffect,
 ];
 
 /** 背景エフェクト一覧 */
