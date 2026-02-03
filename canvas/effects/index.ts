@@ -469,6 +469,17 @@ export { moonphaseEffect } from './moonphase';
 export { zodiacEffect } from './zodiac';
 export { celestialEffect } from './celestial';
 export { stardustEffect } from './stardust';
+export { splash2Effect } from './splash2';
+export { spillEffect } from './spill';
+export { flow2Effect } from './flow2';
+export { stream2Effect } from './stream2';
+export { currentEffect } from './current';
+export { surgeEffect } from './surge';
+export { floodEffect } from './flood';
+export { ripple2Effect } from './ripple2';
+export { wave4Effect } from './wave4';
+export { dropletEffect } from './droplet';
+export { aquaEffect } from './aqua';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -927,6 +938,17 @@ import { moonphaseEffect } from './moonphase';
 import { zodiacEffect } from './zodiac';
 import { celestialEffect } from './celestial';
 import { stardustEffect } from './stardust';
+import { splash2Effect } from './splash2';
+import { spillEffect } from './spill';
+import { flow2Effect } from './flow2';
+import { stream2Effect } from './stream2';
+import { currentEffect } from './current';
+import { surgeEffect } from './surge';
+import { floodEffect } from './flood';
+import { ripple2Effect } from './ripple2';
+import { wave4Effect } from './wave4';
+import { dropletEffect } from './droplet';
+import { aquaEffect } from './aqua';
 
 import type { Effect } from '../types';
 
@@ -1260,6 +1282,17 @@ export const visualEffects: Effect[] = [
   zodiacEffect,
   celestialEffect,
   stardustEffect,
+  splash2Effect,
+  spillEffect,
+  flow2Effect,
+  stream2Effect,
+  currentEffect,
+  surgeEffect,
+  floodEffect,
+  ripple2Effect,
+  wave4Effect,
+  dropletEffect,
+  aquaEffect,
 ];
 
 /** 背景エフェクト一覧 */
