@@ -480,6 +480,16 @@ export { ripple2Effect } from './ripple2';
 export { wave4Effect } from './wave4';
 export { dropletEffect } from './droplet';
 export { aquaEffect } from './aqua';
+export { bassEffect } from './bass';
+export { trebleEffect } from './treble';
+export { beatEffect } from './beat';
+export { rhythmEffect } from './rhythm';
+export { melodyEffect } from './melody';
+export { harmony2Effect } from './harmony2';
+export { chorusEffect } from './chorus';
+export { echo2Effect } from './echo2';
+export { reverbEffect } from './reverb';
+export { vibrationEffect } from './vibration';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -949,6 +959,16 @@ import { ripple2Effect } from './ripple2';
 import { wave4Effect } from './wave4';
 import { dropletEffect } from './droplet';
 import { aquaEffect } from './aqua';
+import { bassEffect } from './bass';
+import { trebleEffect } from './treble';
+import { beatEffect } from './beat';
+import { rhythmEffect } from './rhythm';
+import { melodyEffect } from './melody';
+import { harmony2Effect } from './harmony2';
+import { chorusEffect } from './chorus';
+import { echo2Effect } from './echo2';
+import { reverbEffect } from './reverb';
+import { vibrationEffect } from './vibration';
 
 import type { Effect } from '../types';
 
@@ -1293,6 +1313,16 @@ export const visualEffects: Effect[] = [
   wave4Effect,
   dropletEffect,
   aquaEffect,
+  bassEffect,
+  trebleEffect,
+  beatEffect,
+  rhythmEffect,
+  melodyEffect,
+  harmony2Effect,
+  chorusEffect,
+  echo2Effect,
+  reverbEffect,
+  vibrationEffect,
 ];
 
 /** 背景エフェクト一覧 */
