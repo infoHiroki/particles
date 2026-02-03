@@ -67,6 +67,17 @@
     }
     .tab:hover { background: rgba(255, 255, 255, 0.2); }
     .tab.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .search-input {
+      width: 100%;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.85rem;
+    }
+    .search-input::placeholder { color: #888; }
+    .search-input:focus { outline: none; border-color: #667eea; }
     .effects-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -209,6 +220,7 @@
         </div>
       </div>
       <div class="last-effect">Last: <span id="lastEffect">-</span></div>
+      <input type="text" id="searchInput" placeholder="Search effects..." class="search-input">
       <div class="tabs" id="tabs"></div>
       <div class="effects-grid" id="effectsGrid"></div>
     </aside>
@@ -236,9 +248,22 @@
       return effects[Math.floor(randomFn() * effects.length)];
     }
 
+    // === Pure function for filtering effects by category ===
+    function getFilteredEffects(effects, category, effectMeta) {
+      if (category === 'all') return effects;
+      return effects.filter(e => {
+        const meta = effectMeta[e.config.name];
+        return meta && meta.category === category;
+      });
+    }
+
     // === Table-driven tests (Go-style TDD) ===
     function runTests() {
-      const tests = [
+      let passed = 0;
+      let total = 0;
+
+      // selectRandomEffect tests
+      const randomTests = [
         { effects: [], random: 0, want: null },
         { effects: [{name:'a'},{name:'b'},{name:'c'}], random: 0, wantName: 'a' },
         { effects: [{name:'a'},{name:'b'},{name:'c'}], random: 0.33, wantName: 'a' },
@@ -247,72 +272,566 @@
         { effects: [{name:'a'},{name:'b'},{name:'c'}], random: 0.67, wantName: 'c' },
         { effects: [{name:'a'},{name:'b'},{name:'c'}], random: 0.99, wantName: 'c' },
       ];
-      let passed = 0;
-      tests.forEach((t, i) => {
+      console.log('--- selectRandomEffect ---');
+      randomTests.forEach((t, i) => {
+        total++;
         const got = selectRandomEffect(t.effects, () => t.random);
         const gotName = got ? got.name : null;
         const want = t.wantName ?? t.want;
-        if (gotName === want) {
-          console.log(`✓ test ${i}`);
-          passed++;
-        } else {
-          console.error(`✗ test ${i}: got ${gotName}, want ${want}`);
-        }
+        if (gotName === want) { console.log(`✓ random[${i}]`); passed++; }
+        else { console.error(`✗ random[${i}]: got ${gotName}, want ${want}`); }
       });
-      console.log(`${passed}/${tests.length} passed`);
+
+      // getFilteredEffects tests
+      const meta = { a: { category: 'ui' }, b: { category: 'visual' }, c: { category: 'ui' } };
+      const effects = [{ config: { name: 'a' } }, { config: { name: 'b' } }, { config: { name: 'c' } }];
+      const filterTests = [
+        { category: 'all', wantLength: 3 },
+        { category: 'ui', wantLength: 2 },
+        { category: 'visual', wantLength: 1 },
+        { category: 'game', wantLength: 0 },
+      ];
+      console.log('--- getFilteredEffects ---');
+      filterTests.forEach((t, i) => {
+        total++;
+        const got = getFilteredEffects(effects, t.category, meta);
+        if (got.length === t.wantLength) { console.log(`✓ filter[${i}] ${t.category}`); passed++; }
+        else { console.error(`✗ filter[${i}] ${t.category}: got ${got.length}, want ${t.wantLength}`); }
+      });
+
+      console.log(`${passed}/${total} passed`);
     }
     // Expose to console: window.runTests()
     window.runTests = runTests;
 
-    // Effect definitions with categories (text only, no icons)
+    // Effect definitions with categories and emojis (全501個)
     const EFFECT_META = {
-      // UI/UX
-      success: { category: 'ui' },
-      error: { category: 'ui' },
-      loading: { category: 'ui' },
-      notification: { category: 'ui' },
-      confetti: { category: 'ui' },
-      click: { category: 'ui' },
-      heartbeat: { category: 'ui' },
-      ripple: { category: 'ui' },
-      // Visual
-      fire: { category: 'visual' },
-      water: { category: 'visual' },
-      electric: { category: 'visual' },
-      snow: { category: 'visual' },
-      stars: { category: 'visual' },
-      smoke: { category: 'visual' },
-      rain: { category: 'visual' },
-      fireworks: { category: 'visual' },
-      meteor: { category: 'visual' },
-      spiral: { category: 'visual' },
-      portal: { category: 'visual' },
-      glitch: { category: 'visual' },
-      aurora: { category: 'visual' },
-      matrix: { category: 'visual' },
-      explosion: { category: 'visual' },
-      teleport: { category: 'visual' },
-      lightning: { category: 'visual' },
-      magic: { category: 'visual' },
-      tornado: { category: 'visual' },
-      vortex: { category: 'visual' },
-      galaxy: { category: 'visual' },
-      // Background
-      network: { category: 'background' },
-      bubble: { category: 'background' },
-      dust: { category: 'background' },
-      sakura: { category: 'background' },
-      leaves: { category: 'background' },
-      firefly: { category: 'background' },
-      comet: { category: 'background' },
-      // Game
-      levelup: { category: 'game' },
-      combo: { category: 'game' },
-      critical: { category: 'game' },
-      shield: { category: 'game' },
-      heal: { category: 'game' },
-      poison: { category: 'game' },
-      freeze: { category: 'game' },
+      // === A ===
+      absorb: { category: 'game', emoji: '🧲' },
+      alarm: { category: 'ui', emoji: '⏰' },
+      alert: { category: 'ui', emoji: '🚨' },
+      anger: { category: 'visual', emoji: '😠' },
+      apple: { category: 'visual', emoji: '🍎' },
+      aqua: { category: 'visual', emoji: '💧' },
+      arch: { category: 'visual', emoji: '🌉' },
+      arrow: { category: 'ui', emoji: '➡️' },
+      asteroid: { category: 'background', emoji: '🪨' },
+      aura: { category: 'game', emoji: '👼' },
+      aura2: { category: 'game', emoji: '😇' },
+      aurora: { category: 'visual', emoji: '🌈' },
+      aurora2: { category: 'visual', emoji: '🎨' },
+      // === B ===
+      badge: { category: 'ui', emoji: '🏅' },
+      balance2: { category: 'visual', emoji: '⚖️' },
+      bamboo: { category: 'visual', emoji: '🎋' },
+      baseball: { category: 'visual', emoji: '⚾' },
+      basketball: { category: 'visual', emoji: '🏀' },
+      bass: { category: 'visual', emoji: '🎸' },
+      battery: { category: 'ui', emoji: '🔋' },
+      beam: { category: 'visual', emoji: '📡' },
+      beat: { category: 'visual', emoji: '🥁' },
+      bee: { category: 'visual', emoji: '🐝' },
+      beer: { category: 'visual', emoji: '🍺' },
+      bell2: { category: 'ui', emoji: '🔔' },
+      bike: { category: 'visual', emoji: '🚴' },
+      binary: { category: 'visual', emoji: '🔢' },
+      bird: { category: 'visual', emoji: '🐦' },
+      blackhole: { category: 'visual', emoji: '🕳️' },
+      bleed: { category: 'game', emoji: '🩸' },
+      bless: { category: 'game', emoji: '🙏' },
+      blizzard: { category: 'visual', emoji: '🌨️' },
+      block: { category: 'game', emoji: '🧱' },
+      bloom: { category: 'visual', emoji: '🌺' },
+      bluetooth: { category: 'ui', emoji: '📶' },
+      blush: { category: 'visual', emoji: '😊' },
+      bolt: { category: 'visual', emoji: '⚡' },
+      bolt2: { category: 'visual', emoji: '🔩' },
+      boost: { category: 'game', emoji: '🚀' },
+      bounce: { category: 'visual', emoji: '🏐' },
+      bridge: { category: 'visual', emoji: '🌁' },
+      broadcast: { category: 'ui', emoji: '📻' },
+      bubble: { category: 'background', emoji: '🫧' },
+      buff: { category: 'game', emoji: '💪' },
+      burn: { category: 'game', emoji: '🔥' },
+      burn2: { category: 'game', emoji: '🥵' },
+      butterfly: { category: 'visual', emoji: '🦋' },
+      // === C ===
+      cactus: { category: 'visual', emoji: '🌵' },
+      cake: { category: 'visual', emoji: '🎂' },
+      calendar: { category: 'ui', emoji: '📅' },
+      calm: { category: 'visual', emoji: '😌' },
+      camera: { category: 'ui', emoji: '📷' },
+      cancel: { category: 'ui', emoji: '🚫' },
+      candy: { category: 'visual', emoji: '🍬' },
+      card: { category: 'visual', emoji: '🃏' },
+      cascade: { category: 'visual', emoji: '🌊' },
+      cat: { category: 'visual', emoji: '🐱' },
+      celestial: { category: 'visual', emoji: '🌟' },
+      ceramic: { category: 'visual', emoji: '🏺' },
+      chain: { category: 'visual', emoji: '⛓️' },
+      chaos2: { category: 'visual', emoji: '🌀' },
+      charge: { category: 'game', emoji: '⚡' },
+      chat: { category: 'ui', emoji: '💬' },
+      checker: { category: 'visual', emoji: '🏁' },
+      chi: { category: 'game', emoji: '☯️' },
+      chip: { category: 'visual', emoji: '🎰' },
+      chorus: { category: 'visual', emoji: '🎶' },
+      circle: { category: 'visual', emoji: '⭕' },
+      circuit: { category: 'visual', emoji: '🔌' },
+      circular: { category: 'visual', emoji: '🔄' },
+      clash: { category: 'game', emoji: '⚔️' },
+      click: { category: 'ui', emoji: '👆' },
+      clock: { category: 'ui', emoji: '🕐' },
+      cloud: { category: 'background', emoji: '☁️' },
+      clover: { category: 'visual', emoji: '🍀' },
+      code: { category: 'visual', emoji: '👨‍💻' },
+      coffee: { category: 'visual', emoji: '☕' },
+      cog: { category: 'visual', emoji: '⚙️' },
+      coil: { category: 'visual', emoji: '🧬' },
+      coin: { category: 'visual', emoji: '🪙' },
+      combo: { category: 'game', emoji: '🔥' },
+      combo2: { category: 'game', emoji: '💯' },
+      comet: { category: 'background', emoji: '☄️' },
+      concentric: { category: 'visual', emoji: '🎯' },
+      confetti: { category: 'ui', emoji: '🎊' },
+      confirm: { category: 'ui', emoji: '✅' },
+      constellation: { category: 'background', emoji: '🌌' },
+      contract: { category: 'visual', emoji: '📜' },
+      cookie: { category: 'visual', emoji: '🍪' },
+      corona: { category: 'visual', emoji: '👑' },
+      cosmos: { category: 'background', emoji: '🌠' },
+      countdown: { category: 'ui', emoji: '⏱️' },
+      counter: { category: 'game', emoji: '🔢' },
+      critical: { category: 'game', emoji: '💥' },
+      cross: { category: 'visual', emoji: '✝️' },
+      crown: { category: 'visual', emoji: '👑' },
+      crystal: { category: 'visual', emoji: '💎' },
+      crystal2: { category: 'visual', emoji: '🔮' },
+      cube: { category: 'visual', emoji: '🧊' },
+      curious: { category: 'visual', emoji: '🤔' },
+      current: { category: 'visual', emoji: '🌀' },
+      curse: { category: 'game', emoji: '🧿' },
+      curtain: { category: 'visual', emoji: '🎭' },
+      cut: { category: 'game', emoji: '✂️' },
+      cyber: { category: 'visual', emoji: '🤖' },
+      cyclone: { category: 'visual', emoji: '🌀' },
+      // === D ===
+      damage: { category: 'game', emoji: '💔' },
+      dash: { category: 'game', emoji: '💨' },
+      data: { category: 'visual', emoji: '📊' },
+      deadline: { category: 'ui', emoji: '⏰' },
+      death: { category: 'game', emoji: '💀' },
+      debuff: { category: 'game', emoji: '📉' },
+      decrypt: { category: 'visual', emoji: '🔓' },
+      despair: { category: 'visual', emoji: '😰' },
+      dew: { category: 'visual', emoji: '💧' },
+      diamond: { category: 'visual', emoji: '💠' },
+      dice: { category: 'visual', emoji: '🎲' },
+      diffraction: { category: 'visual', emoji: '🌈' },
+      dimension: { category: 'visual', emoji: '🔲' },
+      discord: { category: 'visual', emoji: '💢' },
+      dislike: { category: 'ui', emoji: '👎' },
+      dissolve: { category: 'visual', emoji: '🫠' },
+      dissolve3: { category: 'visual', emoji: '💨' },
+      division: { category: 'visual', emoji: '➗' },
+      dizzy: { category: 'visual', emoji: '😵' },
+      dodge: { category: 'game', emoji: '🏃' },
+      dog: { category: 'visual', emoji: '🐕' },
+      dome: { category: 'visual', emoji: '🏛️' },
+      dots: { category: 'visual', emoji: '🔘' },
+      download: { category: 'ui', emoji: '📥' },
+      dragon: { category: 'visual', emoji: '🐉' },
+      drain: { category: 'game', emoji: '🩸' },
+      dream: { category: 'visual', emoji: '💭' },
+      drip: { category: 'visual', emoji: '💧' },
+      drizzle: { category: 'background', emoji: '🌦️' },
+      drone: { category: 'visual', emoji: '🛸' },
+      drop: { category: 'visual', emoji: '💧' },
+      droplet: { category: 'visual', emoji: '💦' },
+      drum: { category: 'visual', emoji: '🥁' },
+      dust: { category: 'background', emoji: '🌫️' },
+      // === E ===
+      earthquake: { category: 'visual', emoji: '🌋' },
+      echo2: { category: 'visual', emoji: '🔊' },
+      eclipse: { category: 'visual', emoji: '🌑' },
+      electric: { category: 'visual', emoji: '⚡' },
+      electron: { category: 'visual', emoji: '⚛️' },
+      empathy: { category: 'visual', emoji: '🤝' },
+      encrypt: { category: 'visual', emoji: '🔐' },
+      energy: { category: 'game', emoji: '⚡' },
+      engine: { category: 'visual', emoji: '🏎️' },
+      entropy: { category: 'visual', emoji: '🎲' },
+      envy: { category: 'visual', emoji: '😒' },
+      equalizer: { category: 'visual', emoji: '🎚️' },
+      error: { category: 'ui', emoji: '❌' },
+      essence: { category: 'game', emoji: '🧪' },
+      ethereal: { category: 'visual', emoji: '👻' },
+      excited: { category: 'visual', emoji: '🤩' },
+      exclaim: { category: 'ui', emoji: '❗' },
+      expand: { category: 'visual', emoji: '📈' },
+      explosion: { category: 'visual', emoji: '💥' },
+      eye: { category: 'visual', emoji: '👁️' },
+      // === F ===
+      fabric: { category: 'visual', emoji: '🧵' },
+      factory: { category: 'visual', emoji: '🏭' },
+      fade2: { category: 'visual', emoji: '🌫️' },
+      fall: { category: 'visual', emoji: '🍂' },
+      fear: { category: 'visual', emoji: '😨' },
+      feather: { category: 'visual', emoji: '🪶' },
+      fern: { category: 'visual', emoji: '🌿' },
+      finisher: { category: 'game', emoji: '🏆' },
+      fire: { category: 'visual', emoji: '🔥' },
+      fireflies: { category: 'background', emoji: '🪲' },
+      firefly: { category: 'background', emoji: '🪲' },
+      firewall: { category: 'visual', emoji: '🧱' },
+      fireworks: { category: 'visual', emoji: '🎆' },
+      fish: { category: 'visual', emoji: '🐟' },
+      flame: { category: 'visual', emoji: '🔥' },
+      flicker: { category: 'visual', emoji: '🕯️' },
+      flip2: { category: 'visual', emoji: '🔄' },
+      float: { category: 'visual', emoji: '🎈' },
+      flock: { category: 'visual', emoji: '🐦' },
+      flood: { category: 'visual', emoji: '🌊' },
+      flow2: { category: 'visual', emoji: '〰️' },
+      flower: { category: 'visual', emoji: '🌸' },
+      focus: { category: 'ui', emoji: '🎯' },
+      fog: { category: 'background', emoji: '🌫️' },
+      force: { category: 'game', emoji: '💪' },
+      fountain: { category: 'visual', emoji: '⛲' },
+      freeze: { category: 'game', emoji: '🧊' },
+      freeze2: { category: 'game', emoji: '❄️' },
+      frost: { category: 'visual', emoji: '🥶' },
+      fusion2: { category: 'visual', emoji: '🔮' },
+      // === G ===
+      galaxy: { category: 'visual', emoji: '🌌' },
+      gate: { category: 'visual', emoji: '🚪' },
+      gather: { category: 'visual', emoji: '🧲' },
+      gear: { category: 'visual', emoji: '⚙️' },
+      gem: { category: 'visual', emoji: '💎' },
+      gem2: { category: 'visual', emoji: '💍' },
+      genesis: { category: 'visual', emoji: '🌅' },
+      geyser: { category: 'visual', emoji: '♨️' },
+      glass: { category: 'visual', emoji: '🥛' },
+      glitch: { category: 'visual', emoji: '📺' },
+      glow2: { category: 'visual', emoji: '💡' },
+      golf: { category: 'visual', emoji: '⛳' },
+      gps: { category: 'ui', emoji: '📍' },
+      grab: { category: 'game', emoji: '🫳' },
+      grid: { category: 'visual', emoji: '📐' },
+      grief: { category: 'visual', emoji: '😢' },
+      guilt: { category: 'visual', emoji: '😔' },
+      guitar: { category: 'visual', emoji: '🎸' },
+      // === H ===
+      hack: { category: 'visual', emoji: '👨‍💻' },
+      hail: { category: 'visual', emoji: '🌨️' },
+      harmony2: { category: 'visual', emoji: '🎵' },
+      hashtag: { category: 'ui', emoji: '#️⃣' },
+      haste: { category: 'game', emoji: '⏩' },
+      haze: { category: 'background', emoji: '🌁' },
+      headphone: { category: 'visual', emoji: '🎧' },
+      heal: { category: 'game', emoji: '💚' },
+      heart2: { category: 'visual', emoji: '❤️' },
+      heartbeat: { category: 'ui', emoji: '💓' },
+      helix: { category: 'visual', emoji: '🧬' },
+      herd: { category: 'visual', emoji: '🐑' },
+      hexagon: { category: 'visual', emoji: '⬡' },
+      hexgrid: { category: 'visual', emoji: '🔷' },
+      hologram: { category: 'visual', emoji: '📽️' },
+      hope: { category: 'visual', emoji: '🌞' },
+      hourglass: { category: 'ui', emoji: '⏳' },
+      hurricane: { category: 'visual', emoji: '🌀' },
+      // === I ===
+      icecream: { category: 'visual', emoji: '🍦' },
+      impact: { category: 'game', emoji: '💢' },
+      index: { category: 'visual', emoji: '📑' },
+      infinity2: { category: 'visual', emoji: '♾️' },
+      interference: { category: 'visual', emoji: '📶' },
+      // === J ===
+      jackpot: { category: 'game', emoji: '🎰' },
+      joy: { category: 'visual', emoji: '😄' },
+      jump: { category: 'game', emoji: '🦘' },
+      // === K ===
+      kick: { category: 'game', emoji: '🦶' },
+      // === L ===
+      land: { category: 'visual', emoji: '🏞️' },
+      laptop: { category: 'visual', emoji: '💻' },
+      laser: { category: 'visual', emoji: '🔴' },
+      laugh: { category: 'visual', emoji: '😂' },
+      leaf: { category: 'visual', emoji: '🍃' },
+      leather: { category: 'visual', emoji: '🧥' },
+      leaves: { category: 'background', emoji: '🍂' },
+      lens: { category: 'visual', emoji: '🔍' },
+      levelup: { category: 'game', emoji: '⬆️' },
+      lightning: { category: 'visual', emoji: '🌩️' },
+      like: { category: 'ui', emoji: '👍' },
+      link: { category: 'ui', emoji: '🔗' },
+      loading: { category: 'ui', emoji: '⏳' },
+      lock: { category: 'ui', emoji: '🔒' },
+      love: { category: 'visual', emoji: '💕' },
+      // === M ===
+      machine: { category: 'visual', emoji: '🤖' },
+      magic: { category: 'visual', emoji: '🪄' },
+      mail: { category: 'ui', emoji: '📧' },
+      mana: { category: 'game', emoji: '🔵' },
+      matrix: { category: 'visual', emoji: '💻' },
+      medal: { category: 'ui', emoji: '🏅' },
+      melody: { category: 'visual', emoji: '🎵' },
+      merge: { category: 'visual', emoji: '🔀' },
+      metal: { category: 'visual', emoji: '🔩' },
+      meteor: { category: 'visual', emoji: '☄️' },
+      meteor2: { category: 'visual', emoji: '🌠' },
+      microphone: { category: 'visual', emoji: '🎤' },
+      mist: { category: 'background', emoji: '🌫️' },
+      monsoon: { category: 'visual', emoji: '🌧️' },
+      moon: { category: 'visual', emoji: '🌙' },
+      moon2: { category: 'visual', emoji: '🌛' },
+      moonlight: { category: 'background', emoji: '🌕' },
+      moonphase: { category: 'visual', emoji: '🌘' },
+      morph: { category: 'visual', emoji: '🦎' },
+      mushroom: { category: 'visual', emoji: '🍄' },
+      music: { category: 'visual', emoji: '🎵' },
+      // === N ===
+      nebula: { category: 'visual', emoji: '🌌' },
+      neon: { category: 'visual', emoji: '💡' },
+      network: { category: 'background', emoji: '🌐' },
+      neutron: { category: 'visual', emoji: '⚛️' },
+      noise: { category: 'visual', emoji: '📢' },
+      notification: { category: 'ui', emoji: '🔔' },
+      // === O ===
+      omega: { category: 'visual', emoji: 'Ω' },
+      orange: { category: 'visual', emoji: '🍊' },
+      orbit2: { category: 'visual', emoji: '🛰️' },
+      orbit3: { category: 'visual', emoji: '🪐' },
+      order: { category: 'visual', emoji: '📋' },
+      overcast: { category: 'background', emoji: '☁️' },
+      // === P ===
+      paralyze: { category: 'game', emoji: '😵' },
+      parry: { category: 'game', emoji: '🤺' },
+      path: { category: 'visual', emoji: '🛤️' },
+      pentagon: { category: 'visual', emoji: '⬠' },
+      phoenix: { category: 'visual', emoji: '🦅' },
+      phone: { category: 'ui', emoji: '📱' },
+      photon: { category: 'visual', emoji: '💡' },
+      piano: { category: 'visual', emoji: '🎹' },
+      pierce: { category: 'game', emoji: '🗡️' },
+      pillar: { category: 'visual', emoji: '🗿' },
+      piston: { category: 'visual', emoji: '🔧' },
+      pixel2: { category: 'visual', emoji: '🎮' },
+      pizza: { category: 'visual', emoji: '🍕' },
+      planetring: { category: 'visual', emoji: '🪐' },
+      plasma: { category: 'visual', emoji: '🟣' },
+      plastic: { category: 'visual', emoji: '🧴' },
+      poison: { category: 'game', emoji: '☠️' },
+      poison2: { category: 'game', emoji: '🧪' },
+      pollen: { category: 'background', emoji: '🌼' },
+      pool: { category: 'visual', emoji: '🎱' },
+      portal: { category: 'visual', emoji: '🌀' },
+      pour: { category: 'visual', emoji: '🫗' },
+      power: { category: 'game', emoji: '⚡' },
+      powerup: { category: 'game', emoji: '🆙' },
+      pride: { category: 'visual', emoji: '🏳️‍🌈' },
+      primordial: { category: 'visual', emoji: '🌋' },
+      prism: { category: 'visual', emoji: '🔷' },
+      progress2: { category: 'ui', emoji: '📊' },
+      proton: { category: 'visual', emoji: '⚛️' },
+      pulsar: { category: 'visual', emoji: '💫' },
+      pulse: { category: 'visual', emoji: '💗' },
+      punch: { category: 'game', emoji: '👊' },
+      pyramid: { category: 'visual', emoji: '🔺' },
+      // === Q ===
+      quantum: { category: 'visual', emoji: '⚛️' },
+      quasar: { category: 'visual', emoji: '🌟' },
+      question: { category: 'ui', emoji: '❓' },
+      // === R ===
+      radial: { category: 'visual', emoji: '☀️' },
+      radiance: { category: 'visual', emoji: '🌟' },
+      rage: { category: 'visual', emoji: '😡' },
+      rain: { category: 'visual', emoji: '🌧️' },
+      rainbow: { category: 'visual', emoji: '🌈' },
+      rank: { category: 'ui', emoji: '🏆' },
+      record: { category: 'visual', emoji: '📀' },
+      reflect: { category: 'visual', emoji: '🪞' },
+      reflect2: { category: 'visual', emoji: '💠' },
+      refract: { category: 'visual', emoji: '🌈' },
+      regen: { category: 'game', emoji: '💖' },
+      reverb: { category: 'visual', emoji: '🔊' },
+      revive: { category: 'game', emoji: '💫' },
+      rhythm: { category: 'visual', emoji: '🎼' },
+      ribbon: { category: 'visual', emoji: '🎀' },
+      ring: { category: 'visual', emoji: '💍' },
+      ripple: { category: 'visual', emoji: '〰️' },
+      ripple2: { category: 'visual', emoji: '🌀' },
+      rise: { category: 'visual', emoji: '📈' },
+      robot: { category: 'visual', emoji: '🤖' },
+      rocket: { category: 'visual', emoji: '🚀' },
+      roof: { category: 'visual', emoji: '🏠' },
+      rose: { category: 'visual', emoji: '🌹' },
+      rotate3: { category: 'visual', emoji: '🔄' },
+      roulette: { category: 'visual', emoji: '🎰' },
+      runner: { category: 'visual', emoji: '🏃' },
+      rush: { category: 'game', emoji: '💨' },
+      // === S ===
+      sad: { category: 'visual', emoji: '😢' },
+      sakura: { category: 'background', emoji: '🌸' },
+      sandstorm: { category: 'visual', emoji: '🏜️' },
+      satellite: { category: 'visual', emoji: '🛰️' },
+      save: { category: 'ui', emoji: '💾' },
+      scale2: { category: 'visual', emoji: '⚖️' },
+      scan: { category: 'ui', emoji: '📡' },
+      scatter: { category: 'visual', emoji: '💫' },
+      schedule: { category: 'ui', emoji: '📅' },
+      school: { category: 'visual', emoji: '🏫' },
+      score: { category: 'game', emoji: '🔢' },
+      search: { category: 'ui', emoji: '🔍' },
+      serenity: { category: 'visual', emoji: '😌' },
+      shake: { category: 'visual', emoji: '📳' },
+      shame: { category: 'visual', emoji: '😳' },
+      share: { category: 'ui', emoji: '📤' },
+      shield: { category: 'game', emoji: '🛡️' },
+      shimmer: { category: 'visual', emoji: '🌟' },
+      shock2: { category: 'game', emoji: '😲' },
+      shockwave: { category: 'visual', emoji: '💢' },
+      shooting: { category: 'visual', emoji: '🌠' },
+      shutter: { category: 'visual', emoji: '📷' },
+      signal: { category: 'ui', emoji: '📶' },
+      silence: { category: 'visual', emoji: '🤫' },
+      sine: { category: 'visual', emoji: '〰️' },
+      skate: { category: 'visual', emoji: '⛸️' },
+      ski: { category: 'visual', emoji: '⛷️' },
+      skull: { category: 'visual', emoji: '💀' },
+      slash: { category: 'game', emoji: '⚔️' },
+      sleepy: { category: 'visual', emoji: '😴' },
+      sleet: { category: 'visual', emoji: '🌨️' },
+      slide: { category: 'visual', emoji: '🛝' },
+      slot: { category: 'visual', emoji: '🎰' },
+      slow: { category: 'game', emoji: '🐢' },
+      smash: { category: 'game', emoji: '💥' },
+      smoke: { category: 'visual', emoji: '💨' },
+      snake: { category: 'visual', emoji: '🐍' },
+      snow: { category: 'visual', emoji: '❄️' },
+      snowflake: { category: 'visual', emoji: '❄️' },
+      soccer: { category: 'visual', emoji: '⚽' },
+      solarsystem: { category: 'visual', emoji: '☀️' },
+      soul: { category: 'visual', emoji: '👻' },
+      spark: { category: 'visual', emoji: '⚡' },
+      spawn: { category: 'game', emoji: '🔮' },
+      speaker: { category: 'visual', emoji: '🔈' },
+      speech: { category: 'ui', emoji: '💬' },
+      spider: { category: 'visual', emoji: '🕷️' },
+      spill: { category: 'visual', emoji: '🫗' },
+      spin: { category: 'visual', emoji: '🔄' },
+      spiral: { category: 'visual', emoji: '🌀' },
+      spiral2: { category: 'visual', emoji: '🐚' },
+      spirit: { category: 'visual', emoji: '👻' },
+      splash: { category: 'visual', emoji: '💦' },
+      splash2: { category: 'visual', emoji: '🌊' },
+      split: { category: 'visual', emoji: '✂️' },
+      split2: { category: 'visual', emoji: '↔️' },
+      spotlight: { category: 'visual', emoji: '🔦' },
+      spring: { category: 'visual', emoji: '🌷' },
+      square: { category: 'visual', emoji: '🔲' },
+      square2: { category: 'visual', emoji: '⬛' },
+      squash: { category: 'visual', emoji: '🎃' },
+      stairs: { category: 'visual', emoji: '🪜' },
+      star2: { category: 'visual', emoji: '⭐' },
+      stardust: { category: 'background', emoji: '🌠' },
+      starfield: { category: 'background', emoji: '🌃' },
+      stars: { category: 'visual', emoji: '⭐' },
+      static: { category: 'visual', emoji: '📺' },
+      steam: { category: 'visual', emoji: '♨️' },
+      stone: { category: 'visual', emoji: '🪨' },
+      stopwatch: { category: 'ui', emoji: '⏱️' },
+      storm: { category: 'visual', emoji: '⛈️' },
+      stream: { category: 'visual', emoji: '🌊' },
+      stream2: { category: 'visual', emoji: '📺' },
+      stretch: { category: 'visual', emoji: '🤸' },
+      strike: { category: 'game', emoji: '⚡' },
+      stripe: { category: 'visual', emoji: '📊' },
+      strobe: { category: 'visual', emoji: '💡' },
+      stun: { category: 'game', emoji: '😵' },
+      stun2: { category: 'game', emoji: '💫' },
+      success: { category: 'ui', emoji: '✅' },
+      summon: { category: 'game', emoji: '🔮' },
+      sun: { category: 'visual', emoji: '☀️' },
+      sun2: { category: 'visual', emoji: '🌞' },
+      sunburst: { category: 'visual', emoji: '🌅' },
+      sunflower: { category: 'visual', emoji: '🌻' },
+      sunrise: { category: 'visual', emoji: '🌅' },
+      sunset: { category: 'visual', emoji: '🌇' },
+      supernova: { category: 'visual', emoji: '💥' },
+      surge: { category: 'game', emoji: '⚡' },
+      surprise: { category: 'visual', emoji: '😲' },
+      sushi: { category: 'visual', emoji: '🍣' },
+      swarm: { category: 'visual', emoji: '🐝' },
+      sweat: { category: 'visual', emoji: '😰' },
+      swim: { category: 'visual', emoji: '🏊' },
+      swing: { category: 'visual', emoji: '🎠' },
+      swirl: { category: 'visual', emoji: '🌀' },
+      sync: { category: 'ui', emoji: '🔄' },
+      // === T ===
+      tears2: { category: 'visual', emoji: '😭' },
+      teleport: { category: 'visual', emoji: '🌀' },
+      temporal: { category: 'visual', emoji: '⏰' },
+      tennis: { category: 'visual', emoji: '🎾' },
+      thought: { category: 'visual', emoji: '💭' },
+      thread: { category: 'visual', emoji: '🧵' },
+      thrill: { category: 'visual', emoji: '🎢' },
+      throw: { category: 'game', emoji: '🤾' },
+      thunder: { category: 'visual', emoji: '⛈️' },
+      tide: { category: 'visual', emoji: '🌊' },
+      timer: { category: 'ui', emoji: '⏲️' },
+      tornado: { category: 'visual', emoji: '🌪️' },
+      tower: { category: 'visual', emoji: '🗼' },
+      trace: { category: 'visual', emoji: '🔍' },
+      trail: { category: 'visual', emoji: '🛤️' },
+      transcend: { category: 'visual', emoji: '🙏' },
+      transform: { category: 'visual', emoji: '🔄' },
+      treble: { category: 'visual', emoji: '🎼' },
+      tree: { category: 'visual', emoji: '🌳' },
+      triangle: { category: 'visual', emoji: '🔺' },
+      trophy2: { category: 'ui', emoji: '🏆' },
+      trumpet: { category: 'visual', emoji: '🎺' },
+      tsunami: { category: 'visual', emoji: '🌊' },
+      tulip: { category: 'visual', emoji: '🌷' },
+      twist: { category: 'visual', emoji: '🌀' },
+      typhoon: { category: 'visual', emoji: '🌀' },
+      // === U ===
+      unity: { category: 'visual', emoji: '🤝' },
+      unlock: { category: 'ui', emoji: '🔓' },
+      upload: { category: 'ui', emoji: '📤' },
+      // === V ===
+      vibration: { category: 'visual', emoji: '📳' },
+      violin: { category: 'visual', emoji: '🎻' },
+      virus: { category: 'visual', emoji: '🦠' },
+      void: { category: 'visual', emoji: '🕳️' },
+      void2: { category: 'visual', emoji: '⬛' },
+      volcano: { category: 'visual', emoji: '🌋' },
+      vortex: { category: 'visual', emoji: '🌀' },
+      // === W ===
+      wall: { category: 'visual', emoji: '🧱' },
+      water: { category: 'visual', emoji: '💧' },
+      waterfall: { category: 'visual', emoji: '🌊' },
+      wave: { category: 'visual', emoji: '🌊' },
+      wave2: { category: 'visual', emoji: '〰️' },
+      wave3: { category: 'visual', emoji: '📊' },
+      wave4: { category: 'visual', emoji: '🎵' },
+      web: { category: 'visual', emoji: '🕸️' },
+      whirlpool: { category: 'visual', emoji: '🌀' },
+      wifi: { category: 'ui', emoji: '📶' },
+      wind: { category: 'visual', emoji: '💨' },
+      window2: { category: 'visual', emoji: '🪟' },
+      wings: { category: 'visual', emoji: '🪽' },
+      wipe: { category: 'visual', emoji: '🧹' },
+      wood: { category: 'visual', emoji: '🪵' },
+      wormhole: { category: 'visual', emoji: '🕳️' },
+      wrench: { category: 'visual', emoji: '🔧' },
+      // === Y ===
+      yawn: { category: 'visual', emoji: '🥱' },
+      // === Z ===
+      zigzag: { category: 'visual', emoji: '⚡' },
+      zodiac: { category: 'visual', emoji: '♈' },
+      zoom2: { category: 'visual', emoji: '🔎' },
+      zoom3: { category: 'visual', emoji: '🔭' },
     };
 
     // Import effects from built JS
@@ -369,12 +888,12 @@
 
     allEffects.forEach(effect => {
       const name = effect.config.name;
-      const meta = EFFECT_META[name] || { category: 'visual' };
+      const meta = EFFECT_META[name] || { category: 'visual', emoji: '🔷' };
       const btn = document.createElement('button');
       btn.className = 'effect-btn' + (name === currentEffect ? ' selected' : '');
       btn.dataset.effect = name;
       btn.dataset.category = meta.category;
-      btn.textContent = name;
+      btn.textContent = meta.emoji + ' ' + name;
       btn.onclick = () => selectEffect(name);
       grid.appendChild(btn);
     });
@@ -386,15 +905,32 @@
       });
     }
 
+    // Category and search state
+    let currentCategory = 'all';
+    let currentSearchQuery = '';
+
     function filterEffects(category) {
+      currentCategory = category;
       document.querySelectorAll('.tab').forEach(t => {
         t.classList.toggle('active', t.dataset.category === category);
       });
+      applyFilters();
+    }
+
+    function applyFilters() {
       document.querySelectorAll('.effect-btn').forEach(btn => {
-        const show = category === 'all' || btn.dataset.category === category;
-        btn.style.display = show ? '' : 'none';
+        const name = btn.dataset.effect.toLowerCase();
+        const matchesSearch = currentSearchQuery === '' || name.includes(currentSearchQuery);
+        const matchesCategory = currentCategory === 'all' || btn.dataset.category === currentCategory;
+        btn.style.display = (matchesSearch && matchesCategory) ? '' : 'none';
       });
     }
+
+    // Search input handler
+    document.getElementById('searchInput').oninput = (e) => {
+      currentSearchQuery = e.target.value.toLowerCase();
+      applyFilters();
+    };
 
     // Random mode state
     let randomMode = false;
@@ -411,7 +947,8 @@
       // Select effect based on mode
       let effectName;
       if (randomMode) {
-        const randomEffect = selectRandomEffect(allEffects);
+        const filtered = getFilteredEffects(allEffects, currentCategory, EFFECT_META);
+        const randomEffect = selectRandomEffect(filtered);
         effectName = randomEffect ? randomEffect.config.name : currentEffect;
       } else {
         effectName = currentEffect;
