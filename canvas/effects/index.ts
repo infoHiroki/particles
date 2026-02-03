@@ -429,6 +429,16 @@ export { swarmEffect } from './swarm';
 export { flockEffect } from './flock';
 export { schoolEffect } from './school';
 export { herdEffect } from './herd';
+export { traceEffect } from './trace';
+export { pathEffect } from './path';
+export { coilEffect } from './coil';
+export { helixEffect } from './helix';
+export { sineEffect } from './sine';
+export { square2Effect } from './square2';
+export { noiseEffect } from './noise';
+export { staticEffect } from './static';
+export { interferenceEffect } from './interference';
+export { diffractionEffect } from './diffraction';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -847,6 +857,16 @@ import { swarmEffect } from './swarm';
 import { flockEffect } from './flock';
 import { schoolEffect } from './school';
 import { herdEffect } from './herd';
+import { traceEffect } from './trace';
+import { pathEffect } from './path';
+import { coilEffect } from './coil';
+import { helixEffect } from './helix';
+import { sineEffect } from './sine';
+import { square2Effect } from './square2';
+import { noiseEffect } from './noise';
+import { staticEffect } from './static';
+import { interferenceEffect } from './interference';
+import { diffractionEffect } from './diffraction';
 
 import type { Effect } from '../types';
 
@@ -1140,6 +1160,16 @@ export const visualEffects: Effect[] = [
   flockEffect,
   schoolEffect,
   herdEffect,
+  traceEffect,
+  pathEffect,
+  coilEffect,
+  helixEffect,
+  sineEffect,
+  square2Effect,
+  noiseEffect,
+  staticEffect,
+  interferenceEffect,
+  diffractionEffect,
 ];
 
 /** 背景エフェクト一覧 */
