@@ -439,6 +439,16 @@ export { noiseEffect } from './noise';
 export { staticEffect } from './static';
 export { interferenceEffect } from './interference';
 export { diffractionEffect } from './diffraction';
+export { metalEffect } from './metal';
+export { glassEffect } from './glass';
+export { woodEffect } from './wood';
+export { stoneEffect } from './stone';
+export { fabricEffect } from './fabric';
+export { leatherEffect } from './leather';
+export { plasticEffect } from './plastic';
+export { ceramicEffect } from './ceramic';
+export { crystal2Effect } from './crystal2';
+export { gem2Effect } from './gem2';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -867,6 +877,16 @@ import { noiseEffect } from './noise';
 import { staticEffect } from './static';
 import { interferenceEffect } from './interference';
 import { diffractionEffect } from './diffraction';
+import { metalEffect } from './metal';
+import { glassEffect } from './glass';
+import { woodEffect } from './wood';
+import { stoneEffect } from './stone';
+import { fabricEffect } from './fabric';
+import { leatherEffect } from './leather';
+import { plasticEffect } from './plastic';
+import { ceramicEffect } from './ceramic';
+import { crystal2Effect } from './crystal2';
+import { gem2Effect } from './gem2';
 
 import type { Effect } from '../types';
 
@@ -1170,6 +1190,16 @@ export const visualEffects: Effect[] = [
   staticEffect,
   interferenceEffect,
   diffractionEffect,
+  metalEffect,
+  glassEffect,
+  woodEffect,
+  stoneEffect,
+  fabricEffect,
+  leatherEffect,
+  plasticEffect,
+  ceramicEffect,
+  crystal2Effect,
+  gem2Effect,
 ];
 
 /** 背景エフェクト一覧 */
