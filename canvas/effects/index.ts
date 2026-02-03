@@ -449,6 +449,16 @@ export { plasticEffect } from './plastic';
 export { ceramicEffect } from './ceramic';
 export { crystal2Effect } from './crystal2';
 export { gem2Effect } from './gem2';
+export { griefEffect } from './grief';
+export { serenityEffect } from './serenity';
+export { thrillEffect } from './thrill';
+export { despairEffect } from './despair';
+export { hopeEffect } from './hope';
+export { envyEffect } from './envy';
+export { prideEffect } from './pride';
+export { shameEffect } from './shame';
+export { guiltEffect } from './guilt';
+export { empathyEffect } from './empathy';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -887,6 +897,16 @@ import { plasticEffect } from './plastic';
 import { ceramicEffect } from './ceramic';
 import { crystal2Effect } from './crystal2';
 import { gem2Effect } from './gem2';
+import { griefEffect } from './grief';
+import { serenityEffect } from './serenity';
+import { thrillEffect } from './thrill';
+import { despairEffect } from './despair';
+import { hopeEffect } from './hope';
+import { envyEffect } from './envy';
+import { prideEffect } from './pride';
+import { shameEffect } from './shame';
+import { guiltEffect } from './guilt';
+import { empathyEffect } from './empathy';
 
 import type { Effect } from '../types';
 
@@ -1200,6 +1220,16 @@ export const visualEffects: Effect[] = [
   ceramicEffect,
   crystal2Effect,
   gem2Effect,
+  griefEffect,
+  serenityEffect,
+  thrillEffect,
+  despairEffect,
+  hopeEffect,
+  envyEffect,
+  prideEffect,
+  shameEffect,
+  guiltEffect,
+  empathyEffect,
 ];
 
 /** 背景エフェクト一覧 */
