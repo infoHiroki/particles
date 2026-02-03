@@ -188,7 +188,7 @@
     // Initialize
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-    const system = new ParticleSystem(canvas);
+    const system = new ParticleSystem(canvas, { width: 1200, height: 500 });
 
     // Register all effects
     allEffects.forEach(effect => system.registerEffect(effect));
@@ -249,7 +249,7 @@
       const x = (e.clientX - rect.left) * scaleX;
       const y = (e.clientY - rect.top) * scaleY;
       const intensity = parseFloat(document.getElementById('intensity').value);
-      system.trigger(x, y, { intensity, effectName: currentEffect });
+      system.trigger(currentEffect, x, y, { intensity });
     });
 
     // Controls
@@ -270,7 +270,7 @@
           const intensity = parseFloat(document.getElementById('intensity').value);
           // Random effect
           const randomEffect = allEffects[Math.floor(Math.random() * allEffects.length)];
-          system.trigger(x, y, { intensity, effectName: randomEffect.config.name });
+          system.trigger(randomEffect.config.name, x, y, { intensity });
         }, 500);
       } else {
         clearInterval(autoInterval);

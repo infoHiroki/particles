@@ -38,11 +38,16 @@ export class ParticleSystem {
       throw new Error('Failed to get 2D context');
     }
     this.ctx = ctx;
-    this.config = { ...DEFAULT_CONFIG, ...config };
 
-    // キャンバスサイズ設定
-    this.canvas.width = this.config.width;
-    this.canvas.height = this.config.height;
+    // HTMLの既存サイズを尊重するか、configで上書き
+    const width = config.width ?? canvas.width ?? DEFAULT_CONFIG.width;
+    const height = config.height ?? canvas.height ?? DEFAULT_CONFIG.height;
+
+    this.config = { ...DEFAULT_CONFIG, ...config, width, height };
+
+    // サイズが異なる場合のみ変更
+    if (this.canvas.width !== width) this.canvas.width = width;
+    if (this.canvas.height !== height) this.canvas.height = height;
   }
 
   /** エフェクトを登録 */
