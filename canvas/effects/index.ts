@@ -459,6 +459,16 @@ export { prideEffect } from './pride';
 export { shameEffect } from './shame';
 export { guiltEffect } from './guilt';
 export { empathyEffect } from './empathy';
+export { meteor2Effect } from './meteor2';
+export { aurora2Effect } from './aurora2';
+export { coronaEffect } from './corona';
+export { constellationEffect } from './constellation';
+export { planetringEffect } from './planetring';
+export { solarsystemEffect } from './solarsystem';
+export { moonphaseEffect } from './moonphase';
+export { zodiacEffect } from './zodiac';
+export { celestialEffect } from './celestial';
+export { stardustEffect } from './stardust';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -907,6 +917,16 @@ import { prideEffect } from './pride';
 import { shameEffect } from './shame';
 import { guiltEffect } from './guilt';
 import { empathyEffect } from './empathy';
+import { meteor2Effect } from './meteor2';
+import { aurora2Effect } from './aurora2';
+import { coronaEffect } from './corona';
+import { constellationEffect } from './constellation';
+import { planetringEffect } from './planetring';
+import { solarsystemEffect } from './solarsystem';
+import { moonphaseEffect } from './moonphase';
+import { zodiacEffect } from './zodiac';
+import { celestialEffect } from './celestial';
+import { stardustEffect } from './stardust';
 
 import type { Effect } from '../types';
 
@@ -1230,6 +1250,16 @@ export const visualEffects: Effect[] = [
   shameEffect,
   guiltEffect,
   empathyEffect,
+  meteor2Effect,
+  aurora2Effect,
+  coronaEffect,
+  constellationEffect,
+  planetringEffect,
+  solarsystemEffect,
+  moonphaseEffect,
+  zodiacEffect,
+  celestialEffect,
+  stardustEffect,
 ];
 
 /** 背景エフェクト一覧 */
