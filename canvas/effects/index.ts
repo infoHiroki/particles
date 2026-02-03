@@ -509,6 +509,10 @@ export { primordialEffect } from './primordial';
 export { transcendEffect } from './transcend';
 export { genesisEffect } from './genesis';
 export { omegaEffect } from './omega';
+export { photonEffect } from './photon';
+export { neutronEffect } from './neutron';
+export { electronEffect } from './electron';
+export { protonEffect } from './proton';
 
 // エフェクト配列（カテゴリ別）
 import { successEffect } from './success';
@@ -1007,6 +1011,10 @@ import { primordialEffect } from './primordial';
 import { transcendEffect } from './transcend';
 import { genesisEffect } from './genesis';
 import { omegaEffect } from './omega';
+import { photonEffect } from './photon';
+import { neutronEffect } from './neutron';
+import { electronEffect } from './electron';
+import { protonEffect } from './proton';
 
 import type { Effect } from '../types';
 
@@ -1380,6 +1388,10 @@ export const visualEffects: Effect[] = [
   transcendEffect,
   genesisEffect,
   omegaEffect,
+  photonEffect,
+  neutronEffect,
+  electronEffect,
+  protonEffect,
 ];
 
 /** 背景エフェクト一覧 */
