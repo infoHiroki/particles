@@ -9,7 +9,8 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
       color: #fff;
     }
     .container {
@@ -18,7 +19,8 @@
       margin: 0 auto;
       padding: 20px;
       gap: 20px;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
     }
     /* Sidebar */
     .sidebar {
@@ -27,6 +29,8 @@
       display: flex;
       flex-direction: column;
       gap: 15px;
+      height: calc(100vh - 40px);
+      overflow-y: auto;
     }
     .sidebar-header {
       text-align: center;
@@ -133,12 +137,13 @@
       pointer-events: none;
     }
     .controls {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      align-items: center; justify-content: center;
-      padding: 15px; background: rgba(255, 255, 255, 0.05);
+      display: flex; flex-direction: column; gap: 10px;
+      padding: 15px; background: rgba(0, 0, 0, 0.2);
       border-radius: 10px;
     }
-    .control-group { display: flex; align-items: center; gap: 8px; }
+    .control-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .control-buttons { display: flex; gap: 8px; }
+    .control-buttons .action-btn { flex: 1; }
     .control-group label { font-size: 0.8rem; color: #aaa; }
     .control-group input[type="range"] { width: 100px; accent-color: #667eea; }
     .action-btn {
@@ -148,9 +153,17 @@
       color: #fff; cursor: pointer; font-size: 0.85rem;
     }
     .action-btn:hover { transform: scale(1.05); }
-    .action-btn.auto-active {
+    .action-btn.auto-active,
+    .action-btn.random-active {
       background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     }
+    .last-effect {
+      font-size: 0.8rem; color: #aaa;
+      padding: 8px; text-align: center;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+    }
+    .last-effect span { color: #667eea; font-weight: bold; }
     .stats {
       display: flex; gap: 20px; justify-content: center;
       font-size: 0.8rem; color: #888;
@@ -183,6 +196,19 @@
         <h2>Effects</h2>
         <p><span class="count" id="effectCount">0</span> available</p>
       </div>
+      <div class="controls">
+        <div class="control-group">
+          <label>Intensity:</label>
+          <input type="range" id="intensity" min="0.5" max="3" step="0.1" value="1">
+          <span id="intensityValue">1.0</span>
+        </div>
+        <div class="control-buttons">
+          <button class="action-btn" id="autoBtn">Auto Play</button>
+          <button class="action-btn" id="randomBtn">Random</button>
+          <button class="action-btn" id="clearBtn">Clear</button>
+        </div>
+      </div>
+      <div class="last-effect">Last: <span id="lastEffect">-</span></div>
       <div class="tabs" id="tabs"></div>
       <div class="effects-grid" id="effectsGrid"></div>
     </aside>
@@ -196,15 +222,6 @@
         <canvas id="canvas"></canvas>
         <div class="canvas-hint">Click anywhere to trigger effect</div>
       </div>
-      <div class="controls">
-        <div class="control-group">
-          <label>Intensity:</label>
-          <input type="range" id="intensity" min="0.5" max="3" step="0.1" value="1">
-          <span id="intensityValue">1.0</span>
-        </div>
-        <button class="action-btn" id="autoBtn">Auto Play</button>
-        <button class="action-btn" id="clearBtn">Clear</button>
-      </div>
       <div class="stats">
         <div class="stat">FPS: <span class="stat-value" id="fps">0</span></div>
         <div class="stat">Particles: <span class="stat-value" id="particleCount">0</span></div>
@@ -213,55 +230,89 @@
   </div>
 
   <script type="module">
-    // Effect definitions with categories and icons
+    // === Pure function for random effect selection (testable) ===
+    function selectRandomEffect(effects, randomFn = Math.random) {
+      if (!effects.length) return null;
+      return effects[Math.floor(randomFn() * effects.length)];
+    }
+
+    // === Table-driven tests (Go-style TDD) ===
+    function runTests() {
+      const tests = [
+        { effects: [], random: 0, want: null },
+        { effects: [{name:'a'},{name:'b'},{name:'c'}], random: 0, wantName: 'a' },
+        { effects: [{name:'a'},{name:'b'},{name:'c'}], random: 0.33, wantName: 'a' },
+        { effects: [{name:'a'},{name:'b'},{name:'c'}], random: 0.34, wantName: 'b' },
+        { effects: [{name:'a'},{name:'b'},{name:'c'}], random: 0.5, wantName: 'b' },
+        { effects: [{name:'a'},{name:'b'},{name:'c'}], random: 0.67, wantName: 'c' },
+        { effects: [{name:'a'},{name:'b'},{name:'c'}], random: 0.99, wantName: 'c' },
+      ];
+      let passed = 0;
+      tests.forEach((t, i) => {
+        const got = selectRandomEffect(t.effects, () => t.random);
+        const gotName = got ? got.name : null;
+        const want = t.wantName ?? t.want;
+        if (gotName === want) {
+          console.log(`✓ test ${i}`);
+          passed++;
+        } else {
+          console.error(`✗ test ${i}: got ${gotName}, want ${want}`);
+        }
+      });
+      console.log(`${passed}/${tests.length} passed`);
+    }
+    // Expose to console: window.runTests()
+    window.runTests = runTests;
+
+    // Effect definitions with categories (text only, no icons)
     const EFFECT_META = {
       // UI/UX
-      success: { icon: '✔', category: 'ui' },
-      error: { icon: '✖', category: 'ui' },
-      loading: { icon: '↻', category: 'ui' },
-      notification: { icon: '🔔', category: 'ui' },
-      confetti: { icon: '🎉', category: 'ui' },
-      click: { icon: '👆', category: 'ui' },
-      heartbeat: { icon: '💗', category: 'ui' },
-      ripple: { icon: '💧', category: 'ui' },
+      success: { category: 'ui' },
+      error: { category: 'ui' },
+      loading: { category: 'ui' },
+      notification: { category: 'ui' },
+      confetti: { category: 'ui' },
+      click: { category: 'ui' },
+      heartbeat: { category: 'ui' },
+      ripple: { category: 'ui' },
       // Visual
-      fire: { icon: '🔥', category: 'visual' },
-      water: { icon: '💧', category: 'visual' },
-      electric: { icon: '⚡', category: 'visual' },
-      snow: { icon: '❄', category: 'visual' },
-      stars: { icon: '⭐', category: 'visual' },
-      smoke: { icon: '🌫', category: 'visual' },
-      rain: { icon: '🌧', category: 'visual' },
-      fireworks: { icon: '🎆', category: 'visual' },
-      meteor: { icon: '☄', category: 'visual' },
-      spiral: { icon: '🌀', category: 'visual' },
-      portal: { icon: '🌀', category: 'visual' },
-      glitch: { icon: '📺', category: 'visual' },
-      aurora: { icon: '🌌', category: 'visual' },
-      matrix: { icon: '💻', category: 'visual' },
-      explosion: { icon: '💥', category: 'visual' },
-      teleport: { icon: '✨', category: 'visual' },
-      lightning: { icon: '🌩', category: 'visual' },
-      magic: { icon: '🪄', category: 'visual' },
-      tornado: { icon: '🌪', category: 'visual' },
-      vortex: { icon: '🕳', category: 'visual' },
-      galaxy: { icon: '🌌', category: 'visual' },
+      fire: { category: 'visual' },
+      water: { category: 'visual' },
+      electric: { category: 'visual' },
+      snow: { category: 'visual' },
+      stars: { category: 'visual' },
+      smoke: { category: 'visual' },
+      rain: { category: 'visual' },
+      fireworks: { category: 'visual' },
+      meteor: { category: 'visual' },
+      spiral: { category: 'visual' },
+      portal: { category: 'visual' },
+      glitch: { category: 'visual' },
+      aurora: { category: 'visual' },
+      matrix: { category: 'visual' },
+      explosion: { category: 'visual' },
+      teleport: { category: 'visual' },
+      lightning: { category: 'visual' },
+      magic: { category: 'visual' },
+      tornado: { category: 'visual' },
+      vortex: { category: 'visual' },
+      galaxy: { category: 'visual' },
       // Background
-      network: { icon: '🌐', category: 'background' },
-      bubble: { icon: '💬', category: 'background' },
-      dust: { icon: '✨', category: 'background' },
-      sakura: { icon: '🌸', category: 'background' },
-      leaves: { icon: '🍂', category: 'background' },
-      firefly: { icon: '✨', category: 'background' },
-      comet: { icon: '☄', category: 'background' },
+      network: { category: 'background' },
+      bubble: { category: 'background' },
+      dust: { category: 'background' },
+      sakura: { category: 'background' },
+      leaves: { category: 'background' },
+      firefly: { category: 'background' },
+      comet: { category: 'background' },
       // Game
-      levelup: { icon: '⬆', category: 'game' },
-      combo: { icon: '🔥', category: 'game' },
-      critical: { icon: '💥', category: 'game' },
-      shield: { icon: '🛡', category: 'game' },
-      heal: { icon: '💚', category: 'game' },
-      poison: { icon: '☠', category: 'game' },
-      freeze: { icon: '🧊', category: 'game' },
+      levelup: { category: 'game' },
+      combo: { category: 'game' },
+      critical: { category: 'game' },
+      shield: { category: 'game' },
+      heal: { category: 'game' },
+      poison: { category: 'game' },
+      freeze: { category: 'game' },
     };
 
     // Import effects from built JS
@@ -318,12 +369,12 @@
 
     allEffects.forEach(effect => {
       const name = effect.config.name;
-      const meta = EFFECT_META[name] || { icon: '✨', category: 'visual' };
+      const meta = EFFECT_META[name] || { category: 'visual' };
       const btn = document.createElement('button');
       btn.className = 'effect-btn' + (name === currentEffect ? ' selected' : '');
       btn.dataset.effect = name;
       btn.dataset.category = meta.category;
-      btn.innerHTML = `<span style="font-size:1.2rem">${meta.icon}</span><br>${name}`;
+      btn.textContent = name;
       btn.onclick = () => selectEffect(name);
       grid.appendChild(btn);
     });
@@ -345,6 +396,9 @@
       });
     }
 
+    // Random mode state
+    let randomMode = false;
+
     // Canvas click handler
     canvas.addEventListener('click', (e) => {
       const rect = canvas.getBoundingClientRect();
@@ -353,7 +407,18 @@
       const x = (e.clientX - rect.left) * scaleX;
       const y = (e.clientY - rect.top) * scaleY;
       const intensity = parseFloat(document.getElementById('intensity').value);
-      system.trigger(currentEffect, x, y, { intensity });
+
+      // Select effect based on mode
+      let effectName;
+      if (randomMode) {
+        const randomEffect = selectRandomEffect(allEffects);
+        effectName = randomEffect ? randomEffect.config.name : currentEffect;
+      } else {
+        effectName = currentEffect;
+      }
+
+      system.trigger(effectName, x, y, { intensity });
+      document.getElementById('lastEffect').textContent = effectName;
     });
 
     // Controls
@@ -382,6 +447,13 @@
     };
 
     document.getElementById('clearBtn').onclick = () => system.clear();
+
+    // Random mode toggle
+    document.getElementById('randomBtn').onclick = () => {
+      randomMode = !randomMode;
+      document.getElementById('randomBtn').classList.toggle('random-active', randomMode);
+      document.getElementById('randomBtn').textContent = randomMode ? 'Random ON' : 'Random';
+    };
 
     // Stats
     let lastTime = performance.now();
