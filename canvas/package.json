@@ -21,7 +21,7 @@
     "demo.html"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && node scripts/fix-imports.js",
     "watch": "tsc --watch",
     "clean": "rm -rf dist"
   },
